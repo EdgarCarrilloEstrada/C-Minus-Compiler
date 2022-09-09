@@ -1,0 +1,169 @@
+options {}
+
+PARSER_BEGIN(cminusparser)
+
+public class cminusparser {
+    public static void main(String [] args) throws ParseException{
+            cminusparser anLex = new cminusparser(System.in);
+            anLex.Ejecucion();
+            System.out.println("\n\nAnalysis has ended successfully!");
+}
+PARSER_END(cminusparser)
+
+TOKEN : {
+    <CONDICIONAL_IF: "if">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <CONDICIONAL_ELSE: "else">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <DATO_INT: "int">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <DATO_FLOAT: "float">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <DATO_CHAR: "char">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <RETORNAR_RETURN: "return">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <VACIO_VOID: "void">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <CICLO_WHILE: "while">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_MAS: ["+"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_MENOS: ["-"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_POR: ["*"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_DIVISION: ["/"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_MODULO: ["%"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_MENOR_QUE: ["<"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_MENOR_IGUAL: "<=">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_MAYOR_QUE: [">"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_MAYOR_IGUAL: ">=">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_COMPARACION: "==">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_DIFERENTE: "!=">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_ASIGNACION: ["="]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_PUNTO_Y_COMA: [";"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_COMA: [","]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_PARENTESIS_ABIERTO: ["("]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+
+    <SIMBOLO_PARENTESIS_CERRADO: [")"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_CORCHETE_ABIERTO: ["["]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_CORCHETE_CERRADO: ["]"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_LLAVE_ABIERTA: ["{"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_LLAVE_CERRADA: ["}"]>
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_COMENTARIO_ABIERTO: "/*">
+    {System.out.println(image);}
+}
+
+TOKEN : {
+    <SIMBOLO_COMENTARIO_CERRADO: "*/">
+    {System.out.println(image);}
+}
+
+
+void Ejecucion() : {}
+{
+
+<EOF>
+}
