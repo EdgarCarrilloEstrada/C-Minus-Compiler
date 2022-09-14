@@ -8,6 +8,7 @@ public class cminusparser {
             anLex.Ejecucion();
             System.out.println("\n\nAnalysis has ended successfully!");
 }
+}
 PARSER_END(cminusparser)
 
 TOKEN : {
@@ -148,22 +149,37 @@ TOKEN : {
 
 TOKEN : {
     <SIMBOLO_LLAVE_CERRADA: ["}"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de llave cerrada: " +image);}
 }
 
-TOKEN : {
+SKIP : {
     <SIMBOLO_COMENTARIO_ABIERTO: "/*">
-    {System.out.println(image);}
 }
 
-TOKEN : {
+SKIP : {
     <SIMBOLO_COMENTARIO_CERRADO: "*/">
-    {System.out.println(image);}
+}
+
+SKIP : {
+    <NUEVA_LINEA: "\n">
+}
+
+SKIP : {
+    <RETORNO_DE_CARRO: "\r">
+}
+
+SKIP : {
+    <TABULACION: "\t">
 }
 
 
 void Ejecucion() : {}
 {
-
+(<CONDICIONAL_IF> | <CONDICIONAL_ELSE> | <DATO_INT> | <DATO_FLOAT> | <DATO_CHAR> | <RETORNAR_RETURN> | <VACIO_VOID> |
+<CICLO_WHILE> | <SIMBOLO_MAS> | <SIMBOLO_MENOS> | <SIMBOLO_POR> | <SIMBOLO_DIVISION> | <SIMBOLO_MODULO> |
+<SIMBOLO_MENOR_QUE> | <SIMBOLO_MENOR_IGUAL> | <SIMBOLO_MAYOR_QUE> | <SIMBOLO_MAYOR_IGUAL> | <SIMBOLO_COMPARACION> |
+<SIMBOLO_DIFERENTE> | <SIMBOLO_ASIGNACION> | <SIMBOLO_PUNTO_Y_COMA> | <SIMBOLO_COMA> | <SIMBOLO_PARENTESIS_ABIERTO> |
+<SIMBOLO_PARENTESIS_CERRADO> | <SIMBOLO_CORCHETE_ABIERTO> | <SIMBOLO_CORCHETE_CERRADO> | <SIMBOLO_LLAVE_ABIERTA> |
+<SIMBOLO_LLAVE_CERRADA>)+
 <EOF>
 }
