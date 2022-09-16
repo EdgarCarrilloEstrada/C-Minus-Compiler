@@ -152,6 +152,16 @@ TOKEN : {
     {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de llave cerrada: " +image);}
 }
 
+TOKEN : {
+    <LETRA: ["a"-"z", "A"-"Z"]+>
+    {System.out.println(matchedToken.beginLine + ". Se encontro una letra: " +image);}
+}
+
+TOKEN : {
+    <NUMERO: (["0"-"9"])+>
+    {System.out.println(matchedToken.beginLine + ". Se encontro un numero: " +image);}
+}
+
 SKIP : {
     <SIMBOLO_COMENTARIO_ABIERTO: "/*">
 }
@@ -172,6 +182,22 @@ SKIP : {
     <TABULACION: "\t">
 }
 
+SKIP : {
+    <COMENTARIO_LINEAL: "//" (~["\n", "\r"])*>
+}
+
+SKIP:
+{ 
+    "/*": DentroComentario
+}
+<DENTRO_COMENTARIO>SKIP:
+{
+    "*/": DEFAULT
+}
+<DENTRO_COMENTARIO>MORE:
+{
+    <~[]> 
+}
 
 void Ejecucion() : {}
 {
@@ -180,6 +206,6 @@ void Ejecucion() : {}
 <SIMBOLO_MENOR_QUE> | <SIMBOLO_MENOR_IGUAL> | <SIMBOLO_MAYOR_QUE> | <SIMBOLO_MAYOR_IGUAL> | <SIMBOLO_COMPARACION> |
 <SIMBOLO_DIFERENTE> | <SIMBOLO_ASIGNACION> | <SIMBOLO_PUNTO_Y_COMA> | <SIMBOLO_COMA> | <SIMBOLO_PARENTESIS_ABIERTO> |
 <SIMBOLO_PARENTESIS_CERRADO> | <SIMBOLO_CORCHETE_ABIERTO> | <SIMBOLO_CORCHETE_CERRADO> | <SIMBOLO_LLAVE_ABIERTA> |
-<SIMBOLO_LLAVE_CERRADA>)+
+<SIMBOLO_LLAVE_CERRADA> | <LETRA> | <NUMERO>)+
 <EOF>
 }
