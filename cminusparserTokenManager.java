@@ -682,174 +682,174 @@ static void TokenLexicalActions(Token matchedToken)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[1]);
         lengthOfMatch = jjstrLiteralImages[1].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el condicional if: " +image);
          break;
       case 2 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[2]);
         lengthOfMatch = jjstrLiteralImages[2].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el condicional else: " +image);
          break;
       case 3 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[3]);
         lengthOfMatch = jjstrLiteralImages[3].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato int: " +image);
          break;
       case 4 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[4]);
         lengthOfMatch = jjstrLiteralImages[4].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato float: " +image);
          break;
       case 5 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[5]);
         lengthOfMatch = jjstrLiteralImages[5].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato char: " +image);
          break;
       case 6 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[6]);
         lengthOfMatch = jjstrLiteralImages[6].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el retorno de valor return: " +image);
          break;
       case 7 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[7]);
         lengthOfMatch = jjstrLiteralImages[7].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el vacio: " +image);
          break;
       case 8 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[8]);
         lengthOfMatch = jjstrLiteralImages[8].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el inicio del ciclo while: " +image);
          break;
       case 9 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mas: " +image);
          break;
       case 10 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menos: " +image);
          break;
       case 11 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo asterisco: " +image);
          break;
       case 12 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo diagonal: " +image);
          break;
       case 13 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo porcentaje: " +image);
          break;
       case 14 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menor que: " +image);
          break;
       case 15 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[15]);
         lengthOfMatch = jjstrLiteralImages[15].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menor igual que: " +image);
          break;
       case 16 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mayor que: " +image);
          break;
       case 17 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[17]);
         lengthOfMatch = jjstrLiteralImages[17].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mayor igual que: " +image);
          break;
       case 18 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[18]);
         lengthOfMatch = jjstrLiteralImages[18].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de comparacion: " +image);
          break;
       case 19 :
         if (image == null)
             image = new StringBuffer();
         image.append(jjstrLiteralImages[19]);
         lengthOfMatch = jjstrLiteralImages[19].length();
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de diferencia: " +image);
          break;
       case 20 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo igual o asignacion: " +image);
          break;
       case 21 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo punto y coma: " +image);
          break;
       case 22 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo coma: " +image);
          break;
       case 23 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de parentesis abierto: " +image);
          break;
       case 24 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de parentesis cerrado: " +image);
          break;
       case 25 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de corchete abierto: " +image);
          break;
       case 26 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de corchete cerrado: " +image);
          break;
       case 27 :
         if (image == null)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println(image);
+     System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de llave abierta: " +image);
          break;
       case 28 :
         if (image == null)

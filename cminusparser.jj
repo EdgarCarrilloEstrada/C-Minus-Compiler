@@ -13,138 +13,138 @@ PARSER_END(cminusparser)
 
 TOKEN : {
     <CONDICIONAL_IF: "if">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el condicional if: " +image);}
 }
 
 TOKEN : {
     <CONDICIONAL_ELSE: "else">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el condicional else: " +image);}
 }
 
 TOKEN : {
     <DATO_INT: "int">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato int: " +image);}
 }
 
 TOKEN : {
     <DATO_FLOAT: "float">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato float: " +image);}
 }
 
 TOKEN : {
     <DATO_CHAR: "char">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato char: " +image);}
 }
 
 TOKEN : {
     <RETORNAR_RETURN: "return">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el retorno de valor return: " +image);}
 }
 
 TOKEN : {
     <VACIO_VOID: "void">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el vacio: " +image);}
 }
 
 TOKEN : {
     <CICLO_WHILE: "while">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el inicio del ciclo while: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_MAS: ["+"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mas: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_MENOS: ["-"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menos: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_POR: ["*"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo asterisco: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_DIVISION: ["/"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo diagonal: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_MODULO: ["%"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo porcentaje: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_MENOR_QUE: ["<"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menor que: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_MENOR_IGUAL: "<=">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menor igual que: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_MAYOR_QUE: [">"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mayor que: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_MAYOR_IGUAL: ">=">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mayor igual que: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_COMPARACION: "==">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de comparacion: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_DIFERENTE: "!=">
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de diferencia: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_ASIGNACION: ["="]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo igual o asignacion: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_PUNTO_Y_COMA: [";"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo punto y coma: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_COMA: [","]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo coma: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_PARENTESIS_ABIERTO: ["("]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de parentesis abierto: " +image);}
 }
 
 TOKEN : {
 
     <SIMBOLO_PARENTESIS_CERRADO: [")"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de parentesis cerrado: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_CORCHETE_ABIERTO: ["["]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de corchete abierto: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_CORCHETE_CERRADO: ["]"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de corchete cerrado: " +image);}
 }
 
 TOKEN : {
     <SIMBOLO_LLAVE_ABIERTA: ["{"]>
-    {System.out.println(image);}
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de llave abierta: " +image);}
 }
 
 TOKEN : {
