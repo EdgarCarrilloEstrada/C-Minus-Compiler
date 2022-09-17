@@ -11,6 +11,55 @@ public class cminusparser implements cminusparserConstants {
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case CONDICIONAL_IF:
+      case CONDICIONAL_ELSE:
+      case DATO_INT:
+      case DATO_FLOAT:
+      case DATO_CHAR:
+      case RETORNAR_RETURN:
+      case VACIO_VOID:
+      case CICLO_WHILE:
+      case SIMBOLO_MAS:
+      case SIMBOLO_MENOS:
+      case SIMBOLO_POR:
+      case SIMBOLO_DIVISION:
+      case SIMBOLO_MODULO:
+      case SIMBOLO_MENOR_QUE:
+      case SIMBOLO_MENOR_IGUAL:
+      case SIMBOLO_MAYOR_QUE:
+      case SIMBOLO_MAYOR_IGUAL:
+      case SIMBOLO_COMPARACION:
+      case SIMBOLO_DIFERENTE:
+      case SIMBOLO_ASIGNACION:
+      case SIMBOLO_PUNTO_Y_COMA:
+      case SIMBOLO_COMA:
+      case SIMBOLO_PUNTO:
+      case SIMBOLO_COMILLA_SIMPLE:
+      case SIMBOLO_COMILLA_DOBLE:
+      case SIMBOLO_PARENTESIS_ABIERTO:
+      case SIMBOLO_PARENTESIS_CERRADO:
+      case SIMBOLO_CORCHETE_ABIERTO:
+      case SIMBOLO_CORCHETE_CERRADO:
+      case SIMBOLO_LLAVE_ABIERTA:
+      case SIMBOLO_LLAVE_CERRADA:
+      case NUMERO_ENTERO:
+      case NUMERO_REAL:
+      case CARACTER:
+      case SIMBOLO_GUION_BAJO:
+      case IDENTIFICADOR:
+      case LETRA:
+      case DIGITO:
+      case ERROR_CARACTER:
+      case ERROR_NUMERO_REAL:
+      case ERROR_IDENTIFICADOR:
+      case ERROR_SIMBOLO_INVALIDO:
+        ;
+        break;
+      default:
+        jj_la1[0] = jj_gen;
+        break label_1;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case CONDICIONAL_IF:
         jj_consume_token(CONDICIONAL_IF);
         break;
       case CONDICIONAL_ELSE:
@@ -94,45 +143,52 @@ public class cminusparser implements cminusparserConstants {
       case SIMBOLO_LLAVE_CERRADA:
         jj_consume_token(SIMBOLO_LLAVE_CERRADA);
         break;
-      default:
-        jj_la1[0] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case CONDICIONAL_IF:
-      case CONDICIONAL_ELSE:
-      case DATO_INT:
-      case DATO_FLOAT:
-      case DATO_CHAR:
-      case RETORNAR_RETURN:
-      case VACIO_VOID:
-      case CICLO_WHILE:
-      case SIMBOLO_MAS:
-      case SIMBOLO_MENOS:
-      case SIMBOLO_POR:
-      case SIMBOLO_DIVISION:
-      case SIMBOLO_MODULO:
-      case SIMBOLO_MENOR_QUE:
-      case SIMBOLO_MENOR_IGUAL:
-      case SIMBOLO_MAYOR_QUE:
-      case SIMBOLO_MAYOR_IGUAL:
-      case SIMBOLO_COMPARACION:
-      case SIMBOLO_DIFERENTE:
-      case SIMBOLO_ASIGNACION:
-      case SIMBOLO_PUNTO_Y_COMA:
-      case SIMBOLO_COMA:
-      case SIMBOLO_PARENTESIS_ABIERTO:
-      case SIMBOLO_PARENTESIS_CERRADO:
-      case SIMBOLO_CORCHETE_ABIERTO:
-      case SIMBOLO_CORCHETE_CERRADO:
-      case SIMBOLO_LLAVE_ABIERTA:
-      case SIMBOLO_LLAVE_CERRADA:
-        ;
+      case NUMERO_ENTERO:
+        jj_consume_token(NUMERO_ENTERO);
+        break;
+      case NUMERO_REAL:
+        jj_consume_token(NUMERO_REAL);
+        break;
+      case CARACTER:
+        jj_consume_token(CARACTER);
+        break;
+      case SIMBOLO_COMILLA_DOBLE:
+        jj_consume_token(SIMBOLO_COMILLA_DOBLE);
+        break;
+      case SIMBOLO_COMILLA_SIMPLE:
+        jj_consume_token(SIMBOLO_COMILLA_SIMPLE);
+        break;
+      case SIMBOLO_PUNTO:
+        jj_consume_token(SIMBOLO_PUNTO);
+        break;
+      case IDENTIFICADOR:
+        jj_consume_token(IDENTIFICADOR);
+        break;
+      case SIMBOLO_GUION_BAJO:
+        jj_consume_token(SIMBOLO_GUION_BAJO);
+        break;
+      case LETRA:
+        jj_consume_token(LETRA);
+        break;
+      case DIGITO:
+        jj_consume_token(DIGITO);
+        break;
+      case ERROR_IDENTIFICADOR:
+        jj_consume_token(ERROR_IDENTIFICADOR);
+        break;
+      case ERROR_NUMERO_REAL:
+        jj_consume_token(ERROR_NUMERO_REAL);
+        break;
+      case ERROR_SIMBOLO_INVALIDO:
+        jj_consume_token(ERROR_SIMBOLO_INVALIDO);
+        break;
+      case ERROR_CARACTER:
+        jj_consume_token(ERROR_CARACTER);
         break;
       default:
         jj_la1[1] = jj_gen;
-        break label_1;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
     }
     jj_consume_token(0);
@@ -156,10 +212,10 @@ public class cminusparser implements cminusparserConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x1ffffffe,0x1ffffffe,};
+      jj_la1_0 = new int[] {0xfffffffe,0xfffffffe,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,};
+      jj_la1_1 = new int[] {0x7807f,0x7807f,};
    }
 
   /** Constructor with InputStream. */
@@ -297,7 +353,7 @@ public class cminusparser implements cminusparserConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[34];
+    boolean[] la1tokens = new boolean[51];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -314,7 +370,7 @@ public class cminusparser implements cminusparserConstants {
         }
       }
     }
-    for (int i = 0; i < 34; i++) {
+    for (int i = 0; i < 51; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

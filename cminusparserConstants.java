@@ -53,30 +53,60 @@ public interface cminusparserConstants {
   /** RegularExpression Id. */
   int SIMBOLO_COMA = 22;
   /** RegularExpression Id. */
-  int SIMBOLO_PARENTESIS_ABIERTO = 23;
+  int SIMBOLO_PUNTO = 23;
   /** RegularExpression Id. */
-  int SIMBOLO_PARENTESIS_CERRADO = 24;
+  int SIMBOLO_COMILLA_SIMPLE = 24;
   /** RegularExpression Id. */
-  int SIMBOLO_CORCHETE_ABIERTO = 25;
+  int SIMBOLO_COMILLA_DOBLE = 25;
   /** RegularExpression Id. */
-  int SIMBOLO_CORCHETE_CERRADO = 26;
+  int SIMBOLO_PARENTESIS_ABIERTO = 26;
   /** RegularExpression Id. */
-  int SIMBOLO_LLAVE_ABIERTA = 27;
+  int SIMBOLO_PARENTESIS_CERRADO = 27;
   /** RegularExpression Id. */
-  int SIMBOLO_LLAVE_CERRADA = 28;
+  int SIMBOLO_CORCHETE_ABIERTO = 28;
   /** RegularExpression Id. */
-  int SIMBOLO_COMENTARIO_ABIERTO = 29;
+  int SIMBOLO_CORCHETE_CERRADO = 29;
   /** RegularExpression Id. */
-  int SIMBOLO_COMENTARIO_CERRADO = 30;
+  int SIMBOLO_LLAVE_ABIERTA = 30;
   /** RegularExpression Id. */
-  int NUEVA_LINEA = 31;
+  int SIMBOLO_LLAVE_CERRADA = 31;
   /** RegularExpression Id. */
-  int RETORNO_DE_CARRO = 32;
+  int NUMERO_ENTERO = 32;
   /** RegularExpression Id. */
-  int TABULACION = 33;
+  int NUMERO_REAL = 33;
+  /** RegularExpression Id. */
+  int CARACTER = 34;
+  /** RegularExpression Id. */
+  int SIMBOLO_GUION_BAJO = 35;
+  /** RegularExpression Id. */
+  int IDENTIFICADOR = 36;
+  /** RegularExpression Id. */
+  int LETRA = 37;
+  /** RegularExpression Id. */
+  int DIGITO = 38;
+  /** RegularExpression Id. */
+  int ESPACIO = 39;
+  /** RegularExpression Id. */
+  int NUEVA_LINEA = 40;
+  /** RegularExpression Id. */
+  int RETORNO_DE_CARRO = 41;
+  /** RegularExpression Id. */
+  int TABULACION = 42;
+  /** RegularExpression Id. */
+  int COMENTARIO_LINEAL = 43;
+  /** RegularExpression Id. */
+  int ERROR_CARACTER = 47;
+  /** RegularExpression Id. */
+  int ERROR_NUMERO_REAL = 48;
+  /** RegularExpression Id. */
+  int ERROR_IDENTIFICADOR = 49;
+  /** RegularExpression Id. */
+  int ERROR_SIMBOLO_INVALIDO = 50;
 
   /** Lexical state. */
   int DEFAULT = 0;
+  /** Lexical state. */
+  int DENTRO_COMENTARIO = 1;
 
   /** Literal token values. */
   String[] tokenImage = {
@@ -103,17 +133,34 @@ public interface cminusparserConstants {
     "<SIMBOLO_ASIGNACION>",
     "<SIMBOLO_PUNTO_Y_COMA>",
     "<SIMBOLO_COMA>",
+    "<SIMBOLO_PUNTO>",
+    "<SIMBOLO_COMILLA_SIMPLE>",
+    "\"\\\"\"",
     "<SIMBOLO_PARENTESIS_ABIERTO>",
     "<SIMBOLO_PARENTESIS_CERRADO>",
     "<SIMBOLO_CORCHETE_ABIERTO>",
     "<SIMBOLO_CORCHETE_CERRADO>",
     "<SIMBOLO_LLAVE_ABIERTA>",
     "<SIMBOLO_LLAVE_CERRADA>",
-    "\"/*\"",
-    "\"*/\"",
+    "<NUMERO_ENTERO>",
+    "<NUMERO_REAL>",
+    "<CARACTER>",
+    "<SIMBOLO_GUION_BAJO>",
+    "<IDENTIFICADOR>",
+    "<LETRA>",
+    "<DIGITO>",
+    "\" \"",
     "\"\\n\"",
     "\"\\r\"",
     "\"\\t\"",
+    "<COMENTARIO_LINEAL>",
+    "\"/*\"",
+    "\"*/\"",
+    "<token of kind 46>",
+    "<ERROR_CARACTER>",
+    "<ERROR_NUMERO_REAL>",
+    "<ERROR_IDENTIFICADOR>",
+    "<ERROR_SIMBOLO_INVALIDO>",
   };
 
 }

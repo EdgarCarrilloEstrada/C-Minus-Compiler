@@ -122,6 +122,21 @@ TOKEN : {
 }
 
 TOKEN : {
+    <SIMBOLO_PUNTO: ["."]>
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo punto: " +image);}
+}
+
+TOKEN : {
+    <SIMBOLO_COMILLA_SIMPLE: ["'"]>
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo comilla simple: " +image);}
+}
+
+TOKEN : {
+    <SIMBOLO_COMILLA_DOBLE: "\"">
+    {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo comilla doble: " +image);}
+}
+
+TOKEN : {
     <SIMBOLO_PARENTESIS_ABIERTO: ["("]>
     {System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de parentesis abierto: " +image);}
 }
@@ -153,22 +168,62 @@ TOKEN : {
 }
 
 TOKEN : {
-    <LETRA: ["a"-"z", "A"-"Z"]+>
+    <NUMERO_ENTERO: <DIGITO>(<DIGITO>)*>
+    {System.out.println(matchedToken.beginLine + ". Se encontro un numero entero: " +image);}
+}
+
+TOKEN : {
+    <NUMERO_REAL: (<DIGITO>)+<SIMBOLO_PUNTO>(<DIGITO>)+>
+    {System.out.println(matchedToken.beginLine + ". Se encontro un numero real: " +image);}
+}
+
+TOKEN : {
+    <CARACTER: <SIMBOLO_COMILLA_SIMPLE> (<DIGITO> | <LETRA>) <SIMBOLO_COMILLA_SIMPLE> | <SIMBOLO_COMILLA_SIMPLE><SIMBOLO_COMILLA_SIMPLE>>
+    {System.out.println(matchedToken.beginLine + ". Se encontro un caracter: " +image);}
+}
+
+TOKEN : {
+    <SIMBOLO_GUION_BAJO: ["_"]>
+    {System.out.println(matchedToken.beginLine + ". Se encontro un guion bajo: " +image);}
+}
+
+TOKEN : {
+    <IDENTIFICADOR: <LETRA> (<LETRA> | <DIGITO> | <SIMBOLO_GUION_BAJO> )*>
+    {System.out.println(matchedToken.beginLine + ". Se encontro un identificador: " +image);}
+}
+
+
+
+
+
+/*
+SKIP : {
+    <SIMBOLO_COMENTARIO_ABIERTO: "/*">
+}
+*/
+
+/*
+SKIP : {
+    <SIMBOLO_COMENTARIO_CERRADO: "* /">
+    arriba hay un espacio entre el asterisco y la diagonal para que se pueda comentar este bloque
+
+}
+*/
+
+TOKEN : {
+    <LETRA: ["a"-"z", "A"-"Z"]>
     {System.out.println(matchedToken.beginLine + ". Se encontro una letra: " +image);}
 }
 
 TOKEN : {
-    <NUMERO: (["0"-"9"])+>
-    {System.out.println(matchedToken.beginLine + ". Se encontro un numero: " +image);}
+    <DIGITO: ["0"-"9"]>
+    {System.out.println(matchedToken.beginLine + ". Se encontro un digito: " +image);}
 }
 
 SKIP : {
-    <SIMBOLO_COMENTARIO_ABIERTO: "/*">
+    <ESPACIO: " ">
 }
 
-SKIP : {
-    <SIMBOLO_COMENTARIO_CERRADO: "*/">
-}
 
 SKIP : {
     <NUEVA_LINEA: "\n">
@@ -188,7 +243,7 @@ SKIP : {
 
 SKIP:
 { 
-    "/*": DentroComentario
+    "/*": DENTRO_COMENTARIO
 }
 <DENTRO_COMENTARIO>SKIP:
 {
@@ -199,6 +254,28 @@ SKIP:
     <~[]> 
 }
 
+TOKEN : {
+    <ERROR_CARACTER: <SIMBOLO_COMILLA_SIMPLE>(<DIGITO> | <LETRA> | <ESPACIO>)*<SIMBOLO_COMILLA_SIMPLE> |
+    <SIMBOLO_COMILLA_SIMPLE>(<DIGITO> | <LETRA> | <ESPACIO>)* | (<DIGITO> | <LETRA> | <ESPACIO>)*<SIMBOLO_COMILLA_SIMPLE>>
+    {System.out.println("ERROR LEXICO: Forma incorrecta de declarar un caracter: " + image + ". Linea " +matchedToken.beginLine);}
+}
+
+
+TOKEN : {
+    <ERROR_NUMERO_REAL: (<SIMBOLO_PUNTO>)+(<DIGITO>)+ | (<DIGITO>)+(<SIMBOLO_PUNTO>)+>
+    {System.out.println("ERROR LEXICO: Forma incorrecta de declarar un numero real: " + image + ". Linea " +matchedToken.beginLine);}
+}
+
+TOKEN : {
+    <ERROR_IDENTIFICADOR: <DIGITO>(<LETRA> | <DIGITO> | <SIMBOLO_GUION_BAJO> )* | <SIMBOLO_GUION_BAJO>(<LETRA> | <DIGITO> | <SIMBOLO_GUION_BAJO> )*>
+    {System.out.println("ERROR LEXICO: Forma incorrecta de declarar un identificador: " + image + ". Linea " +matchedToken.beginLine);}
+}
+
+TOKEN : {
+    <ERROR_SIMBOLO_INVALIDO: ~[]>
+    {System.out.println("ERROR LEXICO: Simbolo no valido: " + image + ". Linea " +matchedToken.beginLine);}
+}
+
 void Ejecucion() : {}
 {
 (<CONDICIONAL_IF> | <CONDICIONAL_ELSE> | <DATO_INT> | <DATO_FLOAT> | <DATO_CHAR> | <RETORNAR_RETURN> | <VACIO_VOID> |
@@ -206,6 +283,8 @@ void Ejecucion() : {}
 <SIMBOLO_MENOR_QUE> | <SIMBOLO_MENOR_IGUAL> | <SIMBOLO_MAYOR_QUE> | <SIMBOLO_MAYOR_IGUAL> | <SIMBOLO_COMPARACION> |
 <SIMBOLO_DIFERENTE> | <SIMBOLO_ASIGNACION> | <SIMBOLO_PUNTO_Y_COMA> | <SIMBOLO_COMA> | <SIMBOLO_PARENTESIS_ABIERTO> |
 <SIMBOLO_PARENTESIS_CERRADO> | <SIMBOLO_CORCHETE_ABIERTO> | <SIMBOLO_CORCHETE_CERRADO> | <SIMBOLO_LLAVE_ABIERTA> |
-<SIMBOLO_LLAVE_CERRADA> | <LETRA> | <NUMERO>)+
+<SIMBOLO_LLAVE_CERRADA> |  <NUMERO_ENTERO> | <NUMERO_REAL> | <CARACTER> | <SIMBOLO_COMILLA_DOBLE> |
+<SIMBOLO_COMILLA_SIMPLE> | <SIMBOLO_PUNTO> | <IDENTIFICADOR> | <SIMBOLO_GUION_BAJO> | <LETRA> | <DIGITO> |
+<ERROR_IDENTIFICADOR> | <ERROR_NUMERO_REAL> | <ERROR_SIMBOLO_INVALIDO> | <ERROR_CARACTER> )*
 <EOF>
 }
