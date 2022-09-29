@@ -4,7 +4,7 @@ public class cminusparser implements cminusparserConstants {
             cminusparser anLex = new cminusparser(System.in);
             anLex.Ejecucion();
             System.out.println("\n\nAnalysis has ended successfully!");
-}
+    }
 
   static final public void Ejecucion() throws ParseException {
     label_1:
@@ -48,10 +48,6 @@ public class cminusparser implements cminusparserConstants {
       case IDENTIFICADOR:
       case LETRA:
       case DIGITO:
-      case ERROR_CARACTER:
-      case ERROR_NUMERO_REAL:
-      case ERROR_IDENTIFICADOR:
-      case ERROR_SIMBOLO_INVALIDO:
         ;
         break;
       default:
@@ -173,18 +169,6 @@ public class cminusparser implements cminusparserConstants {
       case DIGITO:
         jj_consume_token(DIGITO);
         break;
-      case ERROR_IDENTIFICADOR:
-        jj_consume_token(ERROR_IDENTIFICADOR);
-        break;
-      case ERROR_NUMERO_REAL:
-        jj_consume_token(ERROR_NUMERO_REAL);
-        break;
-      case ERROR_SIMBOLO_INVALIDO:
-        jj_consume_token(ERROR_SIMBOLO_INVALIDO);
-        break;
-      case ERROR_CARACTER:
-        jj_consume_token(ERROR_CARACTER);
-        break;
       default:
         jj_la1[1] = jj_gen;
         jj_consume_token(-1);
@@ -215,7 +199,7 @@ public class cminusparser implements cminusparserConstants {
       jj_la1_0 = new int[] {0xfffffffe,0xfffffffe,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x7807f,0x7807f,};
+      jj_la1_1 = new int[] {0x7f,0x7f,};
    }
 
   /** Constructor with InputStream. */

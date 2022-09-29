@@ -844,10 +844,13 @@ public static final int[] jjnewLexState = {
    -1, 
 };
 static final long[] jjtoToken = {
-   0x7807fffffffffL, 
+   0x7fffffffffL, 
 };
 static final long[] jjtoSkip = {
-   0x3f8000000000L, 
+   0x7bf8000000000L, 
+};
+static final long[] jjtoSpecial = {
+   0x7800000000000L, 
 };
 static final long[] jjtoMore = {
    0x400000000000L, 
@@ -954,6 +957,7 @@ public static Token getNextToken()
    {        
       jjmatchedKind = 0;
       matchedToken = jjFillToken();
+      matchedToken.specialToken = specialToken;
       return matchedToken;
    }
    image = null;
@@ -994,6 +998,7 @@ public static Token getNextToken()
         if ((jjtoToken[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
         {
            matchedToken = jjFillToken();
+           matchedToken.specialToken = specialToken;
            TokenLexicalActions(matchedToken);
        if (jjnewLexState[jjmatchedKind] != -1)
          curLexState = jjnewLexState[jjmatchedKind];
@@ -1001,6 +1006,20 @@ public static Token getNextToken()
         }
         else if ((jjtoSkip[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
         {
+           if ((jjtoSpecial[jjmatchedKind >> 6] & (1L << (jjmatchedKind & 077))) != 0L)
+           {
+              matchedToken = jjFillToken();
+              if (specialToken == null)
+                 specialToken = matchedToken;
+              else
+              {
+                 matchedToken.specialToken = specialToken;
+                 specialToken = (specialToken.next = matchedToken);
+              }
+              SkipLexicalActions(matchedToken);
+           }
+           else 
+              SkipLexicalActions(null);
          if (jjnewLexState[jjmatchedKind] != -1)
            curLexState = jjnewLexState[jjmatchedKind];
            continue EOFLoop;
@@ -1040,6 +1059,38 @@ public static Token getNextToken()
   }
 }
 
+static void SkipLexicalActions(Token matchedToken)
+{
+   switch(jjmatchedKind)
+   {
+      case 47 :
+         if (image == null)
+            image = new StringBuffer();
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+     System.out.println("ERROR LEXICO: Forma incorrecta de declarar un caracter: " + image + ". Linea " +matchedToken.beginLine);
+         break;
+      case 48 :
+         if (image == null)
+            image = new StringBuffer();
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+     System.out.println("ERROR LEXICO: Forma incorrecta de declarar un numero real: " + image + ". Linea " +matchedToken.beginLine);
+         break;
+      case 49 :
+         if (image == null)
+            image = new StringBuffer();
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+     System.out.println("ERROR LEXICO: Forma incorrecta de declarar un identificador: " + image + ". Linea " +matchedToken.beginLine);
+         break;
+      case 50 :
+         if (image == null)
+            image = new StringBuffer();
+         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
+     System.out.println("ERROR LEXICO: Simbolo no valido: " + image + ". Linea " +matchedToken.beginLine);
+         break;
+      default :
+         break;
+   }
+}
 static void TokenLexicalActions(Token matchedToken)
 {
    switch(jjmatchedKind)
@@ -1284,30 +1335,6 @@ static void TokenLexicalActions(Token matchedToken)
             image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro un digito: " +image);
-         break;
-      case 47 :
-        if (image == null)
-            image = new StringBuffer();
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println("ERROR LEXICO: Forma incorrecta de declarar un caracter: " + image + ". Linea " +matchedToken.beginLine);
-         break;
-      case 48 :
-        if (image == null)
-            image = new StringBuffer();
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println("ERROR LEXICO: Forma incorrecta de declarar un numero real: " + image + ". Linea " +matchedToken.beginLine);
-         break;
-      case 49 :
-        if (image == null)
-            image = new StringBuffer();
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println("ERROR LEXICO: Forma incorrecta de declarar un identificador: " + image + ". Linea " +matchedToken.beginLine);
-         break;
-      case 50 :
-        if (image == null)
-            image = new StringBuffer();
-        image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-     System.out.println("ERROR LEXICO: Simbolo no valido: " + image + ". Linea " +matchedToken.beginLine);
          break;
       default : 
          break;
