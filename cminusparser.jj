@@ -1,4 +1,9 @@
-options {}
+options {
+Ignore_Case = false;
+STATIC=false;
+DEBUG_PARSER=true;
+DEBUG_LOOKAHEAD=true;
+}
 
 PARSER_BEGIN(cminusparser)
 
@@ -280,3 +285,54 @@ void Ejecucion() : {}
 <SIMBOLO_COMILLA_SIMPLE> | <SIMBOLO_PUNTO> | <IDENTIFICADOR> | <SIMBOLO_GUION_BAJO> | <LETRA> | <DIGITO> )*
 <EOF>
 }
+
+void program() : {}
+{
+    declaration_list()
+}
+
+void declaration_list() : {}
+{
+    declaration() declaration_list_prima()
+}
+
+void declaration_list_prima() : {}
+{
+    (declaration() declaration_list_prima() )*
+}
+
+void declaration() : {}
+{
+    var_declaration() | fun_declaration()
+}
+
+void var_declaration() : {}
+{
+    type_specifier() <IDENTIFICADOR>  <SIMBOLO_PUNTO_Y_COMA> | type_specifier() <IDENTIFICADOR> <SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO> <SIMBOLO_PUNTO_Y_COMA>
+}
+
+void type_specifier() : {}
+{
+    <DATO_INT> | <DATO_FLOAT> | <DATO_CHAR> | <VACIO_VOID>
+}
+
+void fun_declaration() : {}
+{
+    type_specifier() <IDENTIFICADOR> <SIMBOLO_PARENTESIS_ABIERTO> params() <SIMBOLO_PARENTESIS_CERRADO> compound_stmt()
+}
+
+void params() : {}
+{
+    param_list() | <VACIO_VOID>
+}
+
+void param_list() : {}
+{
+    param()
+}
+
+void
+
+
+
+
