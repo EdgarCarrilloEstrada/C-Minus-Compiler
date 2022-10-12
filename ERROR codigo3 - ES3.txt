@@ -1,0 +1,30 @@
+int gcd(int v, int h)
+{
+	if(v==0) return u;
+	else return gcd(v,u-u/v*v);
+}
+ suma(float p) //ES3 FALTA TIPO DE RETORNO EN FUNCIÓN
+{
+	if(p==0) return p;
+	else return p+8.5;
+}
+
+void main(void)
+{
+    float i;
+    int h; 
+    int x[10];
+    
+    i = 5;
+    while (i < 10)
+    {
+	i = i + 0.2+0.3+8.9;
+        h = 9/3*h+x[4];
+    }
+    x[6] = 8;
+    h=7;
+    h=gcd(5,6);
+    i=suma(9.3);
+    
+ }
+

@@ -1,0 +1,168 @@
+EQUIPO: LAS PELONCITAS
+
+Carrillo Estrada Edgar
+Martínez Morales Edgar Daniel
+Saucedo Gallaga Ulises Alexis
+
+----------------------------
+GRAMATICA ORIGINAL
+----------------------------
+
+1. 	program ->				declaration-list
+2. 	declaration-list ->			declaration-list declaration | declaration
+3. 	declaration ->				var-declaration | fun-declaration
+4. 	var-declaration ->			type-specifier ID ; | type-specifier ID [ NUMENT ] ;
+5. 	type-specifier ->			int | float | char | void
+6. 	fun-declaration ->			type-specifier ID '(' params ')' compound-stmt
+7. 	params ->					param-list | void
+8. 	param-list ->				param-list , param | param
+9. 	param ->					type-specifier ID | type-specifier ID [ ] 
+10.	compound-stmt ->			{ local-declarations statement-list }
+11.	local-declarations ->		local-declarations var-declaration | empty
+12.	statement-list ->			statement-list statement | empty
+13.	statement -> 				expression-stmt | compound-stmt | selection-stmt | iteration-stmt | return-stmt
+14.	expression-stmt ->			expression ; | ;
+15.	selection-stmt ->			if '(' expression ')' statement | if '(' expression ')' statement else statement
+16.	iteration-stmt ->			while '(' expression ')' statement
+17.	return-stmt ->				return ; | return expression ;
+18.	expression ->				var = expression | simple-expression ;
+19.	var -> 					ID | ID [ expression ]
+20.	simple-expression ->		additive-expression relop additive-expression | additive-expression
+21.	relop ->					<= | < | > | >= | == | !=
+22.	additive-expression ->		additive-expression addop term | term
+23.	addop ->					+ | -
+24.	term ->					term mulop factor | factor
+25.	mulop ->					* | / | %
+26.	factor -> 				'(' expression ')' | var | call | NUMENT | NUMREAL | CHAR
+27.	call -> 					ID '(' args ')'
+28.	args -> 					arg-list | empty
+29.	arg-list -> 				arg-list , expression | expression
+
+------------------------------------------
+ELIMINACION DE RECURSIVIDAD A LA IZQUIERDA
+------------------------------------------
+
+1. 	program ->				declaration-list
+2.	declaration-list ->			declaration declaration-list-prima
+3.	declaration-list-prima->	declaration declaration-list-prima | empty
+4. 	declaration ->				var-declaration | fun-declaration
+5. 	var-declaration ->			type-specifier ID ; | type-specifier ID [ NUMENT ] ;
+6. 	type-specifier ->			int | float | char | void
+7. 	fun-declaration ->			type-specifier ID '(' params ')' compound-stmt
+8. 	params ->					param-list | void
+9.	param-list ->				param param-list-prima
+10.	param-list-prima ->			, param | empty
+11. 	param ->					type-specifier ID | type-specifier ID [ ] 
+12.	compound-stmt ->			{ local-declarations statement-list }
+13.	local-declarations ->		local-declarations-prima
+14.  local-declarations-prima ->	var-declaration local-declarations-prima | empty
+15.	statement-list ->			statement-list-prima
+16.	statement-list-prima ->		statement statement-list-prima | empty
+17.	statement -> 				expression-stmt | compound-stmt | selection-stmt | iteration-stmt | return-stmt
+18.	expression-stmt ->			expression ; | ;
+19.	selection-stmt ->			if '(' expression ')' statement | if '(' expression ')' statement else statement
+20.	iteration-stmt ->			while '(' expression ')' statement
+21.	return-stmt ->				return ; | return expression ;
+22.	expression ->				var = expression | simple-expression ;
+23.	var -> 					ID | ID [ expression ]
+24.	simple-expression ->		additive-expression relop additive-expression | additive-expression
+25.	relop ->					<= | < | > | >= | == | !=
+26.	additive-expression ->		term additive-expression-prima
+27.	additive-expression-prima ->	addop term additive-expression-prima | empty
+28.	addop ->					+ | -
+29.	term ->					factor term-prima
+30.	term-prima ->				mulop factor term-prima | empty
+31.	mulop ->					* | / | %
+32.	factor -> 				'(' expression ')' | var | call | NUMENT | NUMREAL | CHAR
+33.	call -> 					ID '(' args ')'
+34.	args -> 					arg-list | empty
+35.	arg-list ->				expression arg-list-prima
+36.	arg-list-prima ->			expression arg-list-prima | empty
+
+----------------------------
+AGRUPACION O FACTORIZACION
+----------------------------
+
+1. 	program ->				declaration-list
+2.	declaration-list ->			declaration declaration-list-prima
+3.	declaration-list-prima->	declaration declaration-list-prima | empty
+4. 	declaration ->				var-declaration | fun-declaration
+5. 	var-declaration ->			type-specifier ID ( [ NUMENT ] )* ;
+6. 	type-specifier ->			int | float | char | void
+7. 	fun-declaration ->			type-specifier ID '(' params ')' compound-stmt
+8. 	params ->					param-list | void
+9.	param-list ->				param param-list-prima
+10.	param-list-prima ->			, param | empty
+11. 	param ->					type-specifier ID ( [ ] )*
+12.	compound-stmt ->			{ local-declarations statement-list }
+13.	local-declarations ->		local-declarations-prima
+14.  local-declarations-prima ->	var-declaration local-declarations-prima | empty
+15.	statement-list ->			statement-list-prima
+16.	statement-list-prima ->		statement statement-list-prima | empty
+17.	statement -> 				expression-stmt | compound-stmt | selection-stmt | iteration-stmt | return-stmt
+18.	expression-stmt ->			expression ; | ;
+19.	selection-stmt ->			if '(' expression ')' statement | if '(' expression ')' statement else statement
+20.	iteration-stmt ->			while '(' expression ')' statement
+21.	return-stmt ->				return ( ; | expression ; )
+22.	expression ->				var = expression | simple-expression ;
+23.	var -> 					ID ( [ expression ] )*
+24.	simple-expression ->		additive-expression relop additive-expression | additive-expression
+25.	relop ->					<= | < | > | >= | == | !=
+26.	additive-expression ->		term additive-expression-prima
+27.	additive-expression-prima ->	addop term additive-expression-prima | empty
+28.	addop ->					+ | -
+29.	term ->					factor term-prima
+30.	term-prima ->				mulop factor term-prima | empty
+31.	mulop ->					* | / | %
+32.	factor -> 				'(' expression ')' | var | call | NUMENT | NUMREAL | CHAR
+33.	call -> 					ID '(' args ')'
+34.	args -> 					arg-list | empty
+35.	arg-list ->				expression arg-list-prima
+36.	arg-list-prima ->			expression arg-list-prima | empty
+
+------------------------------------------
+AGREGAR DECLARACION MULTIPLE DE VARIABLES
+------------------------------------------
+
+1. 	program ->				declaration-list
+2.	declaration-list ->			declaration declaration-list-prima
+3.	declaration-list-prima->	declaration declaration-list-prima | empty
+4. 	declaration ->				var-declaration | fun-declaration
+5. 	var-declaration ->			type-specifier ID ( [ NUMENT ] | , ID )* ;
+6. 	type-specifier ->			int | float | char | void
+7. 	fun-declaration ->			type-specifier ID '(' params ')' compound-stmt
+8. 	params ->					param-list | void
+9.	param-list ->				param param-list-prima
+10.	param-list-prima ->			, param | empty
+11. 	param ->					type-specifier ID ( [ ] )*
+12.	compound-stmt ->			{ local-declarations statement-list }
+13.	local-declarations ->		local-declarations-prima
+14.  local-declarations-prima ->	var-declaration local-declarations-prima | empty
+15.	statement-list ->			statement-list-prima
+16.	statement-list-prima ->		statement statement-list-prima | empty
+17.	statement -> 				expression-stmt | compound-stmt | selection-stmt | iteration-stmt | return-stmt
+18.	expression-stmt ->			expression ; | ;
+19.	selection-stmt ->			if '(' expression ')' statement 
+20.	iteration-stmt ->			while '(' expression ')' statement
+21.	return-stmt ->				return ( ; | expression ; )
+22.	expression ->				var = expression | simple-expression ;
+23.	var -> 					ID ( [ expression ] )*
+24.	simple-expression ->		additive-expression | additive-expression relop additive-expression 
+25.	relop ->					<= | < | > | >= | == | !=
+26.	additive-expression ->		term additive-expression-prima
+27.	additive-expression-prima ->	addop term additive-expression-prima | empty
+28.	addop ->					+ | -
+29.	term ->					factor term-prima
+30.	term-prima ->				mulop factor term-prima | empty
+31.	mulop ->					* | / | %
+32.	factor -> 				 NUMENT | NUMREAL | CHAR |  call | var | '(' expression ')'
+33.	call -> 					ID '(' args ')'
+34.	args -> 					arg-list | empty
+35.	arg-list ->				expression arg-list-prima
+36.	arg-list-prima ->			expression arg-list-prima | empty
+
+
+38. param_segunda_parte -> 	[ ] | empty
+39. return-stmt-2 -> 			; | expression ;
+
+

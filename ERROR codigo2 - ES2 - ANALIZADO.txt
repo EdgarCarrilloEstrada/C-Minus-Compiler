@@ -1,0 +1,52 @@
+Call:   program
+  Call:   declaration_list
+    Call:   declaration
+      Call:   var_declaration(LOOKING AHEAD...)
+        Call:   type_specifier(LOOKING AHEAD...)
+4. Se encontro el tipo de dato int: int
+          Visited token: <"int" at line 4 column 1>; Expected token: <"int">
+        Return: type_specifier(LOOKAHEAD SUCCEEDED)
+4. Se encontro un identificador: x
+        Visited token: <<IDENTIFICADOR>: "x" at line 4 column 5>; Expected token: <<IDENTIFICADOR>>
+4. Se encontro el simbolo de corchete abierto: [
+        Visited token: <<SIMBOLO_CORCHETE_ABIERTO>: "[" at line 4 column 6>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+        Call:   var_declaration
+          Call:   type_specifier
+            Consumed token: <"int" at line 4 column 1>
+          Return: type_specifier
+          Consumed token: <<IDENTIFICADOR>: "x" at line 4 column 5>
+          Consumed token: <<SIMBOLO_CORCHETE_ABIERTO>: "[" at line 4 column 6>
+4. Se encontro un numero entero: 10
+          Consumed token: <<NUMERO_ENTERO>: "10" at line 4 column 7>
+4. Se encontro el simbolo de corchete cerrado: ]
+          Consumed token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 4 column 9>
+4. Se encontro el simbolo punto y coma: ;
+          Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 4 column 10>
+        Return: var_declaration
+      Return: declaration
+      Call:   declaration_list_prima
+        Call:   declaration(LOOKING AHEAD...)
+          Call:   var_declaration(LOOKING AHEAD...)
+            Call:   type_specifier(LOOKING AHEAD...)
+6. Se encontro el inicio del ciclo while: while
+              Visited token: <"while" at line 6 column 1>; Expected token: <"int">
+              Visited token: <"while" at line 6 column 1>; Expected token: <"float">
+              Visited token: <"while" at line 6 column 1>; Expected token: <"char">
+              Visited token: <"while" at line 6 column 1>; Expected token: <"void">
+            Return: type_specifier(LOOKAHEAD FAILED)
+          Return: var_declaration(LOOKAHEAD FAILED)
+          Call:   fun_declaration(LOOKING AHEAD...)
+            Call:   type_specifier(LOOKING AHEAD...)
+              Visited token: <"while" at line 6 column 1>; Expected token: <"int">
+              Visited token: <"while" at line 6 column 1>; Expected token: <"float">
+              Visited token: <"while" at line 6 column 1>; Expected token: <"char">
+              Visited token: <"while" at line 6 column 1>; Expected token: <"void">
+            Return: type_specifier(LOOKAHEAD FAILED)
+          Return: fun_declaration(LOOKAHEAD FAILED)
+        Return: declaration(LOOKAHEAD FAILED)
+      Return: declaration_list_prima
+    Return: declaration_list
+  Return: program
+
+
+Analysis has ended successfully!

@@ -1,0 +1,417 @@
+Call:   program
+  Call:   declaration_list
+    Call:   declaration
+      Call:   var_declaration(LOOKING AHEAD...)
+        Call:   type_specifier(LOOKING AHEAD...)
+4. Se encontro el tipo de dato int: int
+          Visited token: <"int" at line 4 column 1>; Expected token: <"int">
+        Return: type_specifier(LOOKAHEAD SUCCEEDED)
+4. Se encontro un identificador: x
+        Visited token: <<IDENTIFICADOR>: "x" at line 4 column 5>; Expected token: <<IDENTIFICADOR>>
+4. Se encontro el simbolo de corchete abierto: [
+        Visited token: <<SIMBOLO_CORCHETE_ABIERTO>: "[" at line 4 column 6>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+        Call:   var_declaration
+          Call:   type_specifier
+            Consumed token: <"int" at line 4 column 1>
+          Return: type_specifier
+          Consumed token: <<IDENTIFICADOR>: "x" at line 4 column 5>
+          Consumed token: <<SIMBOLO_CORCHETE_ABIERTO>: "[" at line 4 column 6>
+4. Se encontro un numero entero: 10
+          Consumed token: <<NUMERO_ENTERO>: "10" at line 4 column 7>
+4. Se encontro el simbolo de corchete cerrado: ]
+          Consumed token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 4 column 9>
+4. Se encontro el simbolo punto y coma: ;
+          Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 4 column 10>
+        Return: var_declaration
+      Return: declaration
+      Call:   declaration_list_prima
+        Call:   declaration(LOOKING AHEAD...)
+          Call:   var_declaration(LOOKING AHEAD...)
+            Call:   type_specifier(LOOKING AHEAD...)
+6. Se encontro el tipo de dato int: int
+              Visited token: <"int" at line 6 column 1>; Expected token: <"int">
+            Return: type_specifier(LOOKAHEAD SUCCEEDED)
+6. Se encontro un identificador: minloc
+            Visited token: <<IDENTIFICADOR>: "minloc" at line 6 column 5>; Expected token: <<IDENTIFICADOR>>
+            Call:   declaration
+              Call:   var_declaration(LOOKING AHEAD...)
+                Call:   type_specifier(LOOKING AHEAD...)
+                  Visited token: <"int" at line 6 column 1>; Expected token: <"int">
+                Return: type_specifier(LOOKAHEAD SUCCEEDED)
+                Visited token: <<IDENTIFICADOR>: "minloc" at line 6 column 5>; Expected token: <<IDENTIFICADOR>>
+6. Se encontro el simbolo de parentesis abierto: (
+                Visited token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 6 column 11>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                Visited token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 6 column 11>; Expected token: <<SIMBOLO_COMA>>
+                Visited token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 6 column 11>; Expected token: <<SIMBOLO_PUNTO_Y_COMA>>
+              Return: var_declaration(LOOKAHEAD FAILED)
+              Call:   fun_declaration
+                Call:   type_specifier
+                  Consumed token: <"int" at line 6 column 1>
+                Return: type_specifier
+                Consumed token: <<IDENTIFICADOR>: "minloc" at line 6 column 5>
+                Consumed token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 6 column 11>
+                Call:   params
+                  Call:   param_list(LOOKING AHEAD...)
+                    Call:   param(LOOKING AHEAD...)
+                      Call:   type_specifier(LOOKING AHEAD...)
+6. Se encontro el tipo de dato int: int
+                        Visited token: <"int" at line 6 column 12>; Expected token: <"int">
+                      Return: type_specifier(LOOKAHEAD SUCCEEDED)
+6. Se encontro un identificador: a
+                      Visited token: <<IDENTIFICADOR>: "a" at line 6 column 16>; Expected token: <<IDENTIFICADOR>>
+                      Call:   param_list
+                        Call:   param
+                          Call:   type_specifier
+                            Consumed token: <"int" at line 6 column 12>
+                          Return: type_specifier
+                          Consumed token: <<IDENTIFICADOR>: "a" at line 6 column 16>
+6. Se encontro el simbolo de corchete abierto: [
+                          Consumed token: <<SIMBOLO_CORCHETE_ABIERTO>: "[" at line 6 column 17>
+6. Se encontro el simbolo de corchete cerrado: ]
+                          Consumed token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 6 column 18>
+6. Se encontro el simbolo coma: ,
+                        Return: param
+                        Call:   param_list_prima
+                          Consumed token: <<SIMBOLO_COMA>: "," at line 6 column 19>
+                          Call:   param
+                            Call:   type_specifier
+6. Se encontro el tipo de dato int: int
+                              Consumed token: <"int" at line 6 column 21>
+                            Return: type_specifier
+6. Se encontro un identificador: low
+                            Consumed token: <<IDENTIFICADOR>: "low" at line 6 column 25>
+6. Se encontro el simbolo coma: ,
+                          Return: param
+                          Consumed token: <<SIMBOLO_COMA>: "," at line 6 column 28>
+                          Call:   param
+                            Call:   type_specifier
+6. Se encontro el tipo de dato int: int
+                              Consumed token: <"int" at line 6 column 30>
+                            Return: type_specifier
+6. Se encontro un identificador: high
+                            Consumed token: <<IDENTIFICADOR>: "high" at line 6 column 34>
+6. Se encontro el simbolo de parentesis cerrado: )
+                          Return: param
+                        Return: param_list_prima
+                      Return: param_list
+                    Return: params
+                    Consumed token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 6 column 38>
+                    Call:   compound_stmt
+7. Se encontro el simbolo de llave abierta: {
+                      Consumed token: <<SIMBOLO_LLAVE_ABIERTA>: "{" at line 7 column 1>
+                      Call:   local_declarations
+                        Call:   local_declarations_prima
+                          Call:   var_declaration(LOOKING AHEAD...)
+                            Call:   type_specifier(LOOKING AHEAD...)
+8. Se encontro el tipo de dato int: int
+                              Visited token: <"int" at line 8 column 5>; Expected token: <"int">
+                            Return: type_specifier(LOOKAHEAD SUCCEEDED)
+8. Se encontro un identificador: i
+                            Visited token: <<IDENTIFICADOR>: "i" at line 8 column 9>; Expected token: <<IDENTIFICADOR>>
+                            Call:   var_declaration
+                              Call:   type_specifier
+                                Consumed token: <"int" at line 8 column 5>
+                              Return: type_specifier
+                              Consumed token: <<IDENTIFICADOR>: "i" at line 8 column 9>
+8. Se encontro el simbolo punto y coma: ;
+                              Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 8 column 10>
+                            Return: var_declaration
+                            Call:   local_declarations
+                              Call:   local_declarations_prima
+                                Call:   var_declaration(LOOKING AHEAD...)
+                                  Call:   type_specifier(LOOKING AHEAD...)
+8. Se encontro el tipo de dato int: int
+                                    Visited token: <"int" at line 8 column 12>; Expected token: <"int">
+                                  Return: type_specifier(LOOKAHEAD SUCCEEDED)
+8. Se encontro un identificador: x
+                                  Visited token: <<IDENTIFICADOR>: "x" at line 8 column 16>; Expected token: <<IDENTIFICADOR>>
+                                  Call:   var_declaration
+                                    Call:   type_specifier
+                                      Consumed token: <"int" at line 8 column 12>
+                                    Return: type_specifier
+                                    Consumed token: <<IDENTIFICADOR>: "x" at line 8 column 16>
+8. Se encontro el simbolo punto y coma: ;
+                                    Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 8 column 17>
+                                  Return: var_declaration
+                                  Call:   local_declarations
+                                    Call:   local_declarations_prima
+                                      Call:   var_declaration(LOOKING AHEAD...)
+                                        Call:   type_specifier(LOOKING AHEAD...)
+8. Se encontro el tipo de dato int: int
+                                          Visited token: <"int" at line 8 column 19>; Expected token: <"int">
+                                        Return: type_specifier(LOOKAHEAD SUCCEEDED)
+8. Se encontro un identificador: k
+                                        Visited token: <<IDENTIFICADOR>: "k" at line 8 column 23>; Expected token: <<IDENTIFICADOR>>
+                                        Call:   var_declaration
+                                          Call:   type_specifier
+                                            Consumed token: <"int" at line 8 column 19>
+                                          Return: type_specifier
+                                          Consumed token: <<IDENTIFICADOR>: "k" at line 8 column 23>
+8. Se encontro el simbolo punto y coma: ;
+                                          Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 8 column 24>
+                                        Return: var_declaration
+                                        Call:   local_declarations
+                                          Call:   local_declarations_prima
+                                            Call:   var_declaration(LOOKING AHEAD...)
+                                              Call:   type_specifier(LOOKING AHEAD...)
+10. Se encontro un identificador: k
+                                                Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"int">
+                                                Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"float">
+                                                Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"char">
+                                                Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"void">
+                                              Return: type_specifier(LOOKAHEAD FAILED)
+                                            Return: var_declaration(LOOKAHEAD FAILED)
+                                          Return: local_declarations_prima
+                                        Return: local_declarations
+                                        Call:   var_declaration(LOOKING AHEAD...)
+                                          Call:   type_specifier(LOOKING AHEAD...)
+                                            Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"int">
+                                            Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"float">
+                                            Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"char">
+                                            Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"void">
+                                          Return: type_specifier(LOOKAHEAD FAILED)
+                                        Return: var_declaration(LOOKAHEAD FAILED)
+                                      Return: local_declarations_prima
+                                    Return: local_declarations
+                                    Call:   var_declaration(LOOKING AHEAD...)
+                                      Call:   type_specifier(LOOKING AHEAD...)
+                                        Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"int">
+                                        Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"float">
+                                        Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"char">
+                                        Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"void">
+                                      Return: type_specifier(LOOKAHEAD FAILED)
+                                    Return: var_declaration(LOOKAHEAD FAILED)
+                                  Return: local_declarations_prima
+                                Return: local_declarations
+                                Call:   var_declaration(LOOKING AHEAD...)
+                                  Call:   type_specifier(LOOKING AHEAD...)
+                                    Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"int">
+                                    Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"float">
+                                    Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"char">
+                                    Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <"void">
+                                  Return: type_specifier(LOOKAHEAD FAILED)
+                                Return: var_declaration(LOOKAHEAD FAILED)
+                              Return: local_declarations_prima
+                            Return: local_declarations
+                            Call:   statement_list
+                              Call:   statement_list_prima
+                                Call:   statement(LOOKING AHEAD...)
+                                  Call:   expression_stmt(LOOKING AHEAD...)
+                                    Call:   expression(LOOKING AHEAD...)
+                                      Call:   var(LOOKING AHEAD...)
+                                        Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <<IDENTIFICADOR>>
+10. Se encontro el simbolo igual o asignacion: =
+                                        Visited token: <<SIMBOLO_ASIGNACION>: "=" at line 10 column 7>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                      Return: var(LOOKAHEAD SUCCEEDED)
+                                      Visited token: <<SIMBOLO_ASIGNACION>: "=" at line 10 column 7>; Expected token: <<SIMBOLO_ASIGNACION>>
+                                      Call:   statement
+                                        Call:   expression_stmt
+                                          Call:   expression
+                                            Call:   var(LOOKING AHEAD...)
+                                              Visited token: <<IDENTIFICADOR>: "k" at line 10 column 5>; Expected token: <<IDENTIFICADOR>>
+                                              Visited token: <<SIMBOLO_ASIGNACION>: "=" at line 10 column 7>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                            Return: var(LOOKAHEAD SUCCEEDED)
+                                            Visited token: <<SIMBOLO_ASIGNACION>: "=" at line 10 column 7>; Expected token: <<SIMBOLO_ASIGNACION>>
+                                            Call:   expression(LOOKING AHEAD...)
+                                              Call:   var(LOOKING AHEAD...)
+10. Se encontro un identificador: low
+                                                Visited token: <<IDENTIFICADOR>: "low" at line 10 column 9>; Expected token: <<IDENTIFICADOR>>
+                                                Call:   var
+                                                  Consumed token: <<IDENTIFICADOR>: "k" at line 10 column 5>
+                                                Return: var
+                                                Consumed token: <<SIMBOLO_ASIGNACION>: "=" at line 10 column 7>
+                                                Call:   expression
+                                                  Call:   var(LOOKING AHEAD...)
+                                                    Visited token: <<IDENTIFICADOR>: "low" at line 10 column 9>; Expected token: <<IDENTIFICADOR>>
+10. Se encontro el simbolo punto y coma: ;
+                                                    Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                  Return: var(LOOKAHEAD SUCCEEDED)
+                                                  Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_ASIGNACION>>
+                                                  Call:   simple_expression
+                                                    Call:   additive_expression(LOOKING AHEAD...)
+                                                      Call:   term(LOOKING AHEAD...)
+                                                        Call:   factor(LOOKING AHEAD...)
+                                                          Visited token: <<IDENTIFICADOR>: "low" at line 10 column 9>; Expected token: <<SIMBOLO_PARENTESIS_ABIERTO>>
+                                                          Call:   var(LOOKING AHEAD...)
+                                                            Visited token: <<IDENTIFICADOR>: "low" at line 10 column 9>; Expected token: <<IDENTIFICADOR>>
+                                                            Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                          Return: var(LOOKAHEAD SUCCEEDED)
+                                                        Return: factor(LOOKAHEAD SUCCEEDED)
+                                                        Call:   term_prima(LOOKING AHEAD...)
+                                                          Call:   mulop(LOOKING AHEAD...)
+                                                            Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_POR>>
+                                                            Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_DIVISION>>
+                                                            Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_MODULO>>
+                                                          Return: mulop(LOOKAHEAD FAILED)
+                                                        Return: term_prima(LOOKAHEAD SUCCEEDED)
+                                                      Return: term(LOOKAHEAD SUCCEEDED)
+                                                      Call:   additive_expression_prima(LOOKING AHEAD...)
+                                                        Call:   addop(LOOKING AHEAD...)
+                                                          Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_MAS>>
+                                                          Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_MENOS>>
+                                                        Return: addop(LOOKAHEAD FAILED)
+                                                      Return: additive_expression_prima(LOOKAHEAD SUCCEEDED)
+                                                    Return: additive_expression(LOOKAHEAD SUCCEEDED)
+                                                    Call:   relop(LOOKING AHEAD...)
+                                                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <"<=">
+                                                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_MENOR_QUE>>
+                                                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_MAYOR_QUE>>
+                                                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <">=">
+                                                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <"==">
+                                                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <"!=">
+                                                    Return: relop(LOOKAHEAD FAILED)
+                                                    Call:   additive_expression
+                                                      Call:   term
+                                                        Call:   factor
+                                                          Call:   var(LOOKING AHEAD...)
+                                                            Visited token: <<IDENTIFICADOR>: "low" at line 10 column 9>; Expected token: <<IDENTIFICADOR>>
+                                                            Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                          Return: var(LOOKAHEAD SUCCEEDED)
+                                                          Call:   var
+                                                            Consumed token: <<IDENTIFICADOR>: "low" at line 10 column 9>
+                                                          Return: var
+                                                        Return: factor
+                                                        Call:   term_prima
+                                                          Call:   mulop(LOOKING AHEAD...)
+                                                            Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_POR>>
+                                                            Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_DIVISION>>
+                                                            Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_MODULO>>
+                                                          Return: mulop(LOOKAHEAD FAILED)
+                                                        Return: term_prima
+                                                      Return: term
+                                                      Call:   additive_expression_prima
+                                                        Call:   addop(LOOKING AHEAD...)
+                                                          Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_MAS>>
+                                                          Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>; Expected token: <<SIMBOLO_MENOS>>
+                                                        Return: addop(LOOKAHEAD FAILED)
+                                                      Return: additive_expression_prima
+                                                    Return: additive_expression
+                                                  Return: simple_expression
+                                                Return: expression
+                                              Return: expression
+                                              Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 10 column 12>
+                                            Return: expression_stmt
+                                          Return: statement
+                                          Call:   statement_list_prima
+                                            Call:   statement(LOOKING AHEAD...)
+                                              Call:   expression_stmt(LOOKING AHEAD...)
+                                                Call:   expression(LOOKING AHEAD...)
+                                                  Call:   var(LOOKING AHEAD...)
+11. Se encontro un identificador: x
+                                                    Visited token: <<IDENTIFICADOR>: "x" at line 11 column 5>; Expected token: <<IDENTIFICADOR>>
+11. Se encontro el simbolo igual o asignacion: =
+                                                    Visited token: <<SIMBOLO_ASIGNACION>: "=" at line 11 column 7>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                  Return: var(LOOKAHEAD SUCCEEDED)
+                                                  Visited token: <<SIMBOLO_ASIGNACION>: "=" at line 11 column 7>; Expected token: <<SIMBOLO_ASIGNACION>>
+                                                  Call:   statement
+                                                    Call:   expression_stmt
+                                                      Call:   expression
+                                                        Call:   var(LOOKING AHEAD...)
+                                                          Visited token: <<IDENTIFICADOR>: "x" at line 11 column 5>; Expected token: <<IDENTIFICADOR>>
+                                                          Visited token: <<SIMBOLO_ASIGNACION>: "=" at line 11 column 7>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                        Return: var(LOOKAHEAD SUCCEEDED)
+                                                        Visited token: <<SIMBOLO_ASIGNACION>: "=" at line 11 column 7>; Expected token: <<SIMBOLO_ASIGNACION>>
+                                                        Call:   expression(LOOKING AHEAD...)
+                                                          Call:   var(LOOKING AHEAD...)
+11. Se encontro un identificador: a
+                                                            Visited token: <<IDENTIFICADOR>: "a" at line 11 column 9>; Expected token: <<IDENTIFICADOR>>
+                                                            Call:   var
+                                                              Consumed token: <<IDENTIFICADOR>: "x" at line 11 column 5>
+                                                            Return: var
+                                                            Consumed token: <<SIMBOLO_ASIGNACION>: "=" at line 11 column 7>
+                                                            Call:   expression
+                                                              Call:   var(LOOKING AHEAD...)
+                                                                Visited token: <<IDENTIFICADOR>: "a" at line 11 column 9>; Expected token: <<IDENTIFICADOR>>
+11. Se encontro el simbolo de corchete abierto: [
+                                                                Visited token: <<SIMBOLO_CORCHETE_ABIERTO>: "[" at line 11 column 11>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                                Call:   expression(LOOKING AHEAD...)
+                                                                  Call:   var(LOOKING AHEAD...)
+11. Se encontro un identificador: low
+                                                                    Visited token: <<IDENTIFICADOR>: "low" at line 11 column 12>; Expected token: <<IDENTIFICADOR>>
+                                                                    Call:   var
+                                                                      Consumed token: <<IDENTIFICADOR>: "a" at line 11 column 9>
+                                                                      Consumed token: <<SIMBOLO_CORCHETE_ABIERTO>: "[" at line 11 column 11>
+                                                                      Call:   expression
+                                                                        Call:   var(LOOKING AHEAD...)
+                                                                          Visited token: <<IDENTIFICADOR>: "low" at line 11 column 12>; Expected token: <<IDENTIFICADOR>>
+11. Se encontro el simbolo de corchete cerrado: ]
+                                                                          Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                                        Return: var(LOOKAHEAD SUCCEEDED)
+                                                                        Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_ASIGNACION>>
+                                                                        Call:   simple_expression
+                                                                          Call:   additive_expression(LOOKING AHEAD...)
+                                                                            Call:   term(LOOKING AHEAD...)
+                                                                              Call:   factor(LOOKING AHEAD...)
+                                                                                Visited token: <<IDENTIFICADOR>: "low" at line 11 column 12>; Expected token: <<SIMBOLO_PARENTESIS_ABIERTO>>
+                                                                                Call:   var(LOOKING AHEAD...)
+                                                                                  Visited token: <<IDENTIFICADOR>: "low" at line 11 column 12>; Expected token: <<IDENTIFICADOR>>
+                                                                                  Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                                                Return: var(LOOKAHEAD SUCCEEDED)
+                                                                              Return: factor(LOOKAHEAD SUCCEEDED)
+                                                                              Call:   term_prima(LOOKING AHEAD...)
+                                                                                Call:   mulop(LOOKING AHEAD...)
+                                                                                  Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_POR>>
+                                                                                  Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_DIVISION>>
+                                                                                  Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_MODULO>>
+                                                                                Return: mulop(LOOKAHEAD FAILED)
+                                                                              Return: term_prima(LOOKAHEAD SUCCEEDED)
+                                                                            Return: term(LOOKAHEAD SUCCEEDED)
+                                                                            Call:   additive_expression_prima(LOOKING AHEAD...)
+                                                                              Call:   addop(LOOKING AHEAD...)
+                                                                                Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_MAS>>
+                                                                                Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_MENOS>>
+                                                                              Return: addop(LOOKAHEAD FAILED)
+                                                                            Return: additive_expression_prima(LOOKAHEAD SUCCEEDED)
+                                                                          Return: additive_expression(LOOKAHEAD SUCCEEDED)
+                                                                          Call:   relop(LOOKING AHEAD...)
+                                                                            Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <"<=">
+                                                                            Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_MENOR_QUE>>
+                                                                            Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_MAYOR_QUE>>
+                                                                            Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <">=">
+                                                                            Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <"==">
+                                                                            Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <"!=">
+                                                                          Return: relop(LOOKAHEAD FAILED)
+                                                                          Call:   additive_expression
+                                                                            Call:   term
+                                                                              Call:   factor
+                                                                                Call:   var(LOOKING AHEAD...)
+                                                                                  Visited token: <<IDENTIFICADOR>: "low" at line 11 column 12>; Expected token: <<IDENTIFICADOR>>
+                                                                                  Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                                                                                Return: var(LOOKAHEAD SUCCEEDED)
+                                                                                Call:   var
+                                                                                  Consumed token: <<IDENTIFICADOR>: "low" at line 11 column 12>
+                                                                                Return: var
+                                                                              Return: factor
+                                                                              Call:   term_prima
+                                                                                Call:   mulop(LOOKING AHEAD...)
+                                                                                  Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_POR>>
+                                                                                  Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_DIVISION>>
+                                                                                  Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_MODULO>>
+                                                                                Return: mulop(LOOKAHEAD FAILED)
+                                                                              Return: term_prima
+                                                                            Return: term
+                                                                            Call:   additive_expression_prima
+                                                                              Call:   addop(LOOKING AHEAD...)
+                                                                                Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_MAS>>
+                                                                                Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>; Expected token: <<SIMBOLO_MENOS>>
+                                                                              Return: addop(LOOKAHEAD FAILED)
+                                                                            Return: additive_expression_prima
+                                                                          Return: additive_expression
+                                                                        Return: simple_expression
+                                                                      Return: expression
+                                                                      Consumed token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 11 column 15>
+11. Se encontro el simbolo punto y coma: ;
+                                                                    Return: var
+                                                                  Return: expression
+                                                                Return: expression
+                                                              Return: expression_stmt
+                                                            Return: statement
+                                                          Return: statement_list_prima
+                                                        Return: statement_list_prima
+                                                      Return: statement_list
+                                                    Return: compound_stmt
+                                                  Return: fun_declaration
+                                                Return: declaration
+                                              Return: declaration_list_prima
+                                            Return: declaration_list
+                                          Return: program
