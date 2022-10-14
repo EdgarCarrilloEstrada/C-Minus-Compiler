@@ -10,7 +10,7 @@ PARSER_BEGIN(cminusparser)
 public class cminusparser {
     public static void main(String [] args) throws ParseException{
             cminusparser anLex = new cminusparser(System.in);
-            anLex.program();
+            anLex.Inicio();
             System.out.println("\n\nAnalysis has ended successfully!");
     }
 }
@@ -286,6 +286,11 @@ void Ejecucion() : {}
 <EOF>
 }*/
 
+void Inicio( ) : {}
+{
+    (program())+ <EOF>
+}
+
 
 //LINEA 1
 void program() : {}
@@ -302,19 +307,24 @@ void declaration_list() : {}
 //LINEA 3
 void declaration_list_prima() : {}
 {
-    (LOOKAHEAD(3) declaration() declaration_list_prima())* // | empty -> agregar LOOKAHEAD
+    (LOOKAHEAD(5) declaration() declaration_list_prima())* // | empty -> agregar LOOKAHEAD
 }
 
 //LINEA 4
 void declaration() : {}
 {
-    LOOKAHEAD(3) var_declaration() | LOOKAHEAD(3) fun_declaration()
+    LOOKAHEAD(5) var_declaration() | LOOKAHEAD(5) fun_declaration()
 }
 
 //LINEA 5
 void var_declaration() : {}
 {
-    type_specifier() <IDENTIFICADOR> (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO> | <SIMBOLO_COMA> <IDENTIFICADOR> )*  <SIMBOLO_PUNTO_Y_COMA> //aqui no lleva empty pero se factorizo
+    type_specifier() <IDENTIFICADOR> var_declaration_2()  <SIMBOLO_PUNTO_Y_COMA> //aqui no lleva empty pero se factorizo
+}
+
+void var_declaration_2() : {}
+{
+    (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO> | <SIMBOLO_COMA> <IDENTIFICADOR> )*
 }
 
 //LINEA 6
@@ -332,7 +342,7 @@ void fun_declaration() : {}
 //LINEA 8
 void params() : {}
 {
-        LOOKAHEAD(3) param_list() | LOOKAHEAD (3) <VACIO_VOID>
+        LOOKAHEAD(5) param_list() | LOOKAHEAD (3) <VACIO_VOID>
 }
 
 //LINEA 9
@@ -374,7 +384,7 @@ void local_declarations() : {}
 //LINEA 14
 void local_declarations_prima() : {}
 {
-    (LOOKAHEAD(2) var_declaration() local_declarations_prima())* // | empty -> agregar LOOKAHEAD
+    (LOOKAHEAD(5) var_declaration() local_declarations_prima())* // | empty -> agregar LOOKAHEAD
 }
 
 //LINEA 15
@@ -386,7 +396,7 @@ void statement_list() : {}
 //LINEA 16
 void statement_list_prima() : {}
 {
-    (LOOKAHEAD(2) statement() statement_list_prima())* // | empty -> agregar LOOKAHEAD
+    (LOOKAHEAD(5) statement() statement_list_prima())* // | empty -> agregar LOOKAHEAD
 }
 
 //LINEA 17
@@ -404,7 +414,17 @@ void expression_stmt() : {}
 //LINEA 19
 void selection_stmt() : {}
 {
-    LOOKAHEAD(5) <CONDICIONAL_IF> <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO> statement()  <CONDICIONAL_ELSE> statement() | <CONDICIONAL_IF> <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO> statement()
+    if_def()
+}
+
+void if_def() : {}
+{
+    LOOKAHEAD(5)<CONDICIONAL_IF> <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO> else_def()
+}
+
+void else_def() : {}
+{
+    (LOOKAHEAD(5) <CONDICIONAL_ELSE> statement())*
 }
 
 
@@ -429,19 +449,24 @@ void return_stmt_2() : {}
 //LINEA 22
 void expression() : {}
 {
-    LOOKAHEAD(3) var() <SIMBOLO_ASIGNACION> expression() | LOOKAHEAD(3) simple_expression() <SIMBOLO_PUNTO_Y_COMA>
+    LOOKAHEAD(5) var() <SIMBOLO_ASIGNACION> expression() | LOOKAHEAD(5) simple_expression() <SIMBOLO_PUNTO_Y_COMA>
 }
 
 //LINEA 23
 void var() : {}
 {
-    <IDENTIFICADOR> (<SIMBOLO_CORCHETE_ABIERTO> expression() <SIMBOLO_CORCHETE_CERRADO> )*
+    <IDENTIFICADOR> var_extra()
+}
+
+void var_extra() : {}
+{
+    (<SIMBOLO_CORCHETE_ABIERTO> expression() <SIMBOLO_CORCHETE_CERRADO> )*
 }
 
 //LINEA 24
 void simple_expression() : {}
 {
-    LOOKAHEAD(3) additive_expression() relop() additive_expression() | LOOKAHEAD(3) additive_expression()
+    LOOKAHEAD(5) additive_expression() | LOOKAHEAD(5) additive_expression() relop() additive_expression()
 }
 
 //LINEA 25
@@ -459,7 +484,7 @@ void additive_expression() : {}
 //LINEA 27
 void additive_expression_prima() : {}
 {
-    (LOOKAHEAD(2)addop() term() additive_expression_prima())* // | empty -> agregar LOOKAHEAD
+    (LOOKAHEAD(5)addop() term() additive_expression_prima())* // | empty -> agregar LOOKAHEAD
 }
 
 //LINEA 28
@@ -477,7 +502,7 @@ void term() : {}
 //LINEA 30
 void term_prima() : {}
 {
-    (LOOKAHEAD(2)mulop() factor() term_prima())* // | empty -> agregar LOOKAHEAD
+    (LOOKAHEAD(5)mulop() factor() term_prima())* // | empty -> agregar LOOKAHEAD
 }
 
 //LINEA 31
@@ -489,7 +514,7 @@ void mulop() : {}
 //LINEA 32
 void factor() : {}
 {
-    <NUMERO_ENTERO> | <NUMERO_REAL> | <CARACTER>  | LOOKAHEAD(3) call() | LOOKAHEAD(3) var() | <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO>
+    <NUMERO_ENTERO> | <NUMERO_REAL> | <CARACTER>  | LOOKAHEAD(5) call() | LOOKAHEAD(5) var() | <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO>
 }
 
 //LINEA 33
@@ -513,7 +538,7 @@ void arg_list() : {}
 //LINEA 36
 void arg_list_prima() : {}
 {
-    (LOOKAHEAD(2) expression() arg_list_prima())* // | empty -> agregar LOOKAHEAD
+    (LOOKAHEAD(5) expression() arg_list_prima())* // | empty -> agregar LOOKAHEAD
 }
 
 
@@ -550,12 +575,12 @@ void declaration_list() : {}
 //GRAMATICA EN LINEA 2 (ARREGLADA)
 void declaration_list_prima() : {}
 {
-    (LOOKAHEAD(2) declaration() declaration_list_prima() )*
+    (LOOKAHEAD(5) declaration() declaration_list_prima() )*
 }
 //GRAMATICA EN LINEA 3
 void declaration() : {}
 {
-    LOOKAHEAD(3) var_declaration() | fun_declaration()
+    LOOKAHEAD(5) var_declaration() | fun_declaration()
 }
 //GRAMATICA EN LINEA 4
 void var_declaration() : {}
@@ -576,7 +601,7 @@ void fun_declaration() : {}
 //GRAMATICA EN LINEA 7
 void params() : {}
 {
-    LOOKAHEAD(2) param_list() | <VACIO_VOID>
+    LOOKAHEAD(5) param_list() | <VACIO_VOID>
 }
 //GRAMATICA EN LINEA 8 (ARREGLADA)
 void param_list() : {}
@@ -606,7 +631,7 @@ void local_declarations() : {}
 //GRAMATICA EN LINEA 11 (ARREGLADA)
 void local_declarations_prima() : {}
 {
-    (LOOKAHEAD(2) var_declaration() local_declarations() )*
+    (LOOKAHEAD(5) var_declaration() local_declarations() )*
 }
 //GRAMATICA EN LINEA 12 (ARREGLADA)
 void statement_list() : {}
@@ -616,7 +641,7 @@ void statement_list() : {}
 //GRAMATICA EN LINEA 12 (ARREGLADA)
 void statement_list_prima() : {}
 {
-    (LOOKAHEAD(2) statement() statement_list_prima() )*
+    (LOOKAHEAD(5) statement() statement_list_prima() )*
 }
 //GRAMATICA EN LINEA 13
 void statement() : {}
@@ -631,7 +656,7 @@ void expression_stmt() : {}
 //GRAMATICA EN LINEA 15
 void selection_stmt() : {}
 {
-    LOOKAHEAD(3) <CONDICIONAL_IF> <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO>  statement() |
+    LOOKAHEAD(5) <CONDICIONAL_IF> <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO>  statement() |
     <CONDICIONAL_IF> <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO>  statement() <CONDICIONAL_ELSE>  statement()
 }
 //GRAMATICA EN LINEA 16
@@ -642,13 +667,13 @@ void iteration_stmt() : {}
 //GRAMATICA EN LINEA 17
 void return_stmt() : {}
 {
-    //LOOKAHEAD(2) <RETORNAR_RETURN> <SIMBOLO_PUNTO_Y_COMA> | <RETORNAR_RETURN> expression() <SIMBOLO_PUNTO_Y_COMA>
+    //LOOKAHEAD(5) <RETORNAR_RETURN> <SIMBOLO_PUNTO_Y_COMA> | <RETORNAR_RETURN> expression() <SIMBOLO_PUNTO_Y_COMA>
     <RETORNAR_RETURN> (<SIMBOLO_PUNTO_Y_COMA> | expression() <SIMBOLO_PUNTO_Y_COMA>)
 }
 //GRAMATICA EN LINEA 18
 void expression() : {}
 {
-    LOOKAHEAD(3) var() <SIMBOLO_ASIGNACION> expression() | simple_expression()
+    LOOKAHEAD(5) var() <SIMBOLO_ASIGNACION> expression() | simple_expression()
 }
 //GRAMATICA EN LINEA 19
 void var() : {}
@@ -659,7 +684,7 @@ void var() : {}
 //GRAMATICA EN LINEA 20
 void simple_expression() : {}
 {
-    LOOKAHEAD(3) additive_expression() relop() additive_expression() | additive_expression()
+    LOOKAHEAD(5) additive_expression() relop() additive_expression() | additive_expression()
 }
 //GRAMATICA EN LINEA 21
 void relop() : {}
@@ -674,7 +699,7 @@ void additive_expression() : {}
 //GRAMATICA EN LINEA 22 (ARREGLADA)
 void additive_expression_prima() :{}
 {
-    (LOOKAHEAD(2) addop() term() additive_expression_prima())*
+    (LOOKAHEAD(5) addop() term() additive_expression_prima())*
 }
 //GRAMATICA EN LINEA 23
 void addop() : {}
@@ -689,7 +714,7 @@ void term() : {}
 //GRAMATICA EN LINEA 24 (ARREGLADA)
 void term_prima() : {}
 {
-    (LOOKAHEAD(2) mulop() factor() term_prima() )*
+    (LOOKAHEAD(5) mulop() factor() term_prima() )*
 }
 //GRAMATICA EN LINEA 25
 void mulop() : {}
@@ -699,7 +724,7 @@ void mulop() : {}
 //GRAMATICA EN LINEA 26
 void factor() : {}
 {
-    <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO> | LOOKAHEAD(2)  var() | LOOKAHEAD(2)  call() | <NUMERO_ENTERO> | <NUMERO_REAL> | <CARACTER>
+    <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO> | LOOKAHEAD(5)  var() | LOOKAHEAD(5)  call() | <NUMERO_ENTERO> | <NUMERO_REAL> | <CARACTER>
 }
 //GRAMATICA EN LINEA 27
 void call() : {}
@@ -719,7 +744,7 @@ void arg_list() :{}
 //GRAMATICA EN LINEA 29 (ARREGLADA)
 void arg_list_prima() : {}
 {
-    (LOOKAHEAD(2) <SIMBOLO_COMA> expression() arg_list_prima() )*
+    (LOOKAHEAD(5) <SIMBOLO_COMA> expression() arg_list_prima() )*
 }
 
  */
