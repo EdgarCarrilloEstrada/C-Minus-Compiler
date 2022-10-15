@@ -1,0 +1,145 @@
+Call:   Inicio
+  Call:   parte_if
+1. Se encontro el condicional if: if
+    Consumed token: <"if" at line 1 column 1>
+1. Se encontro el simbolo de parentesis abierto: (
+    Consumed token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 1 column 3>
+    Call:   expression
+      Call:   var(LOOKING AHEAD...)
+1. Se encontro un identificador: v
+        Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<IDENTIFICADOR>>
+1. Se encontro el simbolo de comparacion: ==
+        Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+      Return: var(LOOKAHEAD SUCCEEDED)
+      Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_ASIGNACION>>
+      Call:   simple_expression(LOOKING AHEAD...)
+        Call:   additive_expression(LOOKING AHEAD...)
+          Call:   term(LOOKING AHEAD...)
+            Call:   factor(LOOKING AHEAD...)
+              Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<NUMERO_ENTERO>>
+              Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<NUMERO_REAL>>
+              Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<CARACTER>>
+              Call:   var(LOOKING AHEAD...)
+                Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<IDENTIFICADOR>>
+                Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+              Return: var(LOOKAHEAD SUCCEEDED)
+            Return: factor(LOOKAHEAD SUCCEEDED)
+            Call:   term_prima(LOOKING AHEAD...)
+              Call:   mulop(LOOKING AHEAD...)
+                Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_POR>>
+                Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_DIVISION>>
+                Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MODULO>>
+              Return: mulop(LOOKAHEAD FAILED)
+            Return: term_prima(LOOKAHEAD SUCCEEDED)
+          Return: term(LOOKAHEAD SUCCEEDED)
+          Call:   additive_expression_prima(LOOKING AHEAD...)
+            Call:   addop(LOOKING AHEAD...)
+              Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MAS>>
+              Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MENOS>>
+            Return: addop(LOOKAHEAD FAILED)
+          Return: additive_expression_prima(LOOKAHEAD SUCCEEDED)
+        Return: additive_expression(LOOKAHEAD SUCCEEDED)
+        Call:   relop(LOOKING AHEAD...)
+          Visited token: <"==" at line 1 column 5>; Expected token: <"<=">
+          Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MENOR_QUE>>
+          Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MAYOR_QUE>>
+          Visited token: <"==" at line 1 column 5>; Expected token: <">=">
+          Visited token: <"==" at line 1 column 5>; Expected token: <"==">
+        Return: relop(LOOKAHEAD SUCCEEDED)
+        Call:   additive_expression(LOOKING AHEAD...)
+          Call:   term(LOOKING AHEAD...)
+            Call:   factor(LOOKING AHEAD...)
+1. Se encontro un numero entero: 0
+              Visited token: <<NUMERO_ENTERO>: "0" at line 1 column 7>; Expected token: <<NUMERO_ENTERO>>
+              Call:   simple_expression
+                Call:   additive_expression(LOOKING AHEAD...)
+                  Call:   term(LOOKING AHEAD...)
+                    Call:   factor(LOOKING AHEAD...)
+                      Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<NUMERO_ENTERO>>
+                      Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<NUMERO_REAL>>
+                      Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<CARACTER>>
+                      Call:   var(LOOKING AHEAD...)
+                        Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<IDENTIFICADOR>>
+                        Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                      Return: var(LOOKAHEAD SUCCEEDED)
+                    Return: factor(LOOKAHEAD SUCCEEDED)
+                    Call:   term_prima(LOOKING AHEAD...)
+                      Call:   mulop(LOOKING AHEAD...)
+                        Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_POR>>
+                        Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_DIVISION>>
+                        Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MODULO>>
+                      Return: mulop(LOOKAHEAD FAILED)
+                    Return: term_prima(LOOKAHEAD SUCCEEDED)
+                  Return: term(LOOKAHEAD SUCCEEDED)
+                  Call:   additive_expression_prima(LOOKING AHEAD...)
+                    Call:   addop(LOOKING AHEAD...)
+                      Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MAS>>
+                      Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MENOS>>
+                    Return: addop(LOOKAHEAD FAILED)
+                  Return: additive_expression_prima(LOOKAHEAD SUCCEEDED)
+                Return: additive_expression(LOOKAHEAD SUCCEEDED)
+                Call:   relop(LOOKING AHEAD...)
+                  Visited token: <"==" at line 1 column 5>; Expected token: <"<=">
+                  Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MENOR_QUE>>
+                  Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MAYOR_QUE>>
+                  Visited token: <"==" at line 1 column 5>; Expected token: <">=">
+                  Visited token: <"==" at line 1 column 5>; Expected token: <"==">
+                Return: relop(LOOKAHEAD SUCCEEDED)
+                Call:   additive_expression(LOOKING AHEAD...)
+                  Call:   term(LOOKING AHEAD...)
+                    Call:   factor(LOOKING AHEAD...)
+                      Visited token: <<NUMERO_ENTERO>: "0" at line 1 column 7>; Expected token: <<NUMERO_ENTERO>>
+                      Call:   additive_expression
+                        Call:   term
+                          Call:   factor
+                            Call:   var(LOOKING AHEAD...)
+                              Visited token: <<IDENTIFICADOR>: "v" at line 1 column 4>; Expected token: <<IDENTIFICADOR>>
+                              Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                            Return: var(LOOKAHEAD SUCCEEDED)
+                            Call:   var
+                              Consumed token: <<IDENTIFICADOR>: "v" at line 1 column 4>
+                            Return: var
+                          Return: factor
+                          Call:   term_prima
+                            Call:   mulop(LOOKING AHEAD...)
+                              Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_POR>>
+                              Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_DIVISION>>
+                              Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MODULO>>
+                            Return: mulop(LOOKAHEAD FAILED)
+                          Return: term_prima
+                        Return: term
+                        Call:   additive_expression_prima
+                          Call:   addop(LOOKING AHEAD...)
+                            Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MAS>>
+                            Visited token: <"==" at line 1 column 5>; Expected token: <<SIMBOLO_MENOS>>
+                          Return: addop(LOOKAHEAD FAILED)
+                        Return: additive_expression_prima
+                      Return: additive_expression
+                      Call:   relop
+                        Consumed token: <"==" at line 1 column 5>
+                      Return: relop
+                      Call:   additive_expression
+                        Call:   term
+                          Call:   factor
+                            Consumed token: <<NUMERO_ENTERO>: "0" at line 1 column 7>
+                          Return: factor
+                          Call:   term_prima
+                            Call:   mulop(LOOKING AHEAD...)
+1. Se encontro el simbolo de parentesis cerrado: )
+                              Visited token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 1 column 8>; Expected token: <<SIMBOLO_POR>>
+                              Visited token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 1 column 8>; Expected token: <<SIMBOLO_DIVISION>>
+                              Visited token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 1 column 8>; Expected token: <<SIMBOLO_MODULO>>
+                            Return: mulop(LOOKAHEAD FAILED)
+                          Return: term_prima
+                        Return: term
+                        Call:   additive_expression_prima
+                          Call:   addop(LOOKING AHEAD...)
+                            Visited token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 1 column 8>; Expected token: <<SIMBOLO_MAS>>
+                            Visited token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 1 column 8>; Expected token: <<SIMBOLO_MENOS>>
+                          Return: addop(LOOKAHEAD FAILED)
+                        Return: additive_expression_prima
+                      Return: additive_expression
+                    Return: simple_expression
+                  Return: expression
+                Return: parte_if
+              Return: Inicio
