@@ -1,0 +1,37 @@
+1. Se encontro el tipo de dato int: int
+1. Se encontro un identificador: m
+1. Se encontro el simbolo de parentesis abierto: (
+Id: m Corresponde: Declaración de funcion
+1. Se encontro el tipo de dato int: int
+1. Se encontro un identificador: c
+1. Se encontro el simbolo de parentesis cerrado: )
+Id: c Corresponde: Declaración de parametro
+1. Se encontro el simbolo de llave abierta: {
+2. Se encontro el tipo de dato int: int
+2. Se encontro un identificador: a
+2. Se encontro el simbolo punto y coma: ;
+3. Se encontro el tipo de dato float: float
+3. Se encontro un identificador: b
+3. Se encontro el simbolo coma: ,
+3. Se encontro un identificador: a
+3. Se encontro el simbolo coma: ,
+3. Se encontro un identificador: a
+3. Se encontro el simbolo coma: ,
+3. Se encontro un identificador: a
+3. Se encontro el simbolo punto y coma: ;
+4. Se encontro el simbolo de llave cerrada: }
+Id: a Corresponde: Declaración de variable
+Id: b Corresponde: Declaración de variable
+Repeticion de declaración en el identificador: a
+Id: a Corresponde: Declaración de variable
+Repeticion de declaración en el identificador: a
+Id: a Corresponde: Declaración de variable
+Repeticion de declaración en el identificador: a
+Id: a Corresponde: Declaración de variable
+Keys: b
+Keys: m
+Keys: a
+Keys: c
+
+
+Analysis has ended successfully!

@@ -1,0 +1,79 @@
+7. Se encontro el tipo de dato int: int
+7. Se encontro un identificador: gcd
+7. Se encontro el simbolo de parentesis abierto: (
+7. Se encontro el tipo de dato int: int
+7. Se encontro un identificador: u
+7. Se encontro el simbolo coma: ,
+7. Se encontro el tipo de dato int: int
+7. Se encontro un identificador: v
+7. Se encontro el simbolo de parentesis cerrado: )
+8. Se encontro el simbolo de llave abierta: {
+9. Se encontro el condicional if: if
+9. Se encontro el simbolo de parentesis abierto: (
+9. Se encontro un identificador: v
+9. Se encontro el simbolo de comparacion: ==
+9. Se encontro un numero entero: 0
+9. Se encontro el simbolo de parentesis cerrado: )
+9. Se encontro el retorno de valor return: return
+9. Se encontro un identificador: u
+9. Se encontro el simbolo punto y coma: ;
+10. Se encontro el condicional else: else
+10. Se encontro el retorno de valor return: return
+10. Se encontro un identificador: gcd
+10. Se encontro el simbolo de parentesis abierto: (
+10. Se encontro un identificador: v
+10. Se encontro el simbolo coma: ,
+10. Se encontro un identificador: u
+10. Se encontro el simbolo menos: -
+10. Se encontro un identificador: u
+10. Se encontro el simbolo diagonal: /
+10. Se encontro un identificador: v
+10. Se encontro el simbolo asterisco: *
+10. Se encontro un identificador: v
+10. Se encontro el simbolo de parentesis cerrado: )
+10. Se encontro el simbolo punto y coma: ;
+12. Se encontro el simbolo de llave cerrada: }
+14. Se encontro el vacio: void
+14. Se encontro un identificador: main
+14. Se encontro el simbolo de parentesis abierto: (
+14. Se encontro el vacio: void
+14. Se encontro el simbolo de parentesis cerrado: )
+15. Se encontro el simbolo de llave abierta: {
+16. Se encontro el tipo de dato int: int
+16. Se encontro un identificador: x
+16. Se encontro el simbolo punto y coma: ;
+16. Se encontro el tipo de dato int: int
+16. Se encontro un identificador: y
+16. Se encontro el simbolo punto y coma: ;
+17. Se encontro un identificador: x
+17. Se encontro el simbolo igual o asignacion: =
+17. Se encontro un identificador: input
+17. Se encontro el simbolo de parentesis abierto: (
+17. Se encontro el simbolo de parentesis cerrado: )
+17. Se encontro el simbolo punto y coma: ;
+17. Se encontro un identificador: y
+17. Se encontro el simbolo igual o asignacion: =
+17. Se encontro un identificador: input
+17. Se encontro el simbolo de parentesis abierto: (
+17. Se encontro el simbolo de parentesis cerrado: )
+17. Se encontro el simbolo punto y coma: ;
+18. Se encontro un identificador: output
+18. Se encontro el simbolo de parentesis abierto: (
+18. Se encontro un identificador: gcd
+18. Se encontro el simbolo de parentesis abierto: (
+18. Se encontro un identificador: x
+18. Se encontro el simbolo coma: ,
+18. Se encontro un identificador: y
+18. Se encontro el simbolo de parentesis cerrado: )
+18. Se encontro el simbolo de parentesis cerrado: )
+18. Se encontro el simbolo punto y coma: ;
+19. Se encontro el simbolo de llave cerrada: }
+Keys: x
+Keys: main
+Keys: v
+Keys: u
+Keys: gcd
+Keys: y
+
+
+Analysis has ended successfully!

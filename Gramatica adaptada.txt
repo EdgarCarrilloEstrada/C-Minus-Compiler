@@ -1,0 +1,39 @@
+1.	program 					-> 					declaration-list
+2.	declaration-list			->					declaration declaration-list-prima
+3.	declaration_list_prima		->					declaration declaration-list-prima | empty
+4. 	declaration				->					var-declaration | fun-declaration
+5.	var-declaration			->					type-specifier ID ( '[' NUMERO-ENTERO ']' | ',' ID | empty) ';'
+6.	type-specifier				->					DATO-INT | DATO-FLOAT | DATO-CHAR | VACIO-VOID
+7.	fun-declaration			->					type-specifier ID '(' params ')'compound-stmt
+8.	params					->					param-list | VAVIO-VOID
+9.	param-list				->					param param-list-prima
+10.	param-list-prima			->					',' param | empty
+11.	param					->					type-specifier ID ('[' ']' | empty)
+12.	compound-stmt				->					'{' local-declaration statement-list '}'
+13.	local-declarations			->					local-declarations-prima
+14.	local-declarations-primma	->					var-declaration local-declarations | empty
+15.	statement-list				->					statement-list-prima
+16.	statement-list-prima		->					statement statement-list-prima | empty
+17.	statement					->					return-stmt | expression-stmt | compound-stmt | selection-stmt | iteration-stmt
+18.	expression-stmt			->					expression ';' | ';'
+19.	selection-stmt				->					parte-if parte-else
+20.	parte-if					->					IF '(' expression ')' statement
+21.	parte-else				->					ELSE statement | empty
+22.	iteration-stmt				->					WHILE '(' expression ')' statement
+23.	return-stmt				->					RETURN ( ';' | expression ';')
+24.	expression				->					var expression | simple-expression
+25.	var						->					ID var-extra
+26.	var-extra					->					'[' expression ']' | empty
+27.	simple-expression			->					additive-expression relop additive-expression | additive-expression
+28.	relop					->					<= | < | > | >= | == | !=
+29.	additive-expression			->					term additive-expression-prima
+30.	additive-expression-prima	->					addop term additive-expression-prima | empty
+31.	addop					->					'+' | '-'
+32.	term						->					factor term-prima
+33.	term-prima				->					mulop factor term-prima | empty
+34.	mulop					->					* | / | %
+35.	factor					->					call | '(' expression ')' | var() | NUMERO-ENTERO | NUMERO-REAL | CARACTER
+36.	call						->					ID '(' args ')'
+37.	args						->					arg-list | empty
+38.	arg-list					->					expression arg-list-prima
+39.	arg-list-prima				->					',' expression arg-list-prima | empty
