@@ -1,8 +1,8 @@
 options {
 Ignore_Case = false;
 STATIC=false;
-DEBUG_PARSER=false; //true
-DEBUG_LOOKAHEAD=false; //true
+DEBUG_PARSER=true; //true
+DEBUG_LOOKAHEAD=true; //true
 }
 
 PARSER_BEGIN(cminusparser)
@@ -21,22 +21,27 @@ public class cminusparser {
 
     }
 
-    static void guardar(String Id, String tipo){
-        Enumeration llaves = contenedor.keys();
-        while (llaves.hasMoreElements()) {
-            if(llaves.nextElement().equals(Id)){
-                System.out.println("Repeticion de declaración en el identificador: " + Id);
-            }
+    static void guardar(String Id, String tipo){    
+        //Enumeration llaves = contenedor.keys();
+        //while (llaves.hasMoreElements()) {
+        //    if(llaves.nextElement().equals(Id)){
+        //        System.out.println("Repeticion de declaracion en el identificador: " + Id);
+        //    }
+        //}
+        if(contenedor.containsKey(Id)){
+            System.out.println("Repeticion de declaracion en el identificador: " + Id);
+        }
+        else{
+    	contenedor.put(Id, tipo);
         }
 
-    	contenedor.put(Id, tipo);
     	//System.out.println(""+"Id: " + Id + " Corresponde: " + contenedor.get(Id));
     }
 
     static void mostrar (){
-    	Enumeration llaves = contenedor.keys();
-        while (llaves.hasMoreElements()) {
-            System.out.println(""+"Keys: " + llaves.nextElement() );
+        System.out.println("ACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
+    	for(String id : contenedor.keySet()){
+            System.out.println("Variable: " + id + " Tipo: " + contenedor.get(id));
         }
     }
 
@@ -323,7 +328,7 @@ void declaration() : {}
 //ARREGLAR PARA QUE DETECTE ARREGLOS INDIVIDUALES
 void var_declaration() : {}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaración de variable");} (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO>   | <SIMBOLO_COMA> <IDENTIFICADOR> {guardar(token.image, "Declaración de variable");} ) * <SIMBOLO_PUNTO_Y_COMA>
+    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaracion de variable");} (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO>   | <SIMBOLO_COMA> <IDENTIFICADOR> {guardar(token.image, "Declaración de variable");} ) * <SIMBOLO_PUNTO_Y_COMA>
 }
 
 //GRAMATICA EN LINEA 5
@@ -334,7 +339,7 @@ void type_specifier() : {}
 //GRAMATICA EN LINEA 6
 void fun_declaration() : {}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaración de funcion");} <SIMBOLO_PARENTESIS_ABIERTO> params() <SIMBOLO_PARENTESIS_CERRADO> compound_stmt() {}
+    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaracion de funcion");} <SIMBOLO_PARENTESIS_ABIERTO> params() <SIMBOLO_PARENTESIS_CERRADO> compound_stmt() {}
 }
 //GRAMATICA EN LINEA 7
 void params() : {}
@@ -354,7 +359,7 @@ void param_list_prima() : {}
 //GRAMATICA EN LINEA 9
 void param() : {}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaración de parametro");} (<SIMBOLO_CORCHETE_ABIERTO> <SIMBOLO_CORCHETE_CERRADO> {guardar(token.image, "Declaración de parametro con arreglo");})*
+    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaracion de parametro");} (<SIMBOLO_CORCHETE_ABIERTO> <SIMBOLO_CORCHETE_CERRADO> {guardar(token.image, "Declaración de parametro con arreglo");})*
 }
 //GRAMATICA EN LINEA 10
 void compound_stmt() : {}

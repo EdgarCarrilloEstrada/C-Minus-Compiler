@@ -1,0 +1,273 @@
+Call:   Inicio
+  Call:   program
+    Call:   declaration_list
+      Call:   declaration
+        Call:   var_declaration(LOOKING AHEAD...)
+          Call:   type_specifier(LOOKING AHEAD...)
+1. Se encontro el tipo de dato int: int
+            Visited token: <"int" at line 1 column 1>; Expected token: <"int">
+          Return: type_specifier(LOOKAHEAD SUCCEEDED)
+1. Se encontro un identificador: m
+          Visited token: <<IDENTIFICADOR>: "m" at line 1 column 5>; Expected token: <<IDENTIFICADOR>>
+1. Se encontro el simbolo de parentesis abierto: (
+          Visited token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 1 column 6>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+          Visited token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 1 column 6>; Expected token: <<SIMBOLO_COMA>>
+          Visited token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 1 column 6>; Expected token: <<SIMBOLO_PUNTO_Y_COMA>>
+        Return: var_declaration(LOOKAHEAD FAILED)
+        Call:   fun_declaration
+          Call:   type_specifier
+            Consumed token: <"int" at line 1 column 1>
+          Return: type_specifier
+          Consumed token: <<IDENTIFICADOR>: "m" at line 1 column 5>
+          Consumed token: <<SIMBOLO_PARENTESIS_ABIERTO>: "(" at line 1 column 6>
+          Call:   params
+            Call:   param_list(LOOKING AHEAD...)
+              Call:   param(LOOKING AHEAD...)
+                Call:   type_specifier(LOOKING AHEAD...)
+1. Se encontro el tipo de dato int: int
+                  Visited token: <"int" at line 1 column 7>; Expected token: <"int">
+                Return: type_specifier(LOOKAHEAD SUCCEEDED)
+1. Se encontro un identificador: c
+                Visited token: <<IDENTIFICADOR>: "c" at line 1 column 11>; Expected token: <<IDENTIFICADOR>>
+1. Se encontro el simbolo de parentesis cerrado: )
+                Visited token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 1 column 12>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+              Return: param(LOOKAHEAD SUCCEEDED)
+              Call:   param_list_prima(LOOKING AHEAD...)
+                Visited token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 1 column 12>; Expected token: <<SIMBOLO_COMA>>
+              Return: param_list_prima(LOOKAHEAD SUCCEEDED)
+            Return: param_list(LOOKAHEAD SUCCEEDED)
+            Call:   param_list
+              Call:   param
+                Call:   type_specifier
+                  Consumed token: <"int" at line 1 column 7>
+                Return: type_specifier
+                Consumed token: <<IDENTIFICADOR>: "c" at line 1 column 11>
+              Return: param
+              Call:   param_list_prima
+              Return: param_list_prima
+            Return: param_list
+          Return: params
+          Consumed token: <<SIMBOLO_PARENTESIS_CERRADO>: ")" at line 1 column 12>
+          Call:   compound_stmt
+1. Se encontro el simbolo de llave abierta: {
+            Consumed token: <<SIMBOLO_LLAVE_ABIERTA>: "{" at line 1 column 13>
+            Call:   local_declarations
+              Call:   local_declarations_prima
+                Call:   var_declaration(LOOKING AHEAD...)
+                  Call:   type_specifier(LOOKING AHEAD...)
+2. Se encontro el tipo de dato int: int
+                    Visited token: <"int" at line 2 column 9>; Expected token: <"int">
+                  Return: type_specifier(LOOKAHEAD SUCCEEDED)
+2. Se encontro un identificador: a
+                  Visited token: <<IDENTIFICADOR>: "a" at line 2 column 13>; Expected token: <<IDENTIFICADOR>>
+2. Se encontro el simbolo punto y coma: ;
+                  Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 2 column 14>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                  Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 2 column 14>; Expected token: <<SIMBOLO_COMA>>
+                  Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 2 column 14>; Expected token: <<SIMBOLO_PUNTO_Y_COMA>>
+                Return: var_declaration(LOOKAHEAD SUCCEEDED)
+                Call:   local_declarations(LOOKING AHEAD...)
+                  Call:   local_declarations_prima(LOOKING AHEAD...)
+                    Call:   var_declaration(LOOKING AHEAD...)
+                      Call:   type_specifier(LOOKING AHEAD...)
+3. Se encontro el tipo de dato float: float
+                        Visited token: <"float" at line 3 column 9>; Expected token: <"int">
+                        Visited token: <"float" at line 3 column 9>; Expected token: <"float">
+                      Return: type_specifier(LOOKAHEAD SUCCEEDED)
+3. Se encontro un identificador: b
+                      Visited token: <<IDENTIFICADOR>: "b" at line 3 column 15>; Expected token: <<IDENTIFICADOR>>
+3. Se encontro el simbolo punto y coma: ;
+                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 3 column 16>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 3 column 16>; Expected token: <<SIMBOLO_COMA>>
+                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 3 column 16>; Expected token: <<SIMBOLO_PUNTO_Y_COMA>>
+                    Return: var_declaration(LOOKAHEAD SUCCEEDED)
+                    Call:   local_declarations(LOOKING AHEAD...)
+                      Call:   local_declarations_prima(LOOKING AHEAD...)
+                        Call:   var_declaration(LOOKING AHEAD...)
+                          Call:   type_specifier(LOOKING AHEAD...)
+4. Se encontro el simbolo de llave cerrada: }
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"int">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"float">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"char">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"void">
+                          Return: type_specifier(LOOKAHEAD FAILED)
+                        Return: var_declaration(LOOKAHEAD FAILED)
+                      Return: local_declarations_prima(LOOKAHEAD SUCCEEDED)
+                    Return: local_declarations(LOOKAHEAD SUCCEEDED)
+                    Call:   var_declaration(LOOKING AHEAD...)
+                      Call:   type_specifier(LOOKING AHEAD...)
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"int">
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"float">
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"char">
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"void">
+                      Return: type_specifier(LOOKAHEAD FAILED)
+                    Return: var_declaration(LOOKAHEAD FAILED)
+                  Return: local_declarations_prima(LOOKAHEAD SUCCEEDED)
+                Return: local_declarations(LOOKAHEAD SUCCEEDED)
+                Call:   var_declaration
+                  Call:   type_specifier
+                    Consumed token: <"int" at line 2 column 9>
+                  Return: type_specifier
+                  Consumed token: <<IDENTIFICADOR>: "a" at line 2 column 13>
+                  Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 2 column 14>
+                Return: var_declaration
+                Call:   local_declarations
+                  Call:   local_declarations_prima
+                    Call:   var_declaration(LOOKING AHEAD...)
+                      Call:   type_specifier(LOOKING AHEAD...)
+                        Visited token: <"float" at line 3 column 9>; Expected token: <"int">
+                        Visited token: <"float" at line 3 column 9>; Expected token: <"float">
+                      Return: type_specifier(LOOKAHEAD SUCCEEDED)
+                      Visited token: <<IDENTIFICADOR>: "b" at line 3 column 15>; Expected token: <<IDENTIFICADOR>>
+                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 3 column 16>; Expected token: <<SIMBOLO_CORCHETE_ABIERTO>>
+                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 3 column 16>; Expected token: <<SIMBOLO_COMA>>
+                      Visited token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 3 column 16>; Expected token: <<SIMBOLO_PUNTO_Y_COMA>>
+                    Return: var_declaration(LOOKAHEAD SUCCEEDED)
+                    Call:   local_declarations(LOOKING AHEAD...)
+                      Call:   local_declarations_prima(LOOKING AHEAD...)
+                        Call:   var_declaration(LOOKING AHEAD...)
+                          Call:   type_specifier(LOOKING AHEAD...)
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"int">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"float">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"char">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"void">
+                          Return: type_specifier(LOOKAHEAD FAILED)
+                        Return: var_declaration(LOOKAHEAD FAILED)
+                      Return: local_declarations_prima(LOOKAHEAD SUCCEEDED)
+                    Return: local_declarations(LOOKAHEAD SUCCEEDED)
+                    Call:   var_declaration
+                      Call:   type_specifier
+                        Consumed token: <"float" at line 3 column 9>
+                      Return: type_specifier
+                      Consumed token: <<IDENTIFICADOR>: "b" at line 3 column 15>
+                      Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 3 column 16>
+                    Return: var_declaration
+                    Call:   local_declarations
+                      Call:   local_declarations_prima
+                        Call:   var_declaration(LOOKING AHEAD...)
+                          Call:   type_specifier(LOOKING AHEAD...)
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"int">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"float">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"char">
+                            Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"void">
+                          Return: type_specifier(LOOKAHEAD FAILED)
+                        Return: var_declaration(LOOKAHEAD FAILED)
+                      Return: local_declarations_prima
+                    Return: local_declarations
+                    Call:   var_declaration(LOOKING AHEAD...)
+                      Call:   type_specifier(LOOKING AHEAD...)
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"int">
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"float">
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"char">
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"void">
+                      Return: type_specifier(LOOKAHEAD FAILED)
+                    Return: var_declaration(LOOKAHEAD FAILED)
+                  Return: local_declarations_prima
+                Return: local_declarations
+                Call:   var_declaration(LOOKING AHEAD...)
+                  Call:   type_specifier(LOOKING AHEAD...)
+                    Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"int">
+                    Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"float">
+                    Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"char">
+                    Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"void">
+                  Return: type_specifier(LOOKAHEAD FAILED)
+                Return: var_declaration(LOOKAHEAD FAILED)
+              Return: local_declarations_prima
+            Return: local_declarations
+            Call:   statement_list
+              Call:   statement_list_prima
+                Call:   statement(LOOKING AHEAD...)
+                  Call:   return_stmt(LOOKING AHEAD...)
+                    Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"return">
+                  Return: return_stmt(LOOKAHEAD FAILED)
+                  Call:   expression_stmt(LOOKING AHEAD...)
+                    Call:   expression(LOOKING AHEAD...)
+                      Call:   var(LOOKING AHEAD...)
+                        Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<IDENTIFICADOR>>
+                      Return: var(LOOKAHEAD FAILED)
+                      Call:   simple_expression(LOOKING AHEAD...)
+                        Call:   additive_expression(LOOKING AHEAD...)
+                          Call:   term(LOOKING AHEAD...)
+                            Call:   factor(LOOKING AHEAD...)
+                              Call:   call(LOOKING AHEAD...)
+                                Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<IDENTIFICADOR>>
+                              Return: call(LOOKAHEAD FAILED)
+                              Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<SIMBOLO_PARENTESIS_ABIERTO>>
+                              Call:   var(LOOKING AHEAD...)
+                                Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<IDENTIFICADOR>>
+                              Return: var(LOOKAHEAD FAILED)
+                              Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<NUMERO_ENTERO>>
+                              Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<NUMERO_REAL>>
+                              Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<CARACTER>>
+                            Return: factor(LOOKAHEAD FAILED)
+                          Return: term(LOOKAHEAD FAILED)
+                        Return: additive_expression(LOOKAHEAD FAILED)
+                        Call:   additive_expression(LOOKING AHEAD...)
+                          Call:   term(LOOKING AHEAD...)
+                            Call:   factor(LOOKING AHEAD...)
+                              Call:   call(LOOKING AHEAD...)
+                                Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<IDENTIFICADOR>>
+                              Return: call(LOOKAHEAD FAILED)
+                              Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<SIMBOLO_PARENTESIS_ABIERTO>>
+                              Call:   var(LOOKING AHEAD...)
+                                Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<IDENTIFICADOR>>
+                              Return: var(LOOKAHEAD FAILED)
+                              Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<NUMERO_ENTERO>>
+                              Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<NUMERO_REAL>>
+                              Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<CARACTER>>
+                            Return: factor(LOOKAHEAD FAILED)
+                          Return: term(LOOKAHEAD FAILED)
+                        Return: additive_expression(LOOKAHEAD FAILED)
+                      Return: simple_expression(LOOKAHEAD FAILED)
+                    Return: expression(LOOKAHEAD FAILED)
+                    Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<SIMBOLO_PUNTO_Y_COMA>>
+                  Return: expression_stmt(LOOKAHEAD FAILED)
+                  Call:   compound_stmt(LOOKING AHEAD...)
+                    Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <<SIMBOLO_LLAVE_ABIERTA>>
+                  Return: compound_stmt(LOOKAHEAD FAILED)
+                  Call:   selection_stmt(LOOKING AHEAD...)
+                    Call:   parte_if(LOOKING AHEAD...)
+                      Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"if">
+                    Return: parte_if(LOOKAHEAD FAILED)
+                  Return: selection_stmt(LOOKAHEAD FAILED)
+                  Call:   iteration_stmt(LOOKING AHEAD...)
+                    Visited token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>; Expected token: <"while">
+                  Return: iteration_stmt(LOOKAHEAD FAILED)
+                Return: statement(LOOKAHEAD FAILED)
+              Return: statement_list_prima
+            Return: statement_list
+            Consumed token: <<SIMBOLO_LLAVE_CERRADA>: "}" at line 4 column 1>
+          Return: compound_stmt
+        Return: fun_declaration
+      Return: declaration
+      Call:   declaration_list_prima
+        Call:   declaration(LOOKING AHEAD...)
+          Call:   var_declaration(LOOKING AHEAD...)
+            Call:   type_specifier(LOOKING AHEAD...)
+              Visited token: <<EOF> at line 4 column 1>; Expected token: <"int">
+              Visited token: <<EOF> at line 4 column 1>; Expected token: <"float">
+              Visited token: <<EOF> at line 4 column 1>; Expected token: <"char">
+              Visited token: <<EOF> at line 4 column 1>; Expected token: <"void">
+            Return: type_specifier(LOOKAHEAD FAILED)
+          Return: var_declaration(LOOKAHEAD FAILED)
+          Call:   fun_declaration(LOOKING AHEAD...)
+            Call:   type_specifier(LOOKING AHEAD...)
+              Visited token: <<EOF> at line 4 column 1>; Expected token: <"int">
+              Visited token: <<EOF> at line 4 column 1>; Expected token: <"float">
+              Visited token: <<EOF> at line 4 column 1>; Expected token: <"char">
+              Visited token: <<EOF> at line 4 column 1>; Expected token: <"void">
+            Return: type_specifier(LOOKAHEAD FAILED)
+          Return: fun_declaration(LOOKAHEAD FAILED)
+        Return: declaration(LOOKAHEAD FAILED)
+      Return: declaration_list_prima
+    Return: declaration_list
+  Return: program
+  Consumed token: <<EOF> at line 4 column 1>
+Return: Inicio
+ACCEDIENDO A TABLA DE SIMBOLOS(HASH)
+Variable: b Tipo: Declaracion de variable
+Variable: m Tipo: Declaracion de funcion
+Variable: a Tipo: Declaracion de variable
+Variable: c Tipo: Declaracion de parametro
+
+
+Analysis has ended successfully!

@@ -1,4 +1,4 @@
 int m(int c){
 	int a;
-	float b, a, a, a;
+	float b;
 }
