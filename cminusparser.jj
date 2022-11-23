@@ -11,7 +11,13 @@ import java.util.*;
 
 public class cminusparser {
 
-    static Hashtable<String,String> contenedor = new Hashtable<String,String>();
+    static class symbol{
+            String categoria;
+            String tipo;
+            int tamanio;
+        }
+
+    static Hashtable<String, symbol> contenedor = new Hashtable<String,symbol>();
 
     public static void main(String [] args) throws ParseException{
             cminusparser anLex = new cminusparser(System.in);
@@ -21,18 +27,25 @@ public class cminusparser {
 
     }
 
-    static void guardar(String Id, String tipo){    
+    static void guardar(String Id, String categoria, String tipo, int tamanio ){
         //Enumeration llaves = contenedor.keys();
         //while (llaves.hasMoreElements()) {
         //    if(llaves.nextElement().equals(Id)){
         //        System.out.println("Repeticion de declaracion en el identificador: " + Id);
         //    }
         //}
-        if(contenedor.containsKey(Id)){
+
+        if(!contenedor.containsKey(Id)){
             System.out.println("Repeticion de declaracion en el identificador: " + Id);
+            symbol simbolo = new symbol();
+                    simbolo.categoria = categoria;
+                    simbolo.tipo = tipo;
+                    simbolo.tamanio = tamanio;
+            contenedor.put(Id,simbolo);
+
         }
         else{
-    	contenedor.put(Id, tipo);
+            System.out.println("Id ya existe");
         }
 
     	//System.out.println(""+"Id: " + Id + " Corresponde: " + contenedor.get(Id));
@@ -41,8 +54,11 @@ public class cminusparser {
     static void mostrar (){
         System.out.println("ACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
     	for(String id : contenedor.keySet()){
-            System.out.println("Variable: " + id + " Tipo: " + contenedor.get(id));
-        }
+            symbol simbolo = new symbol();
+            simbolo = contenedor.get(id);
+
+            System.out.println("\n\nVariable: " + id + "\ncategoria: " + simbolo.categoria + "\ntipo: " + simbolo.tipo + "\ntamaño: " + simbolo.tamanio);}
+
     }
 
 }
@@ -328,7 +344,7 @@ void declaration() : {}
 //ARREGLAR PARA QUE DETECTE ARREGLOS INDIVIDUALES
 void var_declaration() : {}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaracion de variable");} (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO>   | <SIMBOLO_COMA> <IDENTIFICADOR> {guardar(token.image, "Declaración de variable");} ) * <SIMBOLO_PUNTO_Y_COMA>
+    type_specifier() <IDENTIFICADOR> {guardar(token.image, "variable", "int", 4);} (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO>   | <SIMBOLO_COMA> <IDENTIFICADOR> {guardar(token.image,  "variable", "int", 4);} ) * <SIMBOLO_PUNTO_Y_COMA>
 }
 
 //GRAMATICA EN LINEA 5
@@ -339,7 +355,7 @@ void type_specifier() : {}
 //GRAMATICA EN LINEA 6
 void fun_declaration() : {}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaracion de funcion");} <SIMBOLO_PARENTESIS_ABIERTO> params() <SIMBOLO_PARENTESIS_CERRADO> compound_stmt() {}
+    type_specifier() <IDENTIFICADOR> {guardar(token.image, "funcion", "int", 4);} <SIMBOLO_PARENTESIS_ABIERTO> params() <SIMBOLO_PARENTESIS_CERRADO> compound_stmt() {}
 }
 //GRAMATICA EN LINEA 7
 void params() : {}
@@ -359,7 +375,7 @@ void param_list_prima() : {}
 //GRAMATICA EN LINEA 9
 void param() : {}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "Declaracion de parametro");} (<SIMBOLO_CORCHETE_ABIERTO> <SIMBOLO_CORCHETE_CERRADO> {guardar(token.image, "Declaración de parametro con arreglo");})*
+    type_specifier() <IDENTIFICADOR> {guardar(token.image, "variable", "int", 4);} (<SIMBOLO_CORCHETE_ABIERTO> <SIMBOLO_CORCHETE_CERRADO> {guardar(token.image, "arreglo", "int", 4);})*
 }
 //GRAMATICA EN LINEA 10
 void compound_stmt() : {}

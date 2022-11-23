@@ -3,7 +3,13 @@ import java.util.*;
 
 public class cminusparser implements cminusparserConstants {
 
-    static Hashtable<String,String> contenedor = new Hashtable<String,String>();
+    static class symbol{
+            String categoria;
+            String tipo;
+            int tamanio;
+        }
+
+    static Hashtable<String, symbol> contenedor = new Hashtable<String,symbol>();
 
     public static void main(String [] args) throws ParseException{
             cminusparser anLex = new cminusparser(System.in);
@@ -13,18 +19,25 @@ public class cminusparser implements cminusparserConstants {
 
     }
 
-    static void guardar(String Id, String tipo){
+    static void guardar(String Id, String categoria, String tipo, int tamanio ){
         //Enumeration llaves = contenedor.keys();
         //while (llaves.hasMoreElements()) {
         //    if(llaves.nextElement().equals(Id)){
         //        System.out.println("Repeticion de declaracion en el identificador: " + Id);
         //    }
         //}
-        if(contenedor.containsKey(Id)){
+
+        if(!contenedor.containsKey(Id)){
             System.out.println("Repeticion de declaracion en el identificador: " + Id);
+            symbol simbolo = new symbol();
+                    simbolo.categoria = categoria;
+                    simbolo.tipo = tipo;
+                    simbolo.tamanio = tamanio;
+            contenedor.put(Id,simbolo);
+
         }
         else{
-        contenedor.put(Id, tipo);
+            System.out.println("Id ya existe");
         }
 
         //System.out.println(""+"Id: " + Id + " Corresponde: " + contenedor.get(Id));
@@ -33,8 +46,11 @@ public class cminusparser implements cminusparserConstants {
     static void mostrar (){
         System.out.println("ACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
         for(String id : contenedor.keySet()){
-            System.out.println("Variable: " + id + " Tipo: " + contenedor.get(id));
-        }
+            symbol simbolo = new symbol();
+            simbolo = contenedor.get(id);
+
+            System.out.println("\n\nVariable: " + id + "\ncategoria: " + simbolo.categoria + "\ntipo: " + simbolo.tipo + "\ntama\u00c3\u00b1o: " + simbolo.tamanio);}
+
     }
 
   final public void Inicio() throws ParseException {
@@ -133,7 +149,7 @@ public class cminusparser implements cminusparserConstants {
     try {
       type_specifier();
       jj_consume_token(IDENTIFICADOR);
-                                      guardar(token.image, "Declaracion de variable");
+                                      guardar(token.image, "variable", "int", 4);
       label_3:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -154,7 +170,7 @@ public class cminusparser implements cminusparserConstants {
         case SIMBOLO_COMA:
           jj_consume_token(SIMBOLO_COMA);
           jj_consume_token(IDENTIFICADOR);
-                                                                                                                                                                                                   guardar(token.image, "Declaraci\u00f3n de variable");
+                                                                                                                                                                                              guardar(token.image,  "variable", "int", 4);
           break;
         default:
           jj_la1[3] = jj_gen;
@@ -201,7 +217,7 @@ public class cminusparser implements cminusparserConstants {
     try {
       type_specifier();
       jj_consume_token(IDENTIFICADOR);
-                                      guardar(token.image, "Declaracion de funcion");
+                                      guardar(token.image, "funcion", "int", 4);
       jj_consume_token(SIMBOLO_PARENTESIS_ABIERTO);
       params();
       jj_consume_token(SIMBOLO_PARENTESIS_CERRADO);
@@ -273,7 +289,7 @@ public class cminusparser implements cminusparserConstants {
     try {
       type_specifier();
       jj_consume_token(IDENTIFICADOR);
-                                      guardar(token.image, "Declaracion de parametro");
+                                      guardar(token.image, "variable", "int", 4);
       label_5:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -286,7 +302,7 @@ public class cminusparser implements cminusparserConstants {
         }
         jj_consume_token(SIMBOLO_CORCHETE_ABIERTO);
         jj_consume_token(SIMBOLO_CORCHETE_CERRADO);
-                                                                                                                                                 guardar(token.image, "Declaraci\u00f3n de parametro con arreglo");
+                                                                                                                                           guardar(token.image, "arreglo", "int", 4);
       }
     } finally {
       trace_return("param");
@@ -942,85 +958,6 @@ public class cminusparser implements cminusparserConstants {
     finally { jj_save(13, xla); }
   }
 
-  private boolean jj_3R_26() {
-    if (!jj_rescan) trace_call("term(LOOKING AHEAD...)");
-    if (jj_3R_29()) { if (!jj_rescan) trace_return("term(LOOKAHEAD FAILED)"); return true; }
-    if (jj_3R_30()) { if (!jj_rescan) trace_return("term(LOOKAHEAD FAILED)"); return true; }
-    { if (!jj_rescan) trace_return("term(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3R_61() {
-    if (jj_3R_22()) return true;
-    if (jj_scan_token(SIMBOLO_PUNTO_Y_COMA)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_18() {
-    if (!jj_rescan) trace_call("local_declarations(LOOKING AHEAD...)");
-    if (jj_3R_38()) { if (!jj_rescan) trace_return("local_declarations(LOOKAHEAD FAILED)"); return true; }
-    { if (!jj_rescan) trace_return("local_declarations(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3R_43() {
-    if (jj_3R_57()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_25() {
-    if (!jj_rescan) trace_call("addop(LOOKING AHEAD...)");
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(9)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(10)) { if (!jj_rescan) trace_return("addop(LOOKAHEAD FAILED)"); return true; }
-    }
-    { if (!jj_rescan) trace_return("addop(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3R_55() {
-    if (!jj_rescan) trace_call("compound_stmt(LOOKING AHEAD...)");
-    if (jj_scan_token(SIMBOLO_LLAVE_ABIERTA)) { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD FAILED)"); return true; }
-    if (jj_3R_18()) { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD FAILED)"); return true; }
-    if (jj_3R_63()) { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD FAILED)"); return true; }
-    if (jj_scan_token(SIMBOLO_LLAVE_CERRADA)) { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD FAILED)"); return true; }
-    { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3_10() {
-    if (jj_3R_25()) return true;
-    if (jj_3R_26()) return true;
-    if (jj_3R_27()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_27() {
-    if (!jj_rescan) trace_call("additive_expression_prima(LOOKING AHEAD...)");
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_10()) { jj_scanpos = xsp; break; }
-    }
-    { if (!jj_rescan) trace_return("additive_expression_prima(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3R_36() {
-    if (!jj_rescan) trace_call("param(LOOKING AHEAD...)");
-    if (jj_3R_34()) { if (!jj_rescan) trace_return("param(LOOKAHEAD FAILED)"); return true; }
-    if (jj_scan_token(IDENTIFICADOR)) { if (!jj_rescan) trace_return("param(LOOKAHEAD FAILED)"); return true; }
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_51()) { jj_scanpos = xsp; break; }
-    }
-    { if (!jj_rescan) trace_return("param(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3R_52() {
-    if (jj_scan_token(SIMBOLO_COMA)) return true;
-    if (jj_3R_36()) return true;
-    return false;
-  }
-
   private boolean jj_3R_33() {
     if (jj_3R_48()) return true;
     return false;
@@ -1041,12 +978,6 @@ public class cminusparser implements cminusparserConstants {
       if (jj_3R_52()) { jj_scanpos = xsp; break; }
     }
     { if (!jj_rescan) trace_return("param_list_prima(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3R_51() {
-    if (jj_scan_token(SIMBOLO_CORCHETE_ABIERTO)) return true;
-    if (jj_scan_token(SIMBOLO_CORCHETE_CERRADO)) return true;
-    return false;
   }
 
   private boolean jj_3R_24() {
@@ -1111,6 +1042,12 @@ public class cminusparser implements cminusparserConstants {
     if (jj_scan_token(7)) { if (!jj_rescan) trace_return("params(LOOKAHEAD FAILED)"); return true; }
     }
     { if (!jj_rescan) trace_return("params(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_51() {
+    if (jj_scan_token(SIMBOLO_CORCHETE_ABIERTO)) return true;
+    if (jj_scan_token(SIMBOLO_CORCHETE_CERRADO)) return true;
+    return false;
   }
 
   private boolean jj_3_3() {
@@ -1249,23 +1186,6 @@ public class cminusparser implements cminusparserConstants {
     return false;
   }
 
-  private boolean jj_3R_49() {
-    if (jj_scan_token(SIMBOLO_CORCHETE_ABIERTO)) return true;
-    if (jj_scan_token(NUMERO_ENTERO)) return true;
-    if (jj_scan_token(SIMBOLO_CORCHETE_CERRADO)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_35() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_49()) {
-    jj_scanpos = xsp;
-    if (jj_3R_50()) return true;
-    }
-    return false;
-  }
-
   private boolean jj_3_1() {
     if (jj_3R_14()) return true;
     if (jj_3R_15()) return true;
@@ -1302,6 +1222,23 @@ public class cminusparser implements cminusparserConstants {
     if (jj_scan_token(SIMBOLO_PARENTESIS_ABIERTO)) return true;
     if (jj_3R_22()) return true;
     if (jj_scan_token(SIMBOLO_PARENTESIS_CERRADO)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_49() {
+    if (jj_scan_token(SIMBOLO_CORCHETE_ABIERTO)) return true;
+    if (jj_scan_token(NUMERO_ENTERO)) return true;
+    if (jj_scan_token(SIMBOLO_CORCHETE_CERRADO)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_35() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_49()) {
+    jj_scanpos = xsp;
+    if (jj_3R_50()) return true;
+    }
     return false;
   }
 
@@ -1383,12 +1320,6 @@ public class cminusparser implements cminusparserConstants {
     { if (!jj_rescan) trace_return("expression_stmt(LOOKAHEAD SUCCEEDED)"); return false; }
   }
 
-  private boolean jj_3R_50() {
-    if (jj_scan_token(SIMBOLO_COMA)) return true;
-    if (jj_scan_token(IDENTIFICADOR)) return true;
-    return false;
-  }
-
   private boolean jj_3R_31() {
     if (!jj_rescan) trace_call("call(LOOKING AHEAD...)");
     if (jj_scan_token(IDENTIFICADOR)) { if (!jj_rescan) trace_return("call(LOOKAHEAD FAILED)"); return true; }
@@ -1421,6 +1352,12 @@ public class cminusparser implements cminusparserConstants {
     }
     }
     { if (!jj_rescan) trace_return("statement(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_50() {
+    if (jj_scan_token(SIMBOLO_COMA)) return true;
+    if (jj_scan_token(IDENTIFICADOR)) return true;
+    return false;
   }
 
   private boolean jj_3_13() {
@@ -1528,6 +1465,85 @@ public class cminusparser implements cminusparserConstants {
       if (jj_3_4()) { jj_scanpos = xsp; break; }
     }
     { if (!jj_rescan) trace_return("local_declarations_prima(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_26() {
+    if (!jj_rescan) trace_call("term(LOOKING AHEAD...)");
+    if (jj_3R_29()) { if (!jj_rescan) trace_return("term(LOOKAHEAD FAILED)"); return true; }
+    if (jj_3R_30()) { if (!jj_rescan) trace_return("term(LOOKAHEAD FAILED)"); return true; }
+    { if (!jj_rescan) trace_return("term(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_61() {
+    if (jj_3R_22()) return true;
+    if (jj_scan_token(SIMBOLO_PUNTO_Y_COMA)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_18() {
+    if (!jj_rescan) trace_call("local_declarations(LOOKING AHEAD...)");
+    if (jj_3R_38()) { if (!jj_rescan) trace_return("local_declarations(LOOKAHEAD FAILED)"); return true; }
+    { if (!jj_rescan) trace_return("local_declarations(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_43() {
+    if (jj_3R_57()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_25() {
+    if (!jj_rescan) trace_call("addop(LOOKING AHEAD...)");
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(9)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(10)) { if (!jj_rescan) trace_return("addop(LOOKAHEAD FAILED)"); return true; }
+    }
+    { if (!jj_rescan) trace_return("addop(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_55() {
+    if (!jj_rescan) trace_call("compound_stmt(LOOKING AHEAD...)");
+    if (jj_scan_token(SIMBOLO_LLAVE_ABIERTA)) { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD FAILED)"); return true; }
+    if (jj_3R_18()) { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD FAILED)"); return true; }
+    if (jj_3R_63()) { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD FAILED)"); return true; }
+    if (jj_scan_token(SIMBOLO_LLAVE_CERRADA)) { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD FAILED)"); return true; }
+    { if (!jj_rescan) trace_return("compound_stmt(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3_10() {
+    if (jj_3R_25()) return true;
+    if (jj_3R_26()) return true;
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_27() {
+    if (!jj_rescan) trace_call("additive_expression_prima(LOOKING AHEAD...)");
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_10()) { jj_scanpos = xsp; break; }
+    }
+    { if (!jj_rescan) trace_return("additive_expression_prima(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_36() {
+    if (!jj_rescan) trace_call("param(LOOKING AHEAD...)");
+    if (jj_3R_34()) { if (!jj_rescan) trace_return("param(LOOKAHEAD FAILED)"); return true; }
+    if (jj_scan_token(IDENTIFICADOR)) { if (!jj_rescan) trace_return("param(LOOKAHEAD FAILED)"); return true; }
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_51()) { jj_scanpos = xsp; break; }
+    }
+    { if (!jj_rescan) trace_return("param(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_52() {
+    if (jj_scan_token(SIMBOLO_COMA)) return true;
+    if (jj_3R_36()) return true;
+    return false;
   }
 
   /** Generated Token Manager. */

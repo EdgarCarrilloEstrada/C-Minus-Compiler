@@ -1,4 +1,6 @@
 int m(int c){
 	int a;
 	float b;
+	int d;
+	float a;
 }
