@@ -1,0 +1,49 @@
+1. Se encontro el vacio: void
+1. Se encontro un identificador: f
+1. Se encontro el simbolo de parentesis abierto: (
+Repeticion de declaracion en el identificador: f
+1. Se encontro el tipo de dato char: char
+1. Se encontro un identificador: c
+1. Se encontro el simbolo de parentesis cerrado: )
+Repeticion de declaracion en el identificador: c
+1. Se encontro el simbolo de llave abierta: {
+2. Se encontro el tipo de dato int: int
+2. Se encontro un identificador: arreglo
+2. Se encontro el simbolo de corchete abierto: [
+2. Se encontro un numero entero: 15
+2. Se encontro el simbolo de corchete cerrado: ]
+2. Se encontro el simbolo punto y coma: ;
+3. Se encontro el tipo de dato float: float
+3. Se encontro un identificador: fl
+3. Se encontro el simbolo punto y coma: ;
+5. Se encontro el simbolo de llave cerrada: }
+Repeticion de declaracion en el identificador: arreglo
+Repeticion de declaracion en el identificador: fl
+ACCEDIENDO A TABLA DE SIMBOLOS(HASH)
+
+
+Variable: arreglo
+categoria: arreglo
+tipo: int
+tamaño: 15
+
+
+Variable: fl
+categoria: variable
+tipo: float
+tamaño: 8
+
+
+Variable: f
+categoria: funcion
+tipo: void
+tamaño: 0
+
+
+Variable: c
+categoria: variable
+tipo: int
+tamaño: 4
+
+
+Analysis has ended successfully!

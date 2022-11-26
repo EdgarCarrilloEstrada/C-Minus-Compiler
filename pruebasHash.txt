@@ -1,6 +1,5 @@
-int m(int c){
-	int a;
-	float b;
-	int d;
-	float a;
+void f(char c){
+	int arreglo[15];
+	float fl;
+
 }

@@ -1,8 +1,8 @@
 options {
 Ignore_Case = false;
 STATIC=false;
-DEBUG_PARSER=true; //true
-DEBUG_LOOKAHEAD=true; //true
+DEBUG_PARSER=false; //true
+DEBUG_LOOKAHEAD=false; //true
 }
 
 PARSER_BEGIN(cminusparser)
@@ -49,6 +49,23 @@ public class cminusparser {
         }
 
     	//System.out.println(""+"Id: " + Id + " Corresponde: " + contenedor.get(Id));
+    }
+
+    static int verificacionTamanio(String tipo){
+        if (tipo.equals("int")){
+            return 4;
+        }
+        if (tipo.equals("float")){
+            return 8;
+        }
+        if (tipo.equals("char")){
+            return 1;
+        }
+        if (tipo.equals("void")){
+            return 0;
+        }
+        return 99;
+
     }
 
     static void mostrar (){
@@ -342,20 +359,37 @@ void declaration() : {}
 
 //GRAMATICA EN LINEA 4
 //ARREGLAR PARA QUE DETECTE ARREGLOS INDIVIDUALES
-void var_declaration() : {}
+void var_declaration() : {String id, tipo;}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "variable", "int", 4);} (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO>   | <SIMBOLO_COMA> <IDENTIFICADOR> {guardar(token.image,  "variable", "int", 4);} ) * <SIMBOLO_PUNTO_Y_COMA>
+
+    tipo=type_specifier() <IDENTIFICADOR> {id=token.image;} var_declaration_ending(id, tipo)
+    //type_specifier() <IDENTIFICADOR> (((<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO> | <SIMBOLO_COMA> <IDENTIFICADOR> )*) <SIMBOLO_PUNTO_Y_COMA> )
+    //type_specifier() (<IDENTIFICADOR> {System.out.println("tomo variable");guardar(token.image, "variable", "int", 4);} (<SIMBOLO_COMA> <IDENTIFICADOR> {guardar(token.image,  "variable", "int", 4);})? | <IDENTIFICADOR> {System.out.println("Entro a arreglo");guardar(token.image, "arreglo", "int", 4);} (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO>)) <SIMBOLO_PUNTO_Y_COMA>
+}
+
+void var_declaration_ending(String id, String tipo):{int tamanio;}
+{
+    <SIMBOLO_PUNTO_Y_COMA> {tamanio=verificacionTamanio(tipo);guardar(id, "variable", tipo, tamanio);} /*AQUI SE GUARDA LA TABLA DE SIMBOLOS */
+    |
+    <SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> {tamanio=Integer.parseInt(token.image);} <SIMBOLO_CORCHETE_CERRADO> <SIMBOLO_PUNTO_Y_COMA> {guardar(id, "arreglo", tipo, tamanio);}  /*AQUI SE GUARDA LA TABLA DE SIMBOLOS */
+    |
+    varias_variables(tipo)
+}
+
+void varias_variables(String tipo):{int tamanio;}
+{
+    <SIMBOLO_COMA> <IDENTIFICADOR> {tamanio=verificacionTamanio(tipo);guardar(token.image, "variable", tipo, tamanio);} /*AQUI SE GUARDA LA TABLA DE SIMBOLOS */ varias_variables(tipo)
 }
 
 //GRAMATICA EN LINEA 5
-void type_specifier() : {}
+String type_specifier() : {String tipo;}
 {
-    <DATO_INT> | <DATO_FLOAT> | <DATO_CHAR> | <VACIO_VOID>
+    <DATO_INT> {tipo = token.image; return tipo;} | <DATO_FLOAT> {tipo = token.image; return tipo;} | <DATO_CHAR> {tipo = token.image; return tipo;} | <VACIO_VOID> {tipo = token.image; return tipo;}
 }
 //GRAMATICA EN LINEA 6
-void fun_declaration() : {}
+void fun_declaration() : {String tipo; int tamanio;}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "funcion", "int", 4);} <SIMBOLO_PARENTESIS_ABIERTO> params() <SIMBOLO_PARENTESIS_CERRADO> compound_stmt() {}
+    tipo = type_specifier() <IDENTIFICADOR> {tamanio=verificacionTamanio(tipo); guardar(token.image, "funcion", tipo, tamanio);} <SIMBOLO_PARENTESIS_ABIERTO> params() <SIMBOLO_PARENTESIS_CERRADO> compound_stmt() {}
 }
 //GRAMATICA EN LINEA 7
 void params() : {}
@@ -375,7 +409,12 @@ void param_list_prima() : {}
 //GRAMATICA EN LINEA 9
 void param() : {}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "variable", "int", 4);} (<SIMBOLO_CORCHETE_ABIERTO> <SIMBOLO_CORCHETE_CERRADO> {guardar(token.image, "arreglo", "int", 4);})*
+    type_specifier() <IDENTIFICADOR> {guardar(token.image, "variable", "int", 4);} param_ending()
+}
+
+void param_ending() : {}
+{
+    (<SIMBOLO_CORCHETE_ABIERTO> <SIMBOLO_CORCHETE_CERRADO> {guardar(token.image, "arreglo", "int", 4);})*
 }
 //GRAMATICA EN LINEA 10
 void compound_stmt() : {}

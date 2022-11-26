@@ -1,0 +1,65 @@
+1. Se encontro el tipo de dato int: int
+1. Se encontro un identificador: m
+1. Se encontro el simbolo de parentesis abierto: (
+Repeticion de declaracion en el identificador: m
+1. Se encontro el tipo de dato int: int
+1. Se encontro un identificador: c
+1. Se encontro el simbolo de parentesis cerrado: )
+Repeticion de declaracion en el identificador: c
+1. Se encontro el simbolo de llave abierta: {
+2. Se encontro el tipo de dato int: int
+2. Se encontro un identificador: s
+2. Se encontro el simbolo de corchete abierto: [
+2. Se encontro un numero entero: 9
+2. Se encontro el simbolo de corchete cerrado: ]
+2. Se encontro el simbolo punto y coma: ;
+3. Se encontro el tipo de dato float: float
+3. Se encontro un identificador: a
+3. Se encontro el simbolo de corchete abierto: [
+3. Se encontro un numero entero: 1
+3. Se encontro el simbolo de corchete cerrado: ]
+3. Se encontro el simbolo punto y coma: ;
+4. Se encontro el tipo de dato char: char
+4. Se encontro un identificador: n
+4. Se encontro el simbolo punto y coma: ;
+5. Se encontro el simbolo de llave cerrada: }
+tomo arreglo
+Repeticion de declaracion en el identificador: s
+tomo arreglo
+Repeticion de declaracion en el identificador: a
+tomo variable individual
+Repeticion de declaracion en el identificador: n
+ACCEDIENDO A TABLA DE SIMBOLOS(HASH)
+
+
+Variable: m
+categoria: funcion
+tipo: int
+tamaño: 4
+
+
+Variable: a
+categoria: arreglo
+tipo: float
+tamaño: 4
+
+
+Variable: s
+categoria: arreglo
+tipo: int
+tamaño: 4
+
+
+Variable: n
+categoria: variable
+tipo: char
+tamaño: 4
+
+
+Variable: c
+categoria: variable
+tipo: int
+tamaño: 4
+
+
+Analysis has ended successfully!
