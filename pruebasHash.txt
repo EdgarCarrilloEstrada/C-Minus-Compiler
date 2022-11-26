@@ -1,5 +1,6 @@
 void f(char c){
 	int arreglo[15];
 	float fl;
+	float fl;
 
 }

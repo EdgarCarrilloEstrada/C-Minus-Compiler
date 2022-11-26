@@ -28,7 +28,7 @@ public class cminusparser implements cminusparserConstants {
         //}
 
         if(!contenedor.containsKey(Id)){
-            System.out.println("Repeticion de declaracion en el identificador: " + Id);
+
             symbol simbolo = new symbol();
                     simbolo.categoria = categoria;
                     simbolo.tipo = tipo;
@@ -37,7 +37,7 @@ public class cminusparser implements cminusparserConstants {
 
         }
         else{
-            System.out.println("Id ya existe");
+            System.out.println("Repeticion de declaracion en el identificador: " + Id);
         }
 
         //System.out.println(""+"Id: " + Id + " Corresponde: " + contenedor.get(Id));
