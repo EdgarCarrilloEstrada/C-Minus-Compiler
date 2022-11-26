@@ -1,4 +1,4 @@
-float f(void){
+float f(char arrayDentroParametro[], int segundoParam, float tercerParamArreglo[], char k){
 	int arreglo[15];
 	float fl;
 

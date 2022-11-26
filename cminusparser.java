@@ -339,18 +339,21 @@ public class cminusparser implements cminusparserConstants {
   final public void param() throws ParseException {
     trace_call("param");
     try {
-      type_specifier();
+                String id, tipo; int tamanio;
+      tipo = type_specifier();
       jj_consume_token(IDENTIFICADOR);
-                                      guardar(token.image, "variable", "int", 4);
-      param_ending();
+                                           id=token.image;
+      param_ending(id, tipo);
+                                                                                    tamanio = verificacionTamanio(tipo); guardar(id, "variable", tipo, tamanio);
     } finally {
       trace_return("param");
     }
   }
 
-  final public void param_ending() throws ParseException {
+  final public void param_ending(String id, String tipo) throws ParseException {
     trace_call("param_ending");
     try {
+                                             int tamanio;
       label_4:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -363,7 +366,7 @@ public class cminusparser implements cminusparserConstants {
         }
         jj_consume_token(SIMBOLO_CORCHETE_ABIERTO);
         jj_consume_token(SIMBOLO_CORCHETE_CERRADO);
-                                                            guardar(token.image, "arreglo", "int", 4);
+                                                            tamanio = verificacionTamanio(tipo); guardar(id, "arreglo", tipo, tamanio);
       }
     } finally {
       trace_return("param_ending");

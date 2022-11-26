@@ -407,14 +407,14 @@ int param_list_prima(int contador) : {}
     ( <SIMBOLO_COMA> param() {contador++;} )* {return contador;}
 }
 //GRAMATICA EN LINEA 9
-void param() : {}
+void param() : {String id, tipo; int tamanio;}
 {
-    type_specifier() <IDENTIFICADOR> {guardar(token.image, "variable", "int", 4);} param_ending()
+    tipo=type_specifier() <IDENTIFICADOR> {id=token.image;} param_ending(id, tipo) {tamanio = verificacionTamanio(tipo); guardar(id, "variable", tipo, tamanio);}
 }
 
-void param_ending() : {}
+void param_ending(String id, String tipo) : {int tamanio;}
 {
-    (<SIMBOLO_CORCHETE_ABIERTO> <SIMBOLO_CORCHETE_CERRADO> {guardar(token.image, "arreglo", "int", 4);})*
+    (<SIMBOLO_CORCHETE_ABIERTO> <SIMBOLO_CORCHETE_CERRADO> {tamanio = verificacionTamanio(tipo); guardar(id, "arreglo", tipo, tamanio);})*
 }
 //GRAMATICA EN LINEA 10
 void compound_stmt() : {}
