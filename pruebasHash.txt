@@ -1,6 +1,5 @@
-void f(char c){
+float f(void){
 	int arreglo[15];
-	float fl;
 	float fl;
 
 }

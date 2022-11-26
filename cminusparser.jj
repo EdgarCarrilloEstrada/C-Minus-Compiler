@@ -1,8 +1,8 @@
 options {
 Ignore_Case = false;
 STATIC=false;
-DEBUG_PARSER=false; //true
-DEBUG_LOOKAHEAD=false; //true
+DEBUG_PARSER=true; //true
+DEBUG_LOOKAHEAD=true; //true
 }
 
 PARSER_BEGIN(cminusparser)
@@ -74,7 +74,7 @@ public class cminusparser {
             symbol simbolo = new symbol();
             simbolo = contenedor.get(id);
 
-            System.out.println("\n\nVariable: " + id + "\ncategoria: " + simbolo.categoria + "\ntipo: " + simbolo.tipo + "\ntamaño: " + simbolo.tamanio);}
+            System.out.println("\n\nVariable: " + id + "\ncategoria: " + simbolo.categoria + "\ntipo: " + simbolo.tipo + "\ntamaño o # de parametros: " + simbolo.tamanio);}
 
     }
 
@@ -387,24 +387,24 @@ String type_specifier() : {String tipo;}
     <DATO_INT> {tipo = token.image; return tipo;} | <DATO_FLOAT> {tipo = token.image; return tipo;} | <DATO_CHAR> {tipo = token.image; return tipo;} | <VACIO_VOID> {tipo = token.image; return tipo;}
 }
 //GRAMATICA EN LINEA 6
-void fun_declaration() : {String tipo; int tamanio;}
+void fun_declaration() : {String tipo, id; int tamanio;}
 {
-    tipo = type_specifier() <IDENTIFICADOR> {tamanio=verificacionTamanio(tipo); guardar(token.image, "funcion", tipo, tamanio);} <SIMBOLO_PARENTESIS_ABIERTO> params() <SIMBOLO_PARENTESIS_CERRADO> compound_stmt() {}
+    tipo = type_specifier() <IDENTIFICADOR> {id = token.image;}  <SIMBOLO_PARENTESIS_ABIERTO> tamanio = params() <SIMBOLO_PARENTESIS_CERRADO> {guardar(id, "funcion", tipo, tamanio);} compound_stmt() {}
 }
 //GRAMATICA EN LINEA 7
-void params() : {}
+int params() : {int contador = 0;}
 {
-    LOOKAHEAD(20) param_list() | <VACIO_VOID>
+    LOOKAHEAD(20) contador = param_list() {return contador;} | <VACIO_VOID> {contador = 0; return contador;}
 }
 //GRAMATICA EN LINEA 8 (ARREGLADA)
-void param_list() : {}
+int param_list() : {int contador = 0;}
 {
-    param() param_list_prima()
+    param() {System.out.println("cantidad de contador antes de incremento: " + contador); contador++; System.out.println("cantidad de contador despues de incremento: " + contador); } contador = param_list_prima(contador) {return contador;}
 }
 //GRAMATICA EN LINEA 8 (ARREGLADA)
-void param_list_prima() : {}
+int param_list_prima(int contador) : {}
 {
-    ( <SIMBOLO_COMA> param() )*
+    ( <SIMBOLO_COMA> param() {contador++;} )* {return contador;}
 }
 //GRAMATICA EN LINEA 9
 void param() : {}
