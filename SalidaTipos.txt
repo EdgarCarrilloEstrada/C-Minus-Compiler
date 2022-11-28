@@ -1,0 +1,137 @@
+1. Se encontro el tipo de dato float: float
+1. Se encontro un identificador: f
+1. Se encontro el simbolo de parentesis abierto: (
+1. Se encontro el tipo de dato char: char
+1. Se encontro un identificador: c
+1. Se encontro el simbolo de parentesis cerrado: )
+cantidad de contador antes de incremento: 0
+cantidad de contador despues de incremento: 1
+1. Se encontro el simbolo de llave abierta: {
+2. Se encontro el tipo de dato int: int
+2. Se encontro un identificador: arreglo
+2. Se encontro el simbolo de corchete abierto: [
+2. Se encontro un numero entero: 15
+2. Se encontro el simbolo de corchete cerrado: ]
+2. Se encontro el simbolo punto y coma: ;
+3. Se encontro el tipo de dato int: int
+3. Se encontro un identificador: a
+3. Se encontro el simbolo punto y coma: ;
+4. Se encontro el tipo de dato float: float
+4. Se encontro un identificador: b
+4. Se encontro el simbolo punto y coma: ;
+5. Se encontro un identificador: arreglo
+5. Se encontro el simbolo de corchete abierto: [
+5. Se encontro un numero entero: 10
+5. Se encontro el simbolo de corchete cerrado: ]
+5. Se encontro el simbolo igual o asignacion: =
+5. Se encontro un numero entero: 5
+5. Se encontro el simbolo punto y coma: ;
+6. Se encontro un identificador: arreglo
+6. Se encontro el simbolo de corchete abierto: [
+6. Se encontro un numero entero: 20
+6. Se encontro el simbolo de corchete cerrado: ]
+6. Se encontro el simbolo igual o asignacion: =
+6. Se encontro un numero entero: 10
+6. Se encontro el simbolo punto y coma: ;
+7. Se encontro un identificador: a
+7. Se encontro el simbolo igual o asignacion: =
+7. Se encontro un numero entero: 1
+7. Se encontro el simbolo punto y coma: ;
+8. Se encontro un identificador: b
+8. Se encontro el simbolo igual o asignacion: =
+Existe variable: true
+Tamaño de la variable: 15
+El tipo de variable es: int
+Posicion dentro del rango del arreglo
+Valor de TipoD dentro de expression: int
+Tipo de id en TS: int Tipo a comparar: int
+esta variable arreglo si son del mismo tipo con int
+8. Se encontro un numero real: 2.2
+8. Se encontro el simbolo punto y coma: ;
+10. Se encontro un identificador: a
+10. Se encontro el simbolo igual o asignacion: =
+10. Se encontro un numero real: 1.1
+10. Se encontro el simbolo punto y coma: ;
+11. Se encontro un identificador: b
+Existe variable: true
+Tamaño de la variable: 15
+El tipo de variable es: int
+Posicion fuera del rango del arreglo
+Valor de TipoD dentro de expression: int
+Tipo de id en TS: int Tipo a comparar: int
+esta variable arreglo si son del mismo tipo con int
+11. Se encontro el simbolo igual o asignacion: =
+11. Se encontro un numero entero: 2
+11. Se encontro el simbolo punto y coma: ;
+13. Se encontro un identificador: a
+13. Se encontro el simbolo igual o asignacion: =
+13. Se encontro un identificador: b
+13. Se encontro el simbolo punto y coma: ;
+Existe variable: true
+Tamaño de la variable: 4
+El tipo de variable es: int
+Valor de TipoD dentro de expression: int
+Tipo de id en TS: int Tipo a comparar: int
+esta variable a si son del mismo tipo con int
+15. Se encontro el simbolo de llave cerrada: }
+Existe variable: true
+Tamaño de la variable: 8
+El tipo de variable es: float
+Valor de TipoD dentro de expression: float
+Tipo de id en TS: float Tipo a comparar: float
+esta variable b si son del mismo tipo con float
+Existe variable: true
+Tamaño de la variable: 4
+El tipo de variable es: int
+Valor de TipoD dentro de expression: float
+Tipo de id en TS: int Tipo a comparar: float
+No mames pon del mismo tipo cabron
+Existe variable: true
+Tamaño de la variable: 8
+El tipo de variable es: float
+Valor de TipoD dentro de expression: int
+Tipo de id en TS: float Tipo a comparar: int
+No mames pon del mismo tipo cabron
+Existe variable: true
+Tamaño de la variable: 4
+El tipo de variable es: int
+Existe variable: true
+Tamaño de la variable: 8
+El tipo de variable es: float
+Valor de TipoD dentro de expression: b
+Tipo de id en TS: int Tipo a comparar: b
+No mames pon del mismo tipo cabron
+ACCEDIENDO A TABLA DE SIMBOLOS(HASH)
+
+
+Variable: b
+categoria: variable
+tipo: float
+tamaño o # de parametros: 8
+
+
+Variable: a
+categoria: variable
+tipo: int
+tamaño o # de parametros: 4
+
+
+Variable: arreglo
+categoria: arreglo
+tipo: int
+tamaño o # de parametros: 15
+
+
+Variable: f
+categoria: funcion
+tipo: float
+tamaño o # de parametros: 1
+
+
+Variable: c
+categoria: variable
+tipo: char
+tamaño o # de parametros: 1
+
+
+Analysis has ended successfully!

@@ -1,5 +1,15 @@
 float f(char c){
 	int arreglo[15];
+	int a;
+	float b;
 	arreglo[10] = 5;
 	arreglo[20] = 10;
+	a = 1;
+	b = 2.2;
+
+	a = 1.1;
+	b = 2;
+
+	a=b;
+
 }
