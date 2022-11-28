@@ -15,7 +15,7 @@ public class cminusparser implements cminusparserConstants {
             cminusparser anLex = new cminusparser(System.in);
             anLex.Inicio();
             mostrar();
-            System.out.println("\u005cn\u005cnAnalysis has ended successfully!");
+            System.out.println("\n\nAnalysis has ended successfully!");
 
     }
 
@@ -117,19 +117,28 @@ public class cminusparser implements cminusparserConstants {
             symbol simbolo = new symbol();
             simbolo = contenedor.get(id);
 
-            System.out.println("\u005cn\u005cnVariable: " + id + "\u005cncategoria: " + simbolo.categoria + "\u005cntipo: " + simbolo.tipo + "\u005cntama\u00f1o o # de parametros: " + simbolo.tamanio);}
+            System.out.println("\n\nVariable: " + id + "\ncategoria: " + simbolo.categoria + "\ntipo: " + simbolo.tipo + "\ntama\u00c3\u00b1o o # de parametros: " + simbolo.tamanio);}
 
+    }
+
+    static void expresionesAritmeticas(String tipo1, String tipo2){
+        if(tipo1 == tipo2){
+            System.out.println("Datos del mismo tipo");
+        }
+        else{
+            System.out.println("Los datos son de diferente tipo");
+        }
     }
 
 
     static void validarTipos(String id, String tipo){
         if (existeVariable(id)){
-            System.out.println("Tipo de id en TS: " + obtenerTipo(id) + " Tipo a comparar: " + tipo);
+            // System.out.println("Tipo de id en TS: " + obtenerTipo(id) + " Tipo a comparar: " + tipo);
             if(obtenerTipo(id) == tipo){
-                System.out.println("esta variable " + id +" si son del mismo tipo con " + tipo);
+               // System.out.println("esta variable " + id +" si son del mismo tipo con " + tipo);
             }
             else
-            System.out.println("No mames pon del mismo tipo cabron");
+            System.out.println("Las variables no son del mismo tipo");
         }
     }
 
@@ -551,9 +560,9 @@ public class cminusparser implements cminusparserConstants {
   final public String var() throws ParseException {
                 String id; boolean existe; int tamanio; String tipo;
     jj_consume_token(IDENTIFICADOR);
-                     id = token.image; existe = existeVariable(id); System.out.println("Existe variable: " + existe); if(existe==true){tamanio = obtenerTamanio(id); System.out.println("Tama\u00f1o de la variable: " + tamanio);} if(existe==true){tipo = obtenerTipo(id); System.out.println("El tipo de variable es: " + tipo);}
+                     id = token.image; existe = existeVariable(id); System.out.println("Existe variable: " + existe); if(existe==true){tamanio = obtenerTamanio(id); System.out.println("Tama\u00c3\u00b1o de la variable: " + tamanio);} if(existe==true){tipo = obtenerTipo(id); System.out.println("El tipo de variable es: " + tipo);}
     var_extra(id);
-                                                                                                                                                                                                                                                                                                                                                  {if (true) return id;}
+                                                                                                                                                                                                                                                                                                                                                   {if (true) return id;}
     throw new Error("Missing return statement in function");
   }
 
@@ -629,14 +638,14 @@ public class cminusparser implements cminusparserConstants {
   final public String additive_expression(String id) throws ParseException {
                                          String tipoD = "";
     tipoD = term(id);
-    additive_expression_prima();
-                                                 {if (true) return tipoD;}
+    additive_expression_prima(tipoD);
+                                                      {if (true) return tipoD;}
     throw new Error("Missing return statement in function");
   }
 
 //GRAMATICA EN LINEA 22 (ARREGLADA)
-  final public String additive_expression_prima() throws ParseException {
-                                     String aux=""; String tipoD = "";
+  final public String additive_expression_prima(String tipoD2) throws ParseException {
+                                                  String aux=""; String tipoD = "";
     label_10:
     while (true) {
       if (jj_2_10(20)) {
@@ -646,10 +655,10 @@ public class cminusparser implements cminusparserConstants {
       }
       addop();
       tipoD = term(aux);
-      additive_expression_prima();
-                                                                        {if (true) return tipoD;}
+      additive_expression_prima(tipoD);
+                                                                             expresionesAritmeticas(tipoD2, tipoD);/* aqui se pone la funcion we  */ {if (true) return tipoD;}
     }
-                                                                                          {if (true) return tipoD;}
+                                                                                                                                                                       {if (true) return tipoD;}
     throw new Error("Missing return statement in function");
   }
 
@@ -673,14 +682,14 @@ public class cminusparser implements cminusparserConstants {
   final public String term(String id) throws ParseException {
                           String tipoD = "";
     tipoD = factor(id);
-    term_prima();
-                                    {if (true) return tipoD;}
+    term_prima(tipoD);
+                                         {if (true) return tipoD;}
     throw new Error("Missing return statement in function");
   }
 
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-  final public String term_prima() throws ParseException {
-                       String aux = ""; String tipoD = "";
+  final public String term_prima(String tipoD2) throws ParseException {
+                                    String aux = ""; String tipoD = "";
     label_11:
     while (true) {
       if (jj_2_11(20)) {
@@ -690,10 +699,10 @@ public class cminusparser implements cminusparserConstants {
       }
       mulop();
       tipoD = factor(aux);
-      tipoD = term_prima();
-                                                                 {if (true) return tipoD;}
+      term_prima(tipoD);
+                                                                expresionesAritmeticas(tipoD2, tipoD); /* aqui se pone la funcion we  */ {if (true) return tipoD;}
     }
-                                                                                   {if (true) return tipoD;}
+                                                                                                                                                           {if (true) return tipoD;}
     throw new Error("Missing return statement in function");
   }
 
@@ -909,32 +918,6 @@ public class cminusparser implements cminusparserConstants {
     try { return !jj_3_14(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(13, xla); }
-  }
-
-  private boolean jj_3_9() {
-    if (jj_3R_23()) return true;
-    if (jj_3R_24()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_76() {
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_9()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  private boolean jj_3R_42() {
-    if (jj_3R_64()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_66() {
-    if (jj_3R_24()) return true;
-    if (jj_3R_76()) return true;
-    return false;
   }
 
   private boolean jj_3_8() {
@@ -1516,6 +1499,32 @@ public class cminusparser implements cminusparserConstants {
     return false;
   }
 
+  private boolean jj_3_9() {
+    if (jj_3R_23()) return true;
+    if (jj_3R_24()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_76() {
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_9()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  private boolean jj_3R_42() {
+    if (jj_3R_64()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_66() {
+    if (jj_3R_24()) return true;
+    if (jj_3R_76()) return true;
+    return false;
+  }
+
   /** Generated Token Manager. */
   public cminusparserTokenManager token_source;
   SimpleCharStream jj_input_stream;
@@ -1526,6 +1535,9 @@ public class cminusparser implements cminusparserConstants {
   private int jj_ntk;
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
+  /** Whether we are looking ahead. */
+  private boolean jj_lookingAhead = false;
+  private boolean jj_semLA;
   private int jj_gen;
   final private int[] jj_la1 = new int[17];
   static private int[] jj_la1_0;
@@ -1675,7 +1687,7 @@ public class cminusparser implements cminusparserConstants {
 
 /** Get the specific Token. */
   final public Token getToken(int index) {
-    Token t = token;
+    Token t = jj_lookingAhead ? jj_scanpos : token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
       else t = t.next = token_source.getNextToken();
@@ -1690,7 +1702,7 @@ public class cminusparser implements cminusparserConstants {
       return (jj_ntk = jj_nt.kind);
   }
 
-  private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+  private java.util.List jj_expentries = new java.util.ArrayList();
   private int[] jj_expentry;
   private int jj_kind = -1;
   private int[] jj_lasttokens = new int[100];
@@ -1706,10 +1718,10 @@ public class cminusparser implements cminusparserConstants {
         jj_expentry[i] = jj_lasttokens[i];
       }
       boolean exists = false;
-      for (java.util.Iterator<?> it = jj_expentries.iterator(); it.hasNext();) {
-        exists = true;
+      for (java.util.Iterator it = jj_expentries.iterator(); it.hasNext();) {
         int[] oldentry = (int[])(it.next());
         if (oldentry.length == jj_expentry.length) {
+          exists = true;
           for (int i = 0; i < jj_expentry.length; i++) {
             if (oldentry[i] != jj_expentry[i]) {
               exists = false;
@@ -1756,7 +1768,7 @@ public class cminusparser implements cminusparserConstants {
     jj_add_error_token(0, 0);
     int[][] exptokseq = new int[jj_expentries.size()][];
     for (int i = 0; i < jj_expentries.size(); i++) {
-      exptokseq[i] = jj_expentries.get(i);
+      exptokseq[i] = (int[])jj_expentries.get(i);
     }
     return new ParseException(token, exptokseq, tokenImage);
   }

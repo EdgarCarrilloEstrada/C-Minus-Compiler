@@ -1,6 +1,8 @@
 float f(char c){
 	int arreglo[15];
 	int a;
+	int z;
+	int x;
 	float b;
 	arreglo[10] = 5;
 	arreglo[20] = 10;
@@ -11,5 +13,25 @@ float f(char c){
 	b = 2;
 
 	a=b;
+
+	a = z + x;
+	a = z - x;
+	a = z * x;
+	a = z / x;
+
+	a = z + b;
+	a = z - b;
+	a = z * b;
+	a = z / b;
+
+	a = b + x;
+	a = b - x;
+	a = b * x;
+	a = b / x;
+
+	b = z + x;
+	b = z - x;
+	b = z * x;
+	b = z / x;
 
 }

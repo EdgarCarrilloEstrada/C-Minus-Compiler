@@ -573,12 +573,12 @@ void relop() : {}
 //GRAMATICA EN LINEA 22 (ARREGLADA)
 String additive_expression(String id) : {String tipoD = "";}
 {
-    tipoD=term(id) additive_expression_prima() { return tipoD;}
+    tipoD=term(id) additive_expression_prima(tipoD) { return tipoD;}
 }
 //GRAMATICA EN LINEA 22 (ARREGLADA)
-String additive_expression_prima() :{String aux=""; String tipoD = "";}
+String additive_expression_prima(String tipoD2) :{String aux=""; String tipoD = "";}
 {
-    (LOOKAHEAD(20) addop() tipoD=term(aux) additive_expression_prima() {return tipoD;})* {return tipoD;}
+    (LOOKAHEAD(20) addop() tipoD=term(aux) additive_expression_prima(tipoD) {/* aqui se pone la funcion we  */ return tipoD;})* {return tipoD;}
 }
 //GRAMATICA EN LINEA 23
 void addop() : {}
@@ -588,12 +588,12 @@ void addop() : {}
 //GRAMATICA EN LINEA 24 (ARREGLADA)
 String term(String id) : {String tipoD = "";}
 {
-    tipoD=factor(id) term_prima()  {return tipoD;} 
+    tipoD=factor(id) term_prima(tipoD)  {return tipoD;}
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-String term_prima() : {String aux = ""; String tipoD = "";}
+String term_prima(String tipoD2) : {String aux = ""; String tipoD = "";}
 {
-    (LOOKAHEAD(20) mulop() tipoD=factor(aux) tipoD=term_prima() {return tipoD;})* {return tipoD;}
+    (LOOKAHEAD(20) mulop() tipoD=factor(aux) term_prima(tipoD) { /* aqui se pone la funcion we  */ return tipoD;})* {return tipoD;}
 }
 //GRAMATICA EN LINEA 25
 void mulop() : {}
