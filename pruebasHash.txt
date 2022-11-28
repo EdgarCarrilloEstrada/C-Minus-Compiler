@@ -1,5 +1,5 @@
-float f(char arrayDentroParametro[], int segundoParam, float tercerParamArreglo[], char k){
+float f(char c){
 	int arreglo[15];
-	float fl;
-
+	arreglo[10] = 5;
+	arreglo[20] = 10;
 }

@@ -1,8 +1,8 @@
 options {
 Ignore_Case = false;
 STATIC=false;
-DEBUG_PARSER=true; //true
-DEBUG_LOOKAHEAD=true; //true
+DEBUG_PARSER=false; //true
+DEBUG_LOOKAHEAD=false; //true
 }
 
 PARSER_BEGIN(cminusparser)
@@ -24,6 +24,22 @@ public class cminusparser {
             anLex.Inicio();
             mostrar();
             System.out.println("\n\nAnalysis has ended successfully!");
+
+    }
+
+    static void accesoArreglo(String id, int tamanio){
+        if(existeVariable(id)){
+            int tamanioArreglo = obtenerTamanio(id);
+            if(tamanio < tamanioArreglo){
+                System.out.println("Posicion dentro del rango del arreglo");
+            }
+            else{
+                        System.out.println("Posicion fuera del rango del arreglo");
+                    }
+        }
+        else{
+            System.out.println("No existe la variable dentro de la tabla de simbolos");
+        }
 
     }
 
@@ -67,6 +83,41 @@ public class cminusparser {
         return 99;
 
     }
+
+    static String obtenerTipo(String id){
+        String tipo;
+        symbol simbolo = new symbol();
+        simbolo = contenedor.get(id);
+
+        tipo = simbolo.tipo;
+
+        return tipo;
+    }
+
+    static int obtenerTamanio(String id){
+        int tamanio;
+        symbol simbolo = new symbol();
+        simbolo = contenedor.get(id);
+
+        tamanio = simbolo.tamanio;
+
+
+
+        return tamanio;
+    }
+
+    static boolean existeVariable(String id){
+        if(contenedor.containsKey(id)){
+            // System.out.println("Si existe el valor en la tabla: " + id);
+            return true;
+        }
+        else{
+            System.out.println("No se ha declarado la variable: " + id);
+            return false;
+        }
+    }
+
+
 
     static void mostrar (){
         System.out.println("ACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
@@ -447,9 +498,9 @@ void statement() : {}
     return_stmt() | expression_stmt() | compound_stmt() | selection_stmt() | iteration_stmt()
 }
 //GRAMATICA EN LINEA 14
-void expression_stmt() : {}
+void expression_stmt() : {String aux = "";}
 {
-    expression() <SIMBOLO_PUNTO_Y_COMA> | <SIMBOLO_PUNTO_Y_COMA>
+    expression(aux) <SIMBOLO_PUNTO_Y_COMA> | <SIMBOLO_PUNTO_Y_COMA>
 }
 //GRAMATICA EN LINEA 15
 void selection_stmt() : {}
@@ -457,9 +508,9 @@ void selection_stmt() : {}
      parte_if() parte_else()
 }
 
-void parte_if(): {}
+void parte_if(): {String aux = "";}
 {
-    <CONDICIONAL_IF> <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO>  statement()
+    <CONDICIONAL_IF> <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO>  statement()
 }
 
 void parte_else(): {}
@@ -468,34 +519,39 @@ void parte_else(): {}
 }
 
 //GRAMATICA EN LINEA 16
-void iteration_stmt() : {}
+void iteration_stmt() : {String aux = "";}
 {
-    <CICLO_WHILE> <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO> statement()
+    <CICLO_WHILE> <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> statement()
 }
 //GRAMATICA EN LINEA 17
-void return_stmt() : {}
+void return_stmt() : {String aux = "";}
 {
-    <RETORNAR_RETURN> (<SIMBOLO_PUNTO_Y_COMA> | expression() <SIMBOLO_PUNTO_Y_COMA>)
+    <RETORNAR_RETURN> (<SIMBOLO_PUNTO_Y_COMA> | expression(aux) <SIMBOLO_PUNTO_Y_COMA>)
 }
 //GRAMATICA EN LINEA 18
-void expression() : {}
+void expression(String id) : {String aux = "";}
 {
-    LOOKAHEAD(20) var() <SIMBOLO_ASIGNACION> expression() | simple_expression()
+    LOOKAHEAD(20) var() <SIMBOLO_ASIGNACION> expression(aux) | simple_expression(id)
 }
 //GRAMATICA EN LINEA 19
-void var() : {}
+void var() : {String id; boolean existe; int tamanio; String tipo;}
 {
-    <IDENTIFICADOR> var_extra()
+    <IDENTIFICADOR> {id = token.image; existe = existeVariable(id); System.out.println("Existe variable: " + existe); if(existe==true){tamanio = obtenerTamanio(id); System.out.println("Tamaño de la variable: " + tamanio);} if(existe==true){tipo = obtenerTipo(id); System.out.println("El tipo de variable es: " + tipo);}  } var_extra(id)
 }
 
-void var_extra(): {}
+void var_extra(String id): {}
 {
-    (LOOKAHEAD(20)<SIMBOLO_CORCHETE_ABIERTO> expression() <SIMBOLO_CORCHETE_CERRADO>)*
+    (LOOKAHEAD(20)<SIMBOLO_CORCHETE_ABIERTO> expression(id) <SIMBOLO_CORCHETE_CERRADO>)*
 }
 //GRAMATICA EN LINEA 20
-void simple_expression() : {}
+void simple_expression(String id) : {}
 {
-    LOOKAHEAD(20) additive_expression() relop() additive_expression() | additive_expression()
+    additive_expression(id) simple_expression_ending()
+}
+
+void simple_expression_ending() : {String aux = "";}
+{
+    (LOOKAHEAD(5) relop() additive_expression(aux)) *
 }
 //GRAMATICA EN LINEA 21
 void relop() : {}
@@ -503,14 +559,14 @@ void relop() : {}
     <SIMBOLO_MENOR_IGUAL> | <SIMBOLO_MENOR_QUE> | <SIMBOLO_MAYOR_QUE> | <SIMBOLO_MAYOR_IGUAL> | <SIMBOLO_COMPARACION> | <SIMBOLO_DIFERENTE>
 }
 //GRAMATICA EN LINEA 22 (ARREGLADA)
-void additive_expression() : {}
+void additive_expression(String id) : {}
 {
-    term() additive_expression_prima()
+    term(id) additive_expression_prima()
 }
 //GRAMATICA EN LINEA 22 (ARREGLADA)
-void additive_expression_prima() :{}
+void additive_expression_prima() :{String aux="";}
 {
-    (LOOKAHEAD(20) addop() term() additive_expression_prima())*
+    (LOOKAHEAD(20) addop() term(aux) additive_expression_prima())*
 }
 //GRAMATICA EN LINEA 23
 void addop() : {}
@@ -518,14 +574,14 @@ void addop() : {}
     <SIMBOLO_MAS> | <SIMBOLO_MENOS>
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-void term() : {}
+void term(String id) : {}
 {
-    factor() term_prima()
+    factor(id) term_prima()
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-void term_prima() : {}
+void term_prima() : {String aux = "";}
 {
-    (LOOKAHEAD(20) mulop() factor() term_prima() )*
+    (LOOKAHEAD(20) mulop() factor(aux) term_prima() )*
 }
 //GRAMATICA EN LINEA 25
 void mulop() : {}
@@ -533,14 +589,14 @@ void mulop() : {}
     <SIMBOLO_POR> | <SIMBOLO_DIVISION> | <SIMBOLO_MODULO>
 }
 //GRAMATICA EN LINEA 26
-void factor() : {}
+void factor(String id) : {String aux = ""; int tamanio = 0;}
 {
-    LOOKAHEAD(20)  call() | <SIMBOLO_PARENTESIS_ABIERTO> expression() <SIMBOLO_PARENTESIS_CERRADO> | LOOKAHEAD(20)  var() |  <NUMERO_ENTERO> | <NUMERO_REAL> | <CARACTER>
+    LOOKAHEAD(20)  call() | <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> | LOOKAHEAD(20)  var() |  <NUMERO_ENTERO> {tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio);} | <NUMERO_REAL> | <CARACTER>
 }
 //GRAMATICA EN LINEA 27
-void call() : {}
+void call() : {String id;}
 {
-    <IDENTIFICADOR> <SIMBOLO_PARENTESIS_ABIERTO> args() <SIMBOLO_PARENTESIS_CERRADO>
+    <IDENTIFICADOR> {id = token.image;} <SIMBOLO_PARENTESIS_ABIERTO> args() <SIMBOLO_PARENTESIS_CERRADO>
 }
 //GRAMATICA EN LINEA 28
 void args() : {}
@@ -548,12 +604,12 @@ void args() : {}
     (arg_list())*
 }
 //GRAMATICA EN LINEA 29 (ARREGLADA)
-void arg_list() :{}
+void arg_list() :{String aux = "";}
 {
-    expression() arg_list_prima()
+    expression(aux) arg_list_prima()
 }
 //GRAMATICA EN LINEA 29 (ARREGLADA)
-void arg_list_prima() : {}
+void arg_list_prima() : {String aux = "";}
 {
-    (LOOKAHEAD(20) <SIMBOLO_COMA> expression() arg_list_prima() )*
+    (LOOKAHEAD(20) <SIMBOLO_COMA> expression(aux) arg_list_prima() )*
 }
