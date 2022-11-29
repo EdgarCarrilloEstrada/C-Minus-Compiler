@@ -26,7 +26,7 @@ public class cminusparser implements cminusparserConstants {
                 //System.out.println("Posicion dentro del rango del arreglo");
             }
             else{
-                        System.out.println("Posicion fuera del rango del arreglo");
+                        System.out.println("\nERROR: Posicion fuera del rango del arreglo\n");
                     }
         }
         else{
@@ -53,7 +53,7 @@ public class cminusparser implements cminusparserConstants {
 
         }
         else{
-            System.out.println("Repeticion de declaracion en el identificador: " + Id);
+            System.out.println("\nERROR: Repeticion de declaracion en el identificador: " + Id + "\n");
         }
 
         //System.out.println(""+"Id: " + Id + " Corresponde: " + contenedor.get(Id));
@@ -105,7 +105,7 @@ public class cminusparser implements cminusparserConstants {
             return true;
         }
         else{
-            System.out.println("No se ha declarado la variable: " + id);
+            System.out.println("\nERROR: No se ha declarado la variable: " + id + "\n");
             return false;
         }
     }
@@ -113,12 +113,12 @@ public class cminusparser implements cminusparserConstants {
 
 
     static void mostrar (){
-        System.out.println("ACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
+        System.out.println("\n\nACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
         for(String id : contenedor.keySet()){
             symbol simbolo = new symbol();
             simbolo = contenedor.get(id);
 
-            System.out.println("\n\nVariable: " + id + "\ncategoria: " + simbolo.categoria + "\ntipo: " + simbolo.tipo + "\ntama\u00c3\u00b1o o # de parametros: " + simbolo.tamanio);}
+            System.out.println("\n\nVariable: " + id + "\nCategoria: " + simbolo.categoria + "\nTipo: " + simbolo.tipo + "\nTama\u00c3\u00b1o o # de parametros: " + simbolo.tamanio);}
 
     }
 
@@ -127,7 +127,7 @@ public class cminusparser implements cminusparserConstants {
             //System.out.println("Tipo de dato dentro de arreglo igual");
         }
         else{
-            System.out.println("Tipo de dato dentro de arreglo diferente");
+            System.out.println("\nERROR: Tipo de dato dentro de arreglo diferente\n");
         }
     }
 
@@ -136,7 +136,7 @@ public class cminusparser implements cminusparserConstants {
             //System.out.println("Tipo de dato igual");
         }
         else{
-            System.out.println("Tipo de dato diferente");
+            System.out.println("\nERROR: Tipo de dato diferente\n");
         }
     }
 
@@ -147,7 +147,7 @@ public class cminusparser implements cminusparserConstants {
                // System.out.println("esta variable " + id +" si son del mismo tipo con " + tipo);
             }
             else
-            System.out.println("Las variables no son del mismo tipo");
+            System.out.println("\nERROR: Las variables no son del mismo tipo\n");
         }
     }
 

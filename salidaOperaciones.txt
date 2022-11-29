@@ -458,7 +458,9 @@ Call:   Inicio
                                     Return: var(LOOKAHEAD FAILED)
                                     Consumed token: <<NUMERO_ENTERO>: "2" at line 3 column 11>
                                   Return: factor
-Tipo de dato diferente
+
+ERROR: Tipo de dato diferente
+
                                   Call:   term_prima
                                     Call:   mulop(LOOKING AHEAD...)
                                       Visited token: <<SIMBOLO_CORCHETE_CERRADO>: "]" at line 3 column 12>; Expected token: <<SIMBOLO_POR>>
@@ -505,7 +507,9 @@ Tipo de dato diferente
                                   Visited token: <<NUMERO_ENTERO>: "5" at line 3 column 16>; Expected token: <<IDENTIFICADOR>>
                                 Return: var(LOOKAHEAD FAILED)
                                 Consumed token: <<NUMERO_ENTERO>: "5" at line 3 column 16>
-No se ha declarado la variable: int
+
+ERROR: No se ha declarado la variable: int
+
                               Return: factor
                               Call:   term_prima
                                 Call:   mulop(LOOKING AHEAD...)
@@ -534,7 +538,9 @@ No se ha declarado la variable: int
                           Return: simple_expression_ending
                         Return: simple_expression
                       Return: expression
-No se ha declarado la variable: int
+
+ERROR: No se ha declarado la variable: int
+
                     Return: expression
                     Consumed token: <<SIMBOLO_PUNTO_Y_COMA>: ";" at line 3 column 17>
                   Return: expression_stmt
@@ -655,25 +661,27 @@ No se ha declarado la variable: int
   Return: program
   Consumed token: <<EOF> at line 5 column 3>
 Return: Inicio
+
+
 ACCEDIENDO A TABLA DE SIMBOLOS(HASH)
 
 
 Variable: a
-categoria: arreglo
-tipo: int
-tamaño o # de parametros: 6
+Categoria: arreglo
+Tipo: int
+Tamaño o # de parametros: 6
 
 
 Variable: f
-categoria: funcion
-tipo: float
-tamaño o # de parametros: 1
+Categoria: funcion
+Tipo: float
+Tamaño o # de parametros: 1
 
 
 Variable: c
-categoria: variable
-tipo: char
-tamaño o # de parametros: 1
+Categoria: variable
+Tipo: char
+Tamaño o # de parametros: 1
 
 
 Analysis has ended successfully!
