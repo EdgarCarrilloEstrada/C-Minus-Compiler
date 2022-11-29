@@ -1,8 +1,8 @@
 options {
 Ignore_Case = false;
 STATIC=false;
-DEBUG_PARSER=false; //true
-DEBUG_LOOKAHEAD=false; //true
+DEBUG_PARSER=true; //true
+DEBUG_LOOKAHEAD=true; //true
 }
 
 PARSER_BEGIN(cminusparser)
@@ -31,14 +31,14 @@ public class cminusparser {
         if(existeVariable(id)){
             int tamanioArreglo = obtenerTamanio(id);
             if(tamanio < tamanioArreglo){
-                System.out.println("Posicion dentro del rango del arreglo");
+                //System.out.println("Posicion dentro del rango del arreglo");
             }
             else{
                         System.out.println("Posicion fuera del rango del arreglo");
                     }
         }
         else{
-            System.out.println("No existe la variable dentro de la tabla de simbolos");
+            //System.out.println("No existe la variable dentro de la tabla de simbolos");
         }
 
     }
@@ -106,6 +106,7 @@ public class cminusparser {
         return tamanio;
     }
 
+
     static boolean existeVariable(String id){
         if(contenedor.containsKey(id)){
             // System.out.println("Si existe el valor en la tabla: " + id);
@@ -129,6 +130,23 @@ public class cminusparser {
 
     }
 
+    static void validarTiposArreglo(String tipo1, String tipo2){
+        if(tipo1.equals(tipo2)){
+            //System.out.println("Tipo de dato dentro de arreglo igual");
+        }
+        else{
+            System.out.println("Tipo de dato dentro de arreglo diferente");
+        }
+    }
+
+    static void comparacionAritmetica(String tipo1, String tipo2){
+        if(tipo1.equals(tipo2)){
+            //System.out.println("Tipo de dato igual");
+        }
+        else{
+            System.out.println("Tipo de dato diferente");
+        }
+    }
 
     static void validarTipos(String id, String tipo){
         if (existeVariable(id)){
@@ -426,22 +444,20 @@ void var_declaration() : {String id, tipo;}
 {
 
     tipo=type_specifier() <IDENTIFICADOR> {id=token.image;} var_declaration_ending(id, tipo)
-    //type_specifier() <IDENTIFICADOR> (((<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO> | <SIMBOLO_COMA> <IDENTIFICADOR> )*) <SIMBOLO_PUNTO_Y_COMA> )
-    //type_specifier() (<IDENTIFICADOR> {System.out.println("tomo variable");guardar(token.image, "variable", "int", 4);} (<SIMBOLO_COMA> <IDENTIFICADOR> {guardar(token.image,  "variable", "int", 4);})? | <IDENTIFICADOR> {System.out.println("Entro a arreglo");guardar(token.image, "arreglo", "int", 4);} (<SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> <SIMBOLO_CORCHETE_CERRADO>)) <SIMBOLO_PUNTO_Y_COMA>
+
 }
 
 void var_declaration_ending(String id, String tipo):{int tamanio;}
 {
-    <SIMBOLO_PUNTO_Y_COMA> {tamanio=verificacionTamanio(tipo);guardar(id, "variable", tipo, tamanio);} /*AQUI SE GUARDA LA TABLA DE SIMBOLOS */
+    LOOKAHEAD(5)<SIMBOLO_PUNTO_Y_COMA> {tamanio=verificacionTamanio(tipo);guardar(id, "variable", tipo, tamanio);} /*AQUI SE GUARDA LA TABLA DE SIMBOLOS */
     |
     <SIMBOLO_CORCHETE_ABIERTO> <NUMERO_ENTERO> {tamanio=Integer.parseInt(token.image);} <SIMBOLO_CORCHETE_CERRADO> <SIMBOLO_PUNTO_Y_COMA> {guardar(id, "arreglo", tipo, tamanio);}  /*AQUI SE GUARDA LA TABLA DE SIMBOLOS */
     |
-    varias_variables(tipo)
+    {tamanio=verificacionTamanio(tipo);guardar(id, "variable", tipo, tamanio);} varias_variables(tipo)  <SIMBOLO_PUNTO_Y_COMA>
 }
 
-void varias_variables(String tipo):{int tamanio;}
-{
-    <SIMBOLO_COMA> <IDENTIFICADOR> {tamanio=verificacionTamanio(tipo);guardar(token.image, "variable", tipo, tamanio);} /*AQUI SE GUARDA LA TABLA DE SIMBOLOS */ varias_variables(tipo)
+void varias_variables(String tipo):{int tamanio;}{
+    (LOOKAHEAD(5) <SIMBOLO_COMA> <IDENTIFICADOR> {tamanio=verificacionTamanio(tipo);guardar(token.image, "variable", tipo, tamanio);} /*AQUI SE GUARDA LA TABLA DE SIMBOLOS */ varias_variables(tipo))*
 }
 
 //GRAMATICA EN LINEA 5
@@ -462,7 +478,7 @@ int params() : {int contador = 0;}
 //GRAMATICA EN LINEA 8 (ARREGLADA)
 int param_list() : {int contador = 0;}
 {
-    param() {System.out.println("cantidad de contador antes de incremento: " + contador); contador++; System.out.println("cantidad de contador despues de incremento: " + contador); } contador = param_list_prima(contador) {return contador;}
+    param() {contador++; } contador = param_list_prima(contador) {return contador;}
 }
 //GRAMATICA EN LINEA 8 (ARREGLADA)
 int param_list_prima(int contador) : {}
@@ -541,24 +557,24 @@ void return_stmt() : {String aux = "";}
     <RETORNAR_RETURN> (<SIMBOLO_PUNTO_Y_COMA> | expression(aux) <SIMBOLO_PUNTO_Y_COMA>)
 }
 //GRAMATICA EN LINEA 18
-String expression(String id) : {String aux = ""; String tipoD = ""; String tipo = "";}
+String expression(String tipo) : {String aux = ""; String tipoD = ""; }
 {
-    LOOKAHEAD(20) tipo=var() <SIMBOLO_ASIGNACION> tipoD=expression(aux) {System.out.println("Valor de TipoD dentro de expression: " + tipoD); validarTipos(tipo, tipoD); return tipoD;}  | tipoD = simple_expression(id) {return tipoD;}
+    LOOKAHEAD(20) tipo=var() <SIMBOLO_ASIGNACION> tipoD=expression(tipo) {validarTiposArreglo(tipo, tipoD); validarTipos(tipo, tipoD); return tipoD;}  | tipoD = simple_expression(tipo) {return tipoD;}
 }
 //GRAMATICA EN LINEA 19
-String var() : {String id; boolean existe; int tamanio; String tipo;}
+String var() : {String id; boolean existe; int tamanio; String tipo = "";}
 {
-    <IDENTIFICADOR> {id = token.image; existe = existeVariable(id); System.out.println("Existe variable: " + existe); if(existe==true){tamanio = obtenerTamanio(id); System.out.println("Tamaño de la variable: " + tamanio);} if(existe==true){tipo = obtenerTipo(id); System.out.println("El tipo de variable es: " + tipo);}  } var_extra(id) {return id;}
+    <IDENTIFICADOR> {id = token.image; existe = existeVariable(id); if(existe==true){tamanio = obtenerTamanio(id);} if(existe==true){tipo = obtenerTipo(id);}  } tipo=var_extra(id) {return tipo;}
 }
 
-void var_extra(String id): {}
+String var_extra(String id): {String tipo = "";}
 {
-    (LOOKAHEAD(20)<SIMBOLO_CORCHETE_ABIERTO> expression(id) <SIMBOLO_CORCHETE_CERRADO>)*
+    (LOOKAHEAD(20)<SIMBOLO_CORCHETE_ABIERTO> expression(id) <SIMBOLO_CORCHETE_CERRADO> {tipo = obtenerTipo(id); return tipo;})* {return tipo;}
 }
 //GRAMATICA EN LINEA 20
-String simple_expression(String id) : {String tipoD = "";}
+String simple_expression(String tipo) : {String tipoD = "";}
 {
-   tipoD = additive_expression(id) simple_expression_ending() {return tipoD;}
+   tipoD = additive_expression(tipo) simple_expression_ending() {return tipoD;}
 }
 
 String simple_expression_ending() : {String aux = ""; String tipoD = "";}
@@ -571,14 +587,14 @@ void relop() : {}
     <SIMBOLO_MENOR_IGUAL> | <SIMBOLO_MENOR_QUE> | <SIMBOLO_MAYOR_QUE> | <SIMBOLO_MAYOR_IGUAL> | <SIMBOLO_COMPARACION> | <SIMBOLO_DIFERENTE>
 }
 //GRAMATICA EN LINEA 22 (ARREGLADA)
-String additive_expression(String id) : {String tipoD = "";}
+String additive_expression(String tipo) : {String tipoD = "";}
 {
-    tipoD=term(id) additive_expression_prima(tipoD) { return tipoD;}
+    tipoD=term(tipo) additive_expression_prima(tipo) { return tipoD;}
 }
 //GRAMATICA EN LINEA 22 (ARREGLADA)
-String additive_expression_prima(String tipoD2) :{String aux=""; String tipoD = "";}
+String additive_expression_prima(String tipo) :{String aux=""; String tipo4 = "";}
 {
-    (LOOKAHEAD(20) addop() tipoD=term(aux) additive_expression_prima(tipoD) {/* aqui se pone la funcion we  */ return tipoD;})* {return tipoD;}
+    (LOOKAHEAD(20) addop() tipo4=term(tipo) {comparacionAritmetica(tipo, tipo4);} additive_expression_prima(tipo) {return tipo;})* {return tipo;}
 }
 //GRAMATICA EN LINEA 23
 void addop() : {}
@@ -586,14 +602,14 @@ void addop() : {}
     <SIMBOLO_MAS> | <SIMBOLO_MENOS>
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-String term(String id) : {String tipoD = "";}
+String term(String tipo) : {String tipoD;}
 {
-    tipoD=factor(id) term_prima(tipoD)  {return tipoD;}
+    tipoD=factor(tipo)  {comparacionAritmetica(tipo, tipoD);} term_prima(tipo)  {return tipoD;}
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-String term_prima(String tipoD2) : {String aux = ""; String tipoD = "";}
+String term_prima(String tipo) : {String aux = ""; String tipo3 = ""; tipo = "";}
 {
-    (LOOKAHEAD(20) mulop() tipoD=factor(aux) term_prima(tipoD) { /* aqui se pone la funcion we  */ return tipoD;})* {return tipoD;}
+    (LOOKAHEAD(20) mulop() tipo3=factor(tipo) {comparacionAritmetica(tipo, tipo3);} term_prima(tipo) {return tipo;})* {return tipo;}
 }
 //GRAMATICA EN LINEA 25
 void mulop() : {}
@@ -601,14 +617,14 @@ void mulop() : {}
     <SIMBOLO_POR> | <SIMBOLO_DIVISION> | <SIMBOLO_MODULO>
 }
 //GRAMATICA EN LINEA 26
-String factor(String id) : {String aux = ""; int tamanio = 0; String tipoD = "";}
+String factor(String id) : {String aux = ""; int tamanio = 0; String tipo = "";}
 {
-    LOOKAHEAD(20)  call() {return "";} | <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> {return "";} | LOOKAHEAD(20)  tipoD = var() {return tipoD;} |  <NUMERO_ENTERO> {tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); return "int";} | <NUMERO_REAL> {return "float";} | <CARACTER> {return "char";}
+    LOOKAHEAD(20)  call() {return "";} | <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> {return "";} | LOOKAHEAD(20)  tipo = var() {return tipo;} |  <NUMERO_ENTERO> {tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); tipo = "int"; return tipo;} | <NUMERO_REAL> {tipo = "float"; return tipo;} | <CARACTER> {tipo = "char"; return tipo;}
 }
 //GRAMATICA EN LINEA 27
 void call() : {String id;}
 {
-    <IDENTIFICADOR> {id = token.image;} <SIMBOLO_PARENTESIS_ABIERTO> args() <SIMBOLO_PARENTESIS_CERRADO>
+    <IDENTIFICADOR> {id = token.image; existeVariable(id);} <SIMBOLO_PARENTESIS_ABIERTO> args() <SIMBOLO_PARENTESIS_CERRADO>
 }
 //GRAMATICA EN LINEA 28
 void args() : {}

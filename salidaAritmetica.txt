@@ -1,0 +1,68 @@
+1. Se encontro el tipo de dato float: float
+1. Se encontro un identificador: f
+1. Se encontro el simbolo de parentesis abierto: (
+1. Se encontro el tipo de dato char: char
+1. Se encontro un identificador: c
+1. Se encontro el simbolo de parentesis cerrado: )
+cantidad de contador antes de incremento: 0
+cantidad de contador despues de incremento: 1
+1. Se encontro el simbolo de llave abierta: {
+2. Se encontro el tipo de dato int: int
+2. Se encontro un identificador: a
+2. Se encontro el simbolo punto y coma: ;
+4. Se encontro un identificador: a
+4. Se encontro el simbolo igual o asignacion: =
+4. Se encontro un numero entero: 1
+4. Se encontro el simbolo mas: +
+4. Se encontro un numero real: 2.2
+4. Se encontro el simbolo punto y coma: ;
+7. Se encontro el simbolo de llave cerrada: }
+Existe variable: true
+Tamaño de la variable: 4
+El tipo de variable es: int
+Valor de retorno en funcion var: int
+Valor de tipo dentro de additive expression: int
+No se ha declarado la variable: int
+No existe la variable dentro de la tabla de simbolos
+Dentro de NUMERO-ENTERO: int
+Valor de retorno desde el dato de factor: int
+Valor de variable tipo por comparar: int
+Comparacion desde TERM-----
+Tipo: int
+TipoD: int
+Tipo de dato igual
+Dentro de NUMERO-REAL: float
+Valor de retorno desde el dato de factor: float
+Valor de variable tipo por comparar: int
+Comparacion desde TERM-----
+Tipo: int
+TipoD: float
+Tipo de dato diferente
+Comparacion desde additive-expression-prima
+Tipo: int
+Tipo4: float
+Tipo de dato diferente
+Valor de TipoD dentro de expression: int
+No se ha declarado la variable: int
+ACCEDIENDO A TABLA DE SIMBOLOS(HASH)
+
+
+Variable: a
+categoria: variable
+tipo: int
+tamaño o # de parametros: 4
+
+
+Variable: f
+categoria: funcion
+tipo: float
+tamaño o # de parametros: 1
+
+
+Variable: c
+categoria: variable
+tipo: char
+tamaño o # de parametros: 1
+
+
+Analysis has ended successfully!
