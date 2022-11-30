@@ -105,8 +105,14 @@ public class cminusparser implements cminusparserConstants {
             return true;
         }
         else{
-            System.out.println("\nERROR: No se ha declarado la variable: " + id + "\n");
-            return false;
+            if(id.equals("int") || id.equals("float") || id.equals("char")){
+                return false;
+            }
+            else{
+                System.out.println("\nERROR: No se ha declarado la variable: " + id + "\n");
+                return false;
+            }
+
         }
     }
 
@@ -136,12 +142,15 @@ public class cminusparser implements cminusparserConstants {
             //System.out.println("Tipo de dato igual");
         }
         else{
-            System.out.println("\nERROR: Tipo de dato diferente\n");
+            if((tipo1.equals("int") || tipo1.equals("float") || tipo1.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){
+                System.out.println("\nERROR: Tipo de dato diferente\n");
+            }
         }
     }
 
     static void validarTipos(String id, String tipo){
         if (existeVariable(id)){
+            System.out.println("Valor de id dentro de validarTipos: " + id);
             // System.out.println("Tipo de id en TS: " + obtenerTipo(id) + " Tipo a comparar: " + tipo);
             if(obtenerTipo(id) == tipo){
                // System.out.println("esta variable " + id +" si son del mismo tipo con " + tipo);
@@ -888,11 +897,11 @@ public class cminusparser implements cminusparserConstants {
   final public String term(String tipo) throws ParseException {
     trace_call("term");
     try {
-                            String tipoD;
-      tipoD = factor(tipo);
-                         comparacionAritmetica(tipo, tipoD);
+                            String tipo2;
+      tipo2 = factor(tipo);
+                         comparacionAritmetica(tipo, tipo2);
       term_prima(tipo);
-                                                                                 {if (true) return tipoD;}
+                                                                                 {if (true) return tipo2;}
     throw new Error("Missing return statement in function");
     } finally {
       trace_return("term");
@@ -1180,41 +1189,6 @@ public class cminusparser implements cminusparserConstants {
     try { return !jj_3_16(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(15, xla); }
-  }
-
-  private boolean jj_3R_23() {
-    if (!jj_rescan) trace_call("var(LOOKING AHEAD...)");
-    if (jj_scan_token(IDENTIFICADOR)) { if (!jj_rescan) trace_return("var(LOOKAHEAD FAILED)"); return true; }
-    if (jj_3R_46()) { if (!jj_rescan) trace_return("var(LOOKAHEAD FAILED)"); return true; }
-    { if (!jj_rescan) trace_return("var(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3R_56() {
-    if (jj_scan_token(DATO_CHAR)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_24() {
-    if (!jj_rescan) trace_call("expression(LOOKING AHEAD...)");
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_9()) {
-    jj_scanpos = xsp;
-    if (jj_3R_47()) { if (!jj_rescan) trace_return("expression(LOOKAHEAD FAILED)"); return true; }
-    }
-    { if (!jj_rescan) trace_return("expression(LOOKAHEAD SUCCEEDED)"); return false; }
-  }
-
-  private boolean jj_3_9() {
-    if (jj_3R_23()) return true;
-    if (jj_scan_token(SIMBOLO_ASIGNACION)) return true;
-    if (jj_3R_24()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_43() {
-    if (jj_3R_64()) return true;
-    return false;
   }
 
   private boolean jj_3R_62() {
@@ -1836,6 +1810,41 @@ public class cminusparser implements cminusparserConstants {
       if (jj_3_10()) { jj_scanpos = xsp; break; }
     }
     { if (!jj_rescan) trace_return("var_extra(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_23() {
+    if (!jj_rescan) trace_call("var(LOOKING AHEAD...)");
+    if (jj_scan_token(IDENTIFICADOR)) { if (!jj_rescan) trace_return("var(LOOKAHEAD FAILED)"); return true; }
+    if (jj_3R_46()) { if (!jj_rescan) trace_return("var(LOOKAHEAD FAILED)"); return true; }
+    { if (!jj_rescan) trace_return("var(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3R_56() {
+    if (jj_scan_token(DATO_CHAR)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_24() {
+    if (!jj_rescan) trace_call("expression(LOOKING AHEAD...)");
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_9()) {
+    jj_scanpos = xsp;
+    if (jj_3R_47()) { if (!jj_rescan) trace_return("expression(LOOKAHEAD FAILED)"); return true; }
+    }
+    { if (!jj_rescan) trace_return("expression(LOOKAHEAD SUCCEEDED)"); return false; }
+  }
+
+  private boolean jj_3_9() {
+    if (jj_3R_23()) return true;
+    if (jj_scan_token(SIMBOLO_ASIGNACION)) return true;
+    if (jj_3R_24()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_43() {
+    if (jj_3R_64()) return true;
+    return false;
   }
 
   /** Generated Token Manager. */

@@ -113,8 +113,14 @@ public class cminusparser {
             return true;
         }
         else{
-            System.out.println("\nERROR: No se ha declarado la variable: " + id + "\n");
-            return false;
+            if(id.equals("int") || id.equals("float") || id.equals("char")){
+                return false;
+            }
+            else{
+                System.out.println("\nERROR: No se ha declarado la variable: " + id + "\n");
+                return false;
+            }
+
         }
     }
 
@@ -144,12 +150,15 @@ public class cminusparser {
             //System.out.println("Tipo de dato igual");
         }
         else{
-            System.out.println("\nERROR: Tipo de dato diferente\n");
+            if((tipo1.equals("int") || tipo1.equals("float") || tipo1.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){
+                System.out.println("\nERROR: Tipo de dato diferente\n");
+            }
         }
     }
 
     static void validarTipos(String id, String tipo){
         if (existeVariable(id)){
+            System.out.println("Valor de id dentro de validarTipos: " + id);
             // System.out.println("Tipo de id en TS: " + obtenerTipo(id) + " Tipo a comparar: " + tipo);
             if(obtenerTipo(id) == tipo){
                // System.out.println("esta variable " + id +" si son del mismo tipo con " + tipo);
@@ -602,9 +611,9 @@ void addop() : {}
     <SIMBOLO_MAS> | <SIMBOLO_MENOS>
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-String term(String tipo) : {String tipoD;}
+String term(String tipo) : {String tipo2;}
 {
-    tipoD=factor(tipo)  {comparacionAritmetica(tipo, tipoD);} term_prima(tipo)  {return tipoD;}
+    tipo2=factor(tipo)  {comparacionAritmetica(tipo, tipo2);} term_prima(tipo)  {return tipo2;}
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
 String term_prima(String tipo) : {String aux = ""; String tipo3 = ""; tipo = "";}
