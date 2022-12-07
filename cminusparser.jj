@@ -1,8 +1,8 @@
 options {
 Ignore_Case = false;
 STATIC=false;
-DEBUG_PARSER=true; //true
-DEBUG_LOOKAHEAD=true; //true
+DEBUG_PARSER=false; //true
+DEBUG_LOOKAHEAD=false; //true
 }
 
 PARSER_BEGIN(cminusparser)
@@ -108,6 +108,7 @@ public class cminusparser {
 
 
     static boolean existeVariable(String id){
+        if(id != "")
         if(contenedor.containsKey(id)){
             // System.out.println("Si existe el valor en la tabla: " + id);
             return true;
@@ -122,6 +123,8 @@ public class cminusparser {
             }
 
         }
+        return false;
+        
     }
 
 
@@ -137,11 +140,13 @@ public class cminusparser {
     }
 
     static void validarTiposArreglo(String tipo1, String tipo2){
+        if(!tipo1.equals("")){
         if(tipo1.equals(tipo2)){
             //System.out.println("Tipo de dato dentro de arreglo igual");
         }
         else{
             System.out.println("\nERROR: Tipo de dato dentro de arreglo diferente\n");
+        }
         }
     }
 

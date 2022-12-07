@@ -1,0 +1,33 @@
+1. Se encontro el tipo de dato float: float
+1. Se encontro un identificador: f
+1. Se encontro el simbolo de parentesis abierto: (
+1. Se encontro el tipo de dato char: char
+1. Se encontro un identificador: c
+1. Se encontro el simbolo de parentesis cerrado: )
+1. Se encontro el simbolo de llave abierta: {
+2. Se encontro un identificador: a
+2. Se encontro el simbolo igual o asignacion: =
+2. Se encontro un numero entero: 1
+2. Se encontro el simbolo punto y coma: ;
+3. Se encontro el simbolo de llave cerrada: }
+
+ERROR: No se ha declarado la variable: a
+
+
+
+ACCEDIENDO A TABLA DE SIMBOLOS(HASH)
+
+
+Variable: f
+Categoria: funcion
+Tipo: float
+Tamaño o # de parametros: 1
+
+
+Variable: c
+Categoria: variable
+Tipo: char
+Tamaño o # de parametros: 1
+
+
+Analysis has ended successfully!
