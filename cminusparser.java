@@ -20,7 +20,16 @@ public class cminusparser implements cminusparserConstants {
     }
 
     static void accesoArreglo(String id, int tamanio){
-        if(existeVariable(id)){
+        String categoria="";
+        symbol simbolo = new symbol();
+        if(contenedor.get(id) != null){
+        simbolo = contenedor.get(id);
+        categoria = simbolo.categoria;
+        }
+
+
+
+        if(existeVariable(id) && categoria.equals("arreglo")){
             int tamanioArreglo = obtenerTamanio(id);
             if(tamanio < tamanioArreglo){
                 //System.out.println("Posicion dentro del rango del arreglo");
@@ -77,12 +86,12 @@ public class cminusparser implements cminusparserConstants {
     }
 
     static String obtenerTipo(String id){
-        String tipo;
+        String tipo="";
         symbol simbolo = new symbol();
+        if(contenedor.get(id) != null){
         simbolo = contenedor.get(id);
-
         tipo = simbolo.tipo;
-
+        }
         return tipo;
     }
 
@@ -100,7 +109,7 @@ public class cminusparser implements cminusparserConstants {
 
 
     static boolean existeVariable(String id){
-        if(id != "")
+
         if(contenedor.containsKey(id)){
             // System.out.println("Si existe el valor en la tabla: " + id);
             return true;
@@ -115,7 +124,7 @@ public class cminusparser implements cminusparserConstants {
             }
 
         }
-        return false;
+
 
     }
 
@@ -132,7 +141,7 @@ public class cminusparser implements cminusparserConstants {
     }
 
     static void validarTiposArreglo(String tipo1, String tipo2){
-        if(!tipo1.equals("")){
+        if(!tipo1.equals("") && (tipo1.equals("int") || tipo1.equals("float") || tipo1.equals("char")) ){
         if(tipo1.equals(tipo2)){
             //System.out.println("Tipo de dato dentro de arreglo igual");
         }
@@ -143,11 +152,17 @@ public class cminusparser implements cminusparserConstants {
     }
 
     static void comparacionAritmetica(String tipo1, String tipo2){
-        if(tipo1.equals(tipo2)){
+        String tipo="";
+        symbol simbolo = new symbol();
+        if(contenedor.get(tipo1) != null){
+        simbolo = contenedor.get(tipo1);
+        tipo = simbolo.tipo;
+        }
+        if(tipo.equals(tipo2)){
             //System.out.println("Tipo de dato igual");
         }
         else{
-            if((tipo1.equals("int") || tipo1.equals("float") || tipo1.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){
+            if((tipo.equals("int") || tipo.equals("float") || tipo.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){
                 System.out.println("\u005cnERROR: Tipo de dato diferente\u005cn");
             }
         }
@@ -155,7 +170,7 @@ public class cminusparser implements cminusparserConstants {
 
     static void validarTipos(String id, String tipo){
         if (existeVariable(id)){
-            System.out.println("Valor de id dentro de validarTipos: " + id);
+           // System.out.println("Valor de id dentro de validarTipos: " + id);
             // System.out.println("Tipo de id en TS: " + obtenerTipo(id) + " Tipo a comparar: " + tipo);
             if(obtenerTipo(id) == tipo){
                // System.out.println("esta variable " + id +" si son del mismo tipo con " + tipo);
@@ -597,12 +612,12 @@ public class cminusparser implements cminusparserConstants {
     jj_consume_token(IDENTIFICADOR);
                      id = token.image; existe = existeVariable(id); if(existe==true){tamanio = obtenerTamanio(id);} if(existe==true){tipo = obtenerTipo(id);}
     tipo = var_extra(id);
-                                                                                                                                                                                     {if (true) return tipo;}
+                                                                                                                                                                                     if(tipo!=""){if (true) return tipo;} else {if (true) return id;}
     throw new Error("Missing return statement in function");
   }
 
   final public String var_extra(String id) throws ParseException {
-                              String tipo = "";
+                              String tipo = ""; String tipoD = "";
     label_9:
     while (true) {
       if (jj_2_10(20)) {
@@ -611,11 +626,11 @@ public class cminusparser implements cminusparserConstants {
         break label_9;
       }
       jj_consume_token(SIMBOLO_CORCHETE_ABIERTO);
-      expression(id);
+      tipoD = expression(id);
       jj_consume_token(SIMBOLO_CORCHETE_CERRADO);
-                                                                                        tipo = obtenerTipo(id); {if (true) return tipo;}
+                                                                                              tipo = obtenerTipo(id); validarTipos(tipo, tipoD); {if (true) return tipo;}
     }
-                                                                                                                                 {if (true) return tipo;}
+                                                                                                                                                                  {if (true) return tipo;}
     throw new Error("Missing return statement in function");
   }
 
@@ -684,7 +699,7 @@ public class cminusparser implements cminusparserConstants {
 
 //GRAMATICA EN LINEA 22 (ARREGLADA)
   final public String additive_expression_prima(String tipo) throws ParseException {
-                                                String aux=""; String tipo4 = "";
+                                                String aux=""; String tipo4 = ""; String tipoR="";
     label_11:
     while (true) {
       if (jj_2_12(20)) {
@@ -720,17 +735,17 @@ public class cminusparser implements cminusparserConstants {
 
 //GRAMATICA EN LINEA 24 (ARREGLADA)
   final public String term(String tipo) throws ParseException {
-                            String tipo2;
+                            String tipo2; String tipoR="";
     tipo2 = factor(tipo);
-                         comparacionAritmetica(tipo, tipo2);
+
     term_prima(tipo);
-                                                                                 {if (true) return tipo2;}
+                                              {if (true) return tipo2;}
     throw new Error("Missing return statement in function");
   }
 
 //GRAMATICA EN LINEA 24 (ARREGLADA)
   final public String term_prima(String tipo) throws ParseException {
-                                  String aux = ""; String tipo3 = ""; tipo = "";
+                                  String aux = ""; String tipo3 = ""; tipo = ""; String tipoR="";
     label_12:
     while (true) {
       if (jj_2_13(20)) {
@@ -740,11 +755,11 @@ public class cminusparser implements cminusparserConstants {
       }
       mulop();
       tipo3 = factor(tipo);
-                                               comparacionAritmetica(tipo, tipo3);
+                                               tipo=obtenerTipo(tipo); comparacionAritmetica(tipo, tipo3);
       term_prima(tipo);
-                                                                                                      {if (true) return tipo;}
+                                                                                                                              {if (true) return tipo;}
     }
-                                                                                                                       {if (true) return tipo;}
+                                                                                                                                               {if (true) return tipo;}
     throw new Error("Missing return statement in function");
   }
 
@@ -974,49 +989,6 @@ public class cminusparser implements cminusparserConstants {
     try { return !jj_3_16(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(15, xla); }
-  }
-
-  private boolean jj_3R_66() {
-    if (jj_scan_token(CICLO_WHILE)) return true;
-    if (jj_scan_token(SIMBOLO_PARENTESIS_ABIERTO)) return true;
-    if (jj_3R_24()) return true;
-    if (jj_scan_token(SIMBOLO_PARENTESIS_CERRADO)) return true;
-    if (jj_3R_21()) return true;
-    return false;
-  }
-
-  private boolean jj_3_8() {
-    if (jj_scan_token(CONDICIONAL_ELSE)) return true;
-    if (jj_3R_21()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_75() {
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_8()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  private boolean jj_3R_42() {
-    if (jj_3R_63()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_74() {
-    if (jj_scan_token(CONDICIONAL_IF)) return true;
-    if (jj_scan_token(SIMBOLO_PARENTESIS_ABIERTO)) return true;
-    if (jj_3R_24()) return true;
-    if (jj_scan_token(SIMBOLO_PARENTESIS_CERRADO)) return true;
-    if (jj_3R_21()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_50() {
-    if (jj_scan_token(NUMERO_REAL)) return true;
-    return false;
   }
 
   private boolean jj_3R_65() {
@@ -1588,6 +1560,49 @@ public class cminusparser implements cminusparserConstants {
 
   private boolean jj_3_15() {
     if (jj_3R_23()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_66() {
+    if (jj_scan_token(CICLO_WHILE)) return true;
+    if (jj_scan_token(SIMBOLO_PARENTESIS_ABIERTO)) return true;
+    if (jj_3R_24()) return true;
+    if (jj_scan_token(SIMBOLO_PARENTESIS_CERRADO)) return true;
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  private boolean jj_3_8() {
+    if (jj_scan_token(CONDICIONAL_ELSE)) return true;
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_75() {
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_8()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  private boolean jj_3R_42() {
+    if (jj_3R_63()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_74() {
+    if (jj_scan_token(CONDICIONAL_IF)) return true;
+    if (jj_scan_token(SIMBOLO_PARENTESIS_ABIERTO)) return true;
+    if (jj_3R_24()) return true;
+    if (jj_scan_token(SIMBOLO_PARENTESIS_CERRADO)) return true;
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_50() {
+    if (jj_scan_token(NUMERO_REAL)) return true;
     return false;
   }
 

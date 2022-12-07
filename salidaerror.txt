@@ -5,17 +5,32 @@
 1. Se encontro un identificador: c
 1. Se encontro el simbolo de parentesis cerrado: )
 1. Se encontro el simbolo de llave abierta: {
+2. Se encontro el tipo de dato int: int
 2. Se encontro un identificador: a
-2. Se encontro el simbolo igual o asignacion: =
-2. Se encontro un numero entero: 1
+2. Se encontro el simbolo de corchete abierto: [
+2. Se encontro un numero entero: 3
+2. Se encontro el simbolo de corchete cerrado: ]
 2. Se encontro el simbolo punto y coma: ;
-3. Se encontro el simbolo de llave cerrada: }
+3. Se encontro un identificador: a
+3. Se encontro el simbolo de corchete abierto: [
+3. Se encontro un numero entero: 2
+3. Se encontro el simbolo de corchete cerrado: ]
+3. Se encontro el simbolo igual o asignacion: =
+3. Se encontro un numero real: 1.2
+3. Se encontro el simbolo punto y coma: ;
+4. Se encontro el simbolo de llave cerrada: }
 
-ERROR: No se ha declarado la variable: a
+ERROR: Tipo de dato dentro de arreglo diferente
 
 
 
 ACCEDIENDO A TABLA DE SIMBOLOS(HASH)
+
+
+Variable: a
+Categoria: arreglo
+Tipo: int
+Tamaño o # de parametros: 3
 
 
 Variable: f
