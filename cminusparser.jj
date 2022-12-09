@@ -19,8 +19,6 @@ public class cminusparser {
 
     static Hashtable<String, symbol> contenedor = new Hashtable<String,symbol>();
 
-    /* ---------------------------------------------------------------------------------- FUNCIONES ------------------------------------------------------------------------------ */
-
     public static void main(String [] args) throws ParseException{
             cminusparser anLex = new cminusparser(System.in);
             anLex.Inicio();
@@ -29,7 +27,7 @@ public class cminusparser {
 
     }
 
-    static void accesoArreglo(String id, int tamanio){ //Asignar un valor al arreglo, verificar si tiene el tamaño suficiente
+    static void accesoArreglo(String id, int tamanio){
         String categoria="";
         symbol simbolo = new symbol();
         if(contenedor.get(id) != null){       
@@ -39,7 +37,7 @@ public class cminusparser {
 
 
 
-        if(existeVariable(id) && categoria.equals("arreglo")){ //Comprobacion tamaño correcto
+        if(existeVariable(id) && categoria.equals("arreglo")){
             int tamanioArreglo = obtenerTamanio(id);
             if(tamanio < tamanioArreglo){
                 //System.out.println("Posicion dentro del rango del arreglo");
@@ -51,10 +49,10 @@ public class cminusparser {
         else{
             //System.out.println("No existe la variable dentro de la tabla de simbolos");
         }
-        
+
     }
 
-    static void guardar(String Id, String categoria, String tipo, int tamanio ){ //Como se guarda las variables en la tabla de simbolos
+    static void guardar(String Id, String categoria, String tipo, int tamanio ){
         //Enumeration llaves = contenedor.keys();
         //while (llaves.hasMoreElements()) {
         //    if(llaves.nextElement().equals(Id)){
@@ -64,11 +62,11 @@ public class cminusparser {
 
         if(!contenedor.containsKey(Id)){
 
-            symbol simbolo = new symbol(); //Se crea un nuevo objeto
+            symbol simbolo = new symbol();
                     simbolo.categoria = categoria;
                     simbolo.tipo = tipo;
                     simbolo.tamanio = tamanio;
-            contenedor.put(Id,simbolo); //Entra a la tabla Hash
+            contenedor.put(Id,simbolo);
 
         }
         else{
@@ -161,25 +159,29 @@ public class cminusparser {
         }
     }
 
-    static void comparacionAritmetica(String tipo1, String tipo2){   //Compara el tipo de la variable con el tipo del numero con el que esta haciendo la operacion    
+    static void comparacionAritmetica(String tipo1, String tipo2){        
         String tipo="";
         symbol simbolo = new symbol();
-        if(contenedor.get(tipo1) != null){  //tipo 1 = variable, tipo 2 = operando     
+        if(contenedor.get(tipo1) != null){       
         simbolo = contenedor.get(tipo1);
         tipo = simbolo.tipo;
         }
+
+
         if(tipo.equals(tipo2)){
             //System.out.println("Tipo de dato igual");
         }
         else{
-            if((tipo.equals("int") || tipo.equals("float") || tipo.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){ //Para asegurar que esta comparando el tipo y no el nombre de la variable
+            if((tipo.equals("int") || tipo.equals("float") || tipo.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){
                 System.out.println("\nERROR: Tipo de dato diferente\n");
             }
         }
     }
 
-    static void validarTipos(String id, String tipo){ //Compara el tipo de la variable con el tipo del valor asignado a la variable
+    static void validarTipos(String id, String tipo){
+
         if (existeVariable(id)){
+
            // System.out.println("Valor de id dentro de validarTipos: " + id);
             // System.out.println("Tipo de id en TS: " + obtenerTipo(id) + " Tipo a comparar: " + tipo);
             if(obtenerTipo(id) == tipo){
@@ -192,8 +194,6 @@ public class cminusparser {
 
 }
 PARSER_END(cminusparser)
-
-/* ------------------------------------------------------------------ TOKENS ------------------------------------------------------------------------------------- */
 
 TOKEN : {
     <CONDICIONAL_IF: "if">
@@ -442,8 +442,6 @@ SPECIAL_TOKEN : {
     {System.out.println("ERROR LEXICO: Simbolo no valido: " + image + ". Linea " +matchedToken.beginLine);}
 }
 
-/* ----------------------------------------------------------------------------------- GRAMATICA ------------------------------------------------------------------------ */
-
 void Inicio() : {}
 {
     (program())+<EOF>
@@ -652,9 +650,9 @@ void mulop() : {}
     <SIMBOLO_POR> | <SIMBOLO_DIVISION> | <SIMBOLO_MODULO>
 }
 //GRAMATICA EN LINEA 26
-String factor(String id) : {String aux = ""; int tamanio = 0; String tipo = "";}
+String factor(String id) : {String aux = ""; int tamanio = 0; String tipo = "", nombreVar = "";}
 {
-    LOOKAHEAD(20)  call() {return "";} | <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> {return "";} | LOOKAHEAD(20)  tipo = var() {return tipo;} |  <NUMERO_ENTERO> {tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); tipo = "int"; return tipo;} | <NUMERO_REAL> {tipo = "float"; return tipo;} | <CARACTER> {tipo = "char"; return tipo;}
+    LOOKAHEAD(20)  call() {return "";} | <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> {return "";} | LOOKAHEAD(20)  nombreVar = var() {tipo=obtenerTipo(nombreVar); return tipo;} |  <NUMERO_ENTERO> {tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); tipo = "int"; return tipo;} | <NUMERO_REAL> {tipo = "float"; return tipo;} | <CARACTER> {tipo = "char"; return tipo;}
 }
 //GRAMATICA EN LINEA 27
 void call() : {String id;}

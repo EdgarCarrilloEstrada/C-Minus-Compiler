@@ -15,7 +15,7 @@ public class cminusparser implements cminusparserConstants {
             cminusparser anLex = new cminusparser(System.in);
             anLex.Inicio();
             mostrar();
-            System.out.println("\u005cn\u005cnAnalysis has ended successfully!");
+            System.out.println("\n\nAnalysis has ended successfully!");
 
     }
 
@@ -35,7 +35,7 @@ public class cminusparser implements cminusparserConstants {
                 //System.out.println("Posicion dentro del rango del arreglo");
             }
             else{
-                        System.out.println("\u005cnERROR: Posicion fuera del rango del arreglo\u005cn");
+                        System.out.println("\nERROR: Posicion fuera del rango del arreglo\n");
                     }
         }
         else{
@@ -62,7 +62,7 @@ public class cminusparser implements cminusparserConstants {
 
         }
         else{
-            System.out.println("\u005cnERROR: Repeticion de declaracion en el identificador: " + Id + "\u005cn");
+            System.out.println("\nERROR: Repeticion de declaracion en el identificador: " + Id + "\n");
         }
 
         //System.out.println(""+"Id: " + Id + " Corresponde: " + contenedor.get(Id));
@@ -119,7 +119,7 @@ public class cminusparser implements cminusparserConstants {
                 return false;
             }
             else{
-                System.out.println("\u005cnERROR: No se ha declarado la variable: " + id + "\u005cn");
+                System.out.println("\nERROR: No se ha declarado la variable: " + id + "\n");
                 return false;
             }
 
@@ -131,12 +131,12 @@ public class cminusparser implements cminusparserConstants {
 
 
     static void mostrar (){
-        System.out.println("\u005cn\u005cnACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
+        System.out.println("\n\nACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
         for(String id : contenedor.keySet()){
             symbol simbolo = new symbol();
             simbolo = contenedor.get(id);
 
-            System.out.println("\u005cn\u005cnVariable: " + id + "\u005cnCategoria: " + simbolo.categoria + "\u005cnTipo: " + simbolo.tipo + "\u005cnTama\u00f1o o # de parametros: " + simbolo.tamanio);}
+            System.out.println("\n\nVariable: " + id + "\nCategoria: " + simbolo.categoria + "\nTipo: " + simbolo.tipo + "\nTama\u00c3\u00b1o o # de parametros: " + simbolo.tamanio);}
 
     }
 
@@ -146,7 +146,7 @@ public class cminusparser implements cminusparserConstants {
             //System.out.println("Tipo de dato dentro de arreglo igual");
         }
         else{
-            System.out.println("\u005cnERROR: Tipo de dato dentro de arreglo diferente\u005cn");
+            System.out.println("\nERROR: Tipo de dato dentro de arreglo diferente\n");
         }
         }
     }
@@ -158,25 +158,29 @@ public class cminusparser implements cminusparserConstants {
         simbolo = contenedor.get(tipo1);
         tipo = simbolo.tipo;
         }
+
+
         if(tipo.equals(tipo2)){
             //System.out.println("Tipo de dato igual");
         }
         else{
             if((tipo.equals("int") || tipo.equals("float") || tipo.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){
-                System.out.println("\u005cnERROR: Tipo de dato diferente\u005cn");
+                System.out.println("\nERROR: Tipo de dato diferente\n");
             }
         }
     }
 
     static void validarTipos(String id, String tipo){
+
         if (existeVariable(id)){
+
            // System.out.println("Valor de id dentro de validarTipos: " + id);
             // System.out.println("Tipo de id en TS: " + obtenerTipo(id) + " Tipo a comparar: " + tipo);
             if(obtenerTipo(id) == tipo){
                // System.out.println("esta variable " + id +" si son del mismo tipo con " + tipo);
             }
             else
-            System.out.println("\u005cnERROR: Las variables no son del mismo tipo\u005cn");
+            System.out.println("\nERROR: Las variables no son del mismo tipo\n");
         }
     }
 
@@ -784,7 +788,7 @@ public class cminusparser implements cminusparserConstants {
 
 //GRAMATICA EN LINEA 26
   final public String factor(String id) throws ParseException {
-                            String aux = ""; int tamanio = 0; String tipo = "";
+                            String aux = ""; int tamanio = 0; String tipo = "", nombreVar = "";
     if (jj_2_14(20)) {
       call();
                            {if (true) return "";}
@@ -799,21 +803,21 @@ public class cminusparser implements cminusparserConstants {
       default:
         jj_la1[14] = jj_gen;
         if (jj_2_15(20)) {
-          tipo = var();
-                                                                                                                                                               {if (true) return tipo;}
+          nombreVar = var();
+                                                                                                                                                                    tipo=obtenerTipo(nombreVar); {if (true) return tipo;}
         } else {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case NUMERO_ENTERO:
             jj_consume_token(NUMERO_ENTERO);
-                                                                                                                                                                                                 tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); tipo = "int"; {if (true) return tipo;}
+                                                                                                                                                                                                                                   tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); tipo = "int"; {if (true) return tipo;}
             break;
           case NUMERO_REAL:
             jj_consume_token(NUMERO_REAL);
-                                                                                                                                                                                                                                                                                                                               tipo = "float"; {if (true) return tipo;}
+                                                                                                                                                                                                                                                                                                                                                                 tipo = "float"; {if (true) return tipo;}
             break;
           case CARACTER:
             jj_consume_token(CARACTER);
-                                                                                                                                                                                                                                                                                                                                                                           tipo = "char"; {if (true) return tipo;}
+                                                                                                                                                                                                                                                                                                                                                                                                             tipo = "char"; {if (true) return tipo;}
             break;
           default:
             jj_la1[15] = jj_gen;
@@ -989,17 +993,6 @@ public class cminusparser implements cminusparserConstants {
     try { return !jj_3_16(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(15, xla); }
-  }
-
-  private boolean jj_3R_65() {
-    if (jj_3R_74()) return true;
-    if (jj_3R_75()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_78() {
-    if (jj_scan_token(VACIO_VOID)) return true;
-    return false;
   }
 
   private boolean jj_3R_72() {
@@ -1278,6 +1271,11 @@ public class cminusparser implements cminusparserConstants {
     return false;
   }
 
+  private boolean jj_3R_49() {
+    if (jj_scan_token(NUMERO_ENTERO)) return true;
+    return false;
+  }
+
   private boolean jj_3R_68() {
     if (jj_3R_77()) return true;
     return false;
@@ -1357,6 +1355,11 @@ public class cminusparser implements cminusparserConstants {
     return false;
   }
 
+  private boolean jj_3R_51() {
+    if (jj_scan_token(CARACTER)) return true;
+    return false;
+  }
+
   private boolean jj_3R_30() {
     Token xsp;
     xsp = jj_scanpos;
@@ -1394,11 +1397,6 @@ public class cminusparser implements cminusparserConstants {
   private boolean jj_3R_28() {
     if (jj_3R_31()) return true;
     if (jj_3R_32()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_49() {
-    if (jj_scan_token(NUMERO_ENTERO)) return true;
     return false;
   }
 
@@ -1467,11 +1465,6 @@ public class cminusparser implements cminusparserConstants {
     return false;
   }
 
-  private boolean jj_3R_51() {
-    if (jj_scan_token(CARACTER)) return true;
-    return false;
-  }
-
   private boolean jj_3_11() {
     if (jj_3R_25()) return true;
     if (jj_3R_26()) return true;
@@ -1495,6 +1488,11 @@ public class cminusparser implements cminusparserConstants {
   private boolean jj_3R_67() {
     if (jj_3R_26()) return true;
     if (jj_3R_76()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_50() {
+    if (jj_scan_token(NUMERO_REAL)) return true;
     return false;
   }
 
@@ -1601,8 +1599,14 @@ public class cminusparser implements cminusparserConstants {
     return false;
   }
 
-  private boolean jj_3R_50() {
-    if (jj_scan_token(NUMERO_REAL)) return true;
+  private boolean jj_3R_65() {
+    if (jj_3R_74()) return true;
+    if (jj_3R_75()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_78() {
+    if (jj_scan_token(VACIO_VOID)) return true;
     return false;
   }
 
@@ -1616,6 +1620,9 @@ public class cminusparser implements cminusparserConstants {
   private int jj_ntk;
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
+  /** Whether we are looking ahead. */
+  private boolean jj_lookingAhead = false;
+  private boolean jj_semLA;
   private int jj_gen;
   final private int[] jj_la1 = new int[17];
   static private int[] jj_la1_0;
@@ -1765,7 +1772,7 @@ public class cminusparser implements cminusparserConstants {
 
 /** Get the specific Token. */
   final public Token getToken(int index) {
-    Token t = token;
+    Token t = jj_lookingAhead ? jj_scanpos : token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
       else t = t.next = token_source.getNextToken();
@@ -1780,7 +1787,7 @@ public class cminusparser implements cminusparserConstants {
       return (jj_ntk = jj_nt.kind);
   }
 
-  private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+  private java.util.List jj_expentries = new java.util.ArrayList();
   private int[] jj_expentry;
   private int jj_kind = -1;
   private int[] jj_lasttokens = new int[100];
@@ -1796,10 +1803,10 @@ public class cminusparser implements cminusparserConstants {
         jj_expentry[i] = jj_lasttokens[i];
       }
       boolean exists = false;
-      for (java.util.Iterator<?> it = jj_expentries.iterator(); it.hasNext();) {
-        exists = true;
+      for (java.util.Iterator it = jj_expentries.iterator(); it.hasNext();) {
         int[] oldentry = (int[])(it.next());
         if (oldentry.length == jj_expentry.length) {
+          exists = true;
           for (int i = 0; i < jj_expentry.length; i++) {
             if (oldentry[i] != jj_expentry[i]) {
               exists = false;
@@ -1846,7 +1853,7 @@ public class cminusparser implements cminusparserConstants {
     jj_add_error_token(0, 0);
     int[][] exptokseq = new int[jj_expentries.size()][];
     for (int i = 0; i < jj_expentries.size(); i++) {
-      exptokseq[i] = jj_expentries.get(i);
+      exptokseq[i] = (int[])jj_expentries.get(i);
     }
     return new ParseException(token, exptokseq, tokenImage);
   }
