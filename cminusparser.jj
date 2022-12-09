@@ -628,7 +628,7 @@ void mulop() : {}
 //GRAMATICA EN LINEA 26
 String factor(String id) : {String aux = ""; int tamanio = 0; String tipo = "";}
 {
-    LOOKAHEAD(20)  call() {return "";} | <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> {return "";} | LOOKAHEAD(20)  tipo = var() {return tipo;} |  <NUMERO_ENTERO> {tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); tipo = "int"; return tipo;} | <NUMERO_REAL> {tipo = "float"; return tipo;} | <CARACTER> {tipo = "char"; return tipo;}
+    LOOKAHEAD(20)  call() {return "";} | <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> {return "";} | LOOKAHEAD(20)  nombreVar = var() {tipo=obtenerTipo(nombreVar); return tipo;} |  <NUMERO_ENTERO> {tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); tipo = "int"; return tipo;} | <NUMERO_REAL> {tipo = "float"; return tipo;} | <CARACTER> {tipo = "char"; return tipo;}
 }
 //GRAMATICA EN LINEA 27
 void call() : {String id;}
