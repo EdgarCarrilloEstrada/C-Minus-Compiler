@@ -1,8 +1,8 @@
 options {
 Ignore_Case = false;
 STATIC=false;
-DEBUG_PARSER=true; //true
-DEBUG_LOOKAHEAD=true; //true
+DEBUG_PARSER=false; //true
+DEBUG_LOOKAHEAD=false; //true
 }
 
 PARSER_BEGIN(cminusparser)
@@ -28,7 +28,16 @@ public class cminusparser {
     }
 
     static void accesoArreglo(String id, int tamanio){
-        if(existeVariable(id)){
+        String categoria="";
+        symbol simbolo = new symbol();
+        if(contenedor.get(id) != null){       
+        simbolo = contenedor.get(id);
+        categoria = simbolo.categoria;
+        }
+
+
+
+        if(existeVariable(id) && categoria.equals("arreglo")){
             int tamanioArreglo = obtenerTamanio(id);
             if(tamanio < tamanioArreglo){
                 //System.out.println("Posicion dentro del rango del arreglo");
@@ -85,12 +94,12 @@ public class cminusparser {
     }
 
     static String obtenerTipo(String id){
-        String tipo;
+        String tipo="";
         symbol simbolo = new symbol();
+        if(contenedor.get(id) != null){
         simbolo = contenedor.get(id);
-
         tipo = simbolo.tipo;
-
+        }
         return tipo;
     }
 
@@ -108,6 +117,7 @@ public class cminusparser {
 
 
     static boolean existeVariable(String id){
+        
         if(contenedor.containsKey(id)){
             // System.out.println("Si existe el valor en la tabla: " + id);
             return true;
@@ -122,6 +132,8 @@ public class cminusparser {
             }
 
         }
+        
+        
     }
 
 
@@ -137,28 +149,40 @@ public class cminusparser {
     }
 
     static void validarTiposArreglo(String tipo1, String tipo2){
+        if(!tipo1.equals("") && (tipo1.equals("int") || tipo1.equals("float") || tipo1.equals("char")) ){
         if(tipo1.equals(tipo2)){
             //System.out.println("Tipo de dato dentro de arreglo igual");
         }
         else{
             System.out.println("\nERROR: Tipo de dato dentro de arreglo diferente\n");
         }
+        }
     }
 
-    static void comparacionAritmetica(String tipo1, String tipo2){
-        if(tipo1.equals(tipo2)){
+    static void comparacionAritmetica(String tipo1, String tipo2){        
+        String tipo="";
+        symbol simbolo = new symbol();
+        if(contenedor.get(tipo1) != null){       
+        simbolo = contenedor.get(tipo1);
+        tipo = simbolo.tipo;
+        }
+
+
+        if(tipo.equals(tipo2)){
             //System.out.println("Tipo de dato igual");
         }
         else{
-            if((tipo1.equals("int") || tipo1.equals("float") || tipo1.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){
+            if((tipo.equals("int") || tipo.equals("float") || tipo.equals("char")) && (tipo2.equals("int") || tipo2.equals("float") || tipo2.equals("char"))){
                 System.out.println("\nERROR: Tipo de dato diferente\n");
             }
         }
     }
 
     static void validarTipos(String id, String tipo){
+
         if (existeVariable(id)){
-            System.out.println("Valor de id dentro de validarTipos: " + id);
+
+           // System.out.println("Valor de id dentro de validarTipos: " + id);
             // System.out.println("Tipo de id en TS: " + obtenerTipo(id) + " Tipo a comparar: " + tipo);
             if(obtenerTipo(id) == tipo){
                // System.out.println("esta variable " + id +" si son del mismo tipo con " + tipo);
@@ -573,12 +597,12 @@ String expression(String tipo) : {String aux = ""; String tipoD = ""; }
 //GRAMATICA EN LINEA 19
 String var() : {String id; boolean existe; int tamanio; String tipo = "";}
 {
-    <IDENTIFICADOR> {id = token.image; existe = existeVariable(id); if(existe==true){tamanio = obtenerTamanio(id);} if(existe==true){tipo = obtenerTipo(id);}  } tipo=var_extra(id) {return tipo;}
+    <IDENTIFICADOR> {id = token.image; existe = existeVariable(id); if(existe==true){tamanio = obtenerTamanio(id);} if(existe==true){tipo = obtenerTipo(id);}  } tipo=var_extra(id) {if(tipo!="")return tipo; else return id;}
 }
 
-String var_extra(String id): {String tipo = "";}
+String var_extra(String id): {String tipo = ""; String tipoD = "";}
 {
-    (LOOKAHEAD(20)<SIMBOLO_CORCHETE_ABIERTO> expression(id) <SIMBOLO_CORCHETE_CERRADO> {tipo = obtenerTipo(id); return tipo;})* {return tipo;}
+    (LOOKAHEAD(20)<SIMBOLO_CORCHETE_ABIERTO> tipoD=expression(id) <SIMBOLO_CORCHETE_CERRADO> {tipo = obtenerTipo(id); validarTipos(tipo, tipoD); return tipo;})* {return tipo;}
 }
 //GRAMATICA EN LINEA 20
 String simple_expression(String tipo) : {String tipoD = "";}
@@ -601,7 +625,7 @@ String additive_expression(String tipo) : {String tipoD = "";}
     tipoD=term(tipo) additive_expression_prima(tipo) { return tipoD;}
 }
 //GRAMATICA EN LINEA 22 (ARREGLADA)
-String additive_expression_prima(String tipo) :{String aux=""; String tipo4 = "";}
+String additive_expression_prima(String tipo) :{String aux=""; String tipo4 = ""; String tipoR="";}
 {
     (LOOKAHEAD(20) addop() tipo4=term(tipo) {comparacionAritmetica(tipo, tipo4);} additive_expression_prima(tipo) {return tipo;})* {return tipo;}
 }
@@ -611,14 +635,14 @@ void addop() : {}
     <SIMBOLO_MAS> | <SIMBOLO_MENOS>
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-String term(String tipo) : {String tipo2;}
+String term(String tipo) : {String tipo2; String tipoR="";}
 {
-    tipo2=factor(tipo)  {comparacionAritmetica(tipo, tipo2);} term_prima(tipo)  {return tipo2;}
+    tipo2=factor(tipo)  {} term_prima(tipo)  {return tipo2;}
 }
 //GRAMATICA EN LINEA 24 (ARREGLADA)
-String term_prima(String tipo) : {String aux = ""; String tipo3 = ""; tipo = "";}
+String term_prima(String tipo) : {String aux = ""; String tipo3 = ""; tipo = ""; String tipoR="";}
 {
-    (LOOKAHEAD(20) mulop() tipo3=factor(tipo) {comparacionAritmetica(tipo, tipo3);} term_prima(tipo) {return tipo;})* {return tipo;}
+    (LOOKAHEAD(20) mulop() tipo3=factor(tipo) {tipo=obtenerTipo(tipo); comparacionAritmetica(tipo, tipo3);} term_prima(tipo) {return tipo;})* {return tipo;}
 }
 //GRAMATICA EN LINEA 25
 void mulop() : {}
@@ -626,7 +650,7 @@ void mulop() : {}
     <SIMBOLO_POR> | <SIMBOLO_DIVISION> | <SIMBOLO_MODULO>
 }
 //GRAMATICA EN LINEA 26
-String factor(String id) : {String aux = ""; int tamanio = 0; String tipo = "";}
+String factor(String id) : {String aux = ""; int tamanio = 0; String tipo = "", nombreVar = "";}
 {
     LOOKAHEAD(20)  call() {return "";} | <SIMBOLO_PARENTESIS_ABIERTO> expression(aux) <SIMBOLO_PARENTESIS_CERRADO> {return "";} | LOOKAHEAD(20)  nombreVar = var() {tipo=obtenerTipo(nombreVar); return tipo;} |  <NUMERO_ENTERO> {tamanio = Integer.parseInt(token.image); if(id!=aux) accesoArreglo(id, tamanio); tipo = "int"; return tipo;} | <NUMERO_REAL> {tipo = "float"; return tipo;} | <CARACTER> {tipo = "char"; return tipo;}
 }

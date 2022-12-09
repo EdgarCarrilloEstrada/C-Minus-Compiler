@@ -1,5 +1,4 @@
-float f(char c){
-	int a[6];
-	a[2] = 5;
-
+float f(char c){   
+int a[3];
+    a[2] = 1.2;
 }

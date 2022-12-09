@@ -1,0 +1,7 @@
+int main(int c){
+	int a;
+	int b, g, h, i, j;
+	float f;
+
+	a = f + b + g +h+i+j;
+}
