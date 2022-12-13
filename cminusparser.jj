@@ -79,7 +79,7 @@ public class cminusparser {
     }
 
     static int verificacionTamanio(String tipo){
-        if (tipo.equals("int")){ //Tamaño de bits de cada tipo
+        if (tipo.equals("int")){
             return 4;
         }
         if (tipo.equals("float")){
