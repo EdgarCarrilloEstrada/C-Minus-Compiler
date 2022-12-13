@@ -123,14 +123,6 @@ private int jjStopAtPos(int pos, int kind)
    jjmatchedPos = pos;
    return pos + 1;
 }
-private int jjStartNfaWithStates_0(int pos, int kind, int state)
-{
-   jjmatchedKind = kind;
-   jjmatchedPos = pos;
-   try { curChar = input_stream.readChar(); }
-   catch(java.io.IOException e) { return pos + 1; }
-   return jjMoveNfa_0(state, pos + 1);
-}
 private int jjMoveStringLiteralDfa0_0()
 {
    switch(curChar)
@@ -212,7 +204,7 @@ private int jjMoveStringLiteralDfa1_0(long active0)
 private int jjMoveStringLiteralDfa2_0(long old0, long active0)
 {
    if (((active0 &= old0)) == 0L)
-      return jjStartNfa_0(0, old0); 
+      return jjStartNfa_0(0, old0);
    try { curChar = input_stream.readChar(); }
    catch(java.io.IOException e) {
       jjStopStringLiteralDfa_0(1, active0);
@@ -240,7 +232,7 @@ private int jjMoveStringLiteralDfa2_0(long old0, long active0)
 private int jjMoveStringLiteralDfa3_0(long old0, long active0)
 {
    if (((active0 &= old0)) == 0L)
-      return jjStartNfa_0(1, old0); 
+      return jjStartNfa_0(1, old0);
    try { curChar = input_stream.readChar(); }
    catch(java.io.IOException e) {
       jjStopStringLiteralDfa_0(2, active0);
@@ -274,7 +266,7 @@ private int jjMoveStringLiteralDfa3_0(long old0, long active0)
 private int jjMoveStringLiteralDfa4_0(long old0, long active0)
 {
    if (((active0 &= old0)) == 0L)
-      return jjStartNfa_0(2, old0); 
+      return jjStartNfa_0(2, old0);
    try { curChar = input_stream.readChar(); }
    catch(java.io.IOException e) {
       jjStopStringLiteralDfa_0(3, active0);
@@ -300,7 +292,7 @@ private int jjMoveStringLiteralDfa4_0(long old0, long active0)
 private int jjMoveStringLiteralDfa5_0(long old0, long active0)
 {
    if (((active0 &= old0)) == 0L)
-      return jjStartNfa_0(3, old0); 
+      return jjStartNfa_0(3, old0);
    try { curChar = input_stream.readChar(); }
    catch(java.io.IOException e) {
       jjStopStringLiteralDfa_0(4, active0);
@@ -317,17 +309,23 @@ private int jjMoveStringLiteralDfa5_0(long old0, long active0)
    }
    return jjStartNfa_0(4, active0);
 }
+private int jjStartNfaWithStates_0(int pos, int kind, int state)
+{
+   jjmatchedKind = kind;
+   jjmatchedPos = pos;
+   try { curChar = input_stream.readChar(); }
+   catch(java.io.IOException e) { return pos + 1; }
+   return jjMoveNfa_0(state, pos + 1);
+}
 static final long[] jjbitVec0 = {
    0x0L, 0x0L, 0xffffffffffffffffL, 0xffffffffffffffffL
 };
 private int jjMoveNfa_0(int startState, int curPos)
 {
-   //int[] nextStates; // not used
    int startsAt = 0;
    jjnewStateCnt = 41;
    int i = 1;
    jjstateSet[0] = startState;
-   //int j; // not used
    int kind = 0x7fffffff;
    for (;;)
    {
@@ -834,8 +832,8 @@ null, null, };
 
 /** Lexer state names. */
 public static final String[] lexStateNames = {
-   "DEFAULT", 
-   "DENTRO_COMENTARIO", 
+   "DEFAULT",
+   "DENTRO_COMENTARIO",
 };
 
 /** Lex State array. */
@@ -859,9 +857,10 @@ static final long[] jjtoMore = {
 protected SimpleCharStream input_stream;
 private final int[] jjrounds = new int[41];
 private final int[] jjstateSet = new int[82];
-StringBuffer image;
-int jjimageLen;
-int lengthOfMatch;
+private final StringBuilder jjimage = new StringBuilder();
+private StringBuilder image = jjimage;
+private int jjimageLen;
+private int lengthOfMatch;
 protected char curChar;
 /** Constructor. */
 public cminusparserTokenManager(SimpleCharStream stream){
@@ -911,18 +910,18 @@ public void SwitchTo(int lexState)
 protected Token jjFillToken()
 {
    final Token t;
-   final String tokenImage;
+   final String curTokenImage;
    final int beginLine;
    final int endLine;
    final int beginColumn;
    final int endColumn;
    String im = jjstrLiteralImages[jjmatchedKind];
-   tokenImage = (im == null) ? input_stream.GetImage() : im;
+   curTokenImage = (im == null) ? input_stream.GetImage() : im;
    beginLine = input_stream.getBeginLine();
    beginColumn = input_stream.getBeginColumn();
    endLine = input_stream.getEndLine();
    endColumn = input_stream.getEndColumn();
-   t = Token.newToken(jjmatchedKind, tokenImage);
+   t = Token.newToken(jjmatchedKind, curTokenImage);
 
    t.beginLine = beginLine;
    t.endLine = endLine;
@@ -942,26 +941,26 @@ int jjmatchedKind;
 /** Get the next Token. */
 public Token getNextToken() 
 {
-  //int kind;
   Token specialToken = null;
   Token matchedToken;
   int curPos = 0;
 
   EOFLoop :
   for (;;)
-  {   
-   try   
-   {     
+  {
+   try
+   {
       curChar = input_stream.BeginToken();
-   }     
+   }
    catch(java.io.IOException e)
-   {        
+   {
       jjmatchedKind = 0;
       matchedToken = jjFillToken();
       matchedToken.specialToken = specialToken;
       return matchedToken;
    }
-   image = null;
+   image = jjimage;
+   image.setLength(0);
    jjimageLen = 0;
 
    for (;;)
@@ -1019,7 +1018,7 @@ public Token getNextToken()
               }
               SkipLexicalActions(matchedToken);
            }
-           else 
+           else
               SkipLexicalActions(null);
          if (jjnewLexState[jjmatchedKind] != -1)
            curLexState = jjnewLexState[jjmatchedKind];
@@ -1065,26 +1064,18 @@ void SkipLexicalActions(Token matchedToken)
    switch(jjmatchedKind)
    {
       case 47 :
-         if (image == null)
-            image = new StringBuffer();
          image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println("ERROR LEXICO: Forma incorrecta de declarar un caracter: " + image + ". Linea " +matchedToken.beginLine);
          break;
       case 48 :
-         if (image == null)
-            image = new StringBuffer();
          image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println("ERROR LEXICO: Forma incorrecta de declarar un numero real: " + image + ". Linea " +matchedToken.beginLine);
          break;
       case 49 :
-         if (image == null)
-            image = new StringBuffer();
          image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println("ERROR LEXICO: Forma incorrecta de declarar un identificador: " + image + ". Linea " +matchedToken.beginLine);
          break;
       case 50 :
-         if (image == null)
-            image = new StringBuffer();
          image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println("ERROR LEXICO: Simbolo no valido: " + image + ". Linea " +matchedToken.beginLine);
          break;
@@ -1097,247 +1088,171 @@ void TokenLexicalActions(Token matchedToken)
    switch(jjmatchedKind)
    {
       case 1 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[1]);
         lengthOfMatch = jjstrLiteralImages[1].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el condicional if: " +image);
          break;
       case 2 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[2]);
         lengthOfMatch = jjstrLiteralImages[2].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el condicional else: " +image);
          break;
       case 3 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[3]);
         lengthOfMatch = jjstrLiteralImages[3].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato int: " +image);
          break;
       case 4 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[4]);
         lengthOfMatch = jjstrLiteralImages[4].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato float: " +image);
          break;
       case 5 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[5]);
         lengthOfMatch = jjstrLiteralImages[5].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el tipo de dato char: " +image);
          break;
       case 6 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[6]);
         lengthOfMatch = jjstrLiteralImages[6].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el retorno de valor return: " +image);
          break;
       case 7 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[7]);
         lengthOfMatch = jjstrLiteralImages[7].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el vacio: " +image);
          break;
       case 8 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[8]);
         lengthOfMatch = jjstrLiteralImages[8].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el inicio del ciclo while: " +image);
          break;
       case 9 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mas: " +image);
          break;
       case 10 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menos: " +image);
          break;
       case 11 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo asterisco: " +image);
          break;
       case 12 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo diagonal: " +image);
          break;
       case 13 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo porcentaje: " +image);
          break;
       case 14 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menor que: " +image);
          break;
       case 15 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[15]);
         lengthOfMatch = jjstrLiteralImages[15].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo menor igual que: " +image);
          break;
       case 16 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mayor que: " +image);
          break;
       case 17 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[17]);
         lengthOfMatch = jjstrLiteralImages[17].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo mayor igual que: " +image);
          break;
       case 18 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[18]);
         lengthOfMatch = jjstrLiteralImages[18].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de comparacion: " +image);
          break;
       case 19 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[19]);
         lengthOfMatch = jjstrLiteralImages[19].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de diferencia: " +image);
          break;
       case 20 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo igual o asignacion: " +image);
          break;
       case 21 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo punto y coma: " +image);
          break;
       case 22 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo coma: " +image);
          break;
       case 23 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo punto: " +image);
          break;
       case 24 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo comilla simple: " +image);
          break;
       case 25 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(jjstrLiteralImages[25]);
         lengthOfMatch = jjstrLiteralImages[25].length();
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo comilla doble: " +image);
          break;
       case 26 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de parentesis abierto: " +image);
          break;
       case 27 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de parentesis cerrado: " +image);
          break;
       case 28 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de corchete abierto: " +image);
          break;
       case 29 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de corchete cerrado: " +image);
          break;
       case 30 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de llave abierta: " +image);
          break;
       case 31 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro el simbolo de llave cerrada: " +image);
          break;
       case 32 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro un numero entero: " +image);
          break;
       case 33 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro un numero real: " +image);
          break;
       case 34 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro un caracter: " +image);
          break;
       case 35 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro un guion bajo: " +image);
          break;
       case 36 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro un identificador: " +image);
          break;
       case 37 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro una letra: " +image);
          break;
       case 38 :
-        if (image == null)
-            image = new StringBuffer();
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
      System.out.println(matchedToken.beginLine + ". Se encontro un digito: " +image);
          break;
-      default : 
+      default :
          break;
    }
 }
