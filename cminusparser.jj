@@ -27,7 +27,7 @@ public class cminusparser {
 
     }
 
-    static void accesoArreglo(String id, int tamanio){ //Obtiene el id del arreglo de la tabla de simbolos
+    static void accesoArreglo(String id, int tamanio){
         String categoria="";
         symbol simbolo = new symbol();
         if(contenedor.get(id) != null){       
@@ -37,9 +37,9 @@ public class cminusparser {
 
 
 
-        if(existeVariable(id) && categoria.equals("arreglo")){ 
+        if(existeVariable(id) && categoria.equals("arreglo")){
             int tamanioArreglo = obtenerTamanio(id);
-            if(tamanio < tamanioArreglo){ //comparacion entre el tamaño del arreglo y el numero donde queremos insertar un valor
+            if(tamanio < tamanioArreglo){
                 //System.out.println("Posicion dentro del rango del arreglo");
             }
             else{
@@ -52,7 +52,7 @@ public class cminusparser {
 
     }
 
-    static void guardar(String Id, String categoria, String tipo, int tamanio ){ //guardamos variables en la tabla de simbolos 
+    static void guardar(String Id, String categoria, String tipo, int tamanio ){
         //Enumeration llaves = contenedor.keys();
         //while (llaves.hasMoreElements()) {
         //    if(llaves.nextElement().equals(Id)){
@@ -60,13 +60,13 @@ public class cminusparser {
         //    }
         //}
 
-        if(!contenedor.containsKey(Id)){ //Si no existe la variable en la tabla, guardamos todos sus datos
+        if(!contenedor.containsKey(Id)){
 
             symbol simbolo = new symbol();
                     simbolo.categoria = categoria;
                     simbolo.tipo = tipo;
                     simbolo.tamanio = tamanio;
-            contenedor.put(Id,simbolo); //guardamos su id en la primer columna y su demas datos en la segunda columna
+            contenedor.put(Id,simbolo);
 
         }
         else{
@@ -93,30 +93,30 @@ public class cminusparser {
 
     }
 
-    static String obtenerTipo(String id){ 
+    static String obtenerTipo(String id){
         String tipo="";
         symbol simbolo = new symbol();
-        if(contenedor.get(id) != null){ //Si la variable si existe en la tabla de simbolos, obtenemos su tipo
+        if(contenedor.get(id) != null){
         simbolo = contenedor.get(id);
         tipo = simbolo.tipo;
         }
-        return tipo; //Retornamos el tipo de la variable
+        return tipo;
     }
 
     static int obtenerTamanio(String id){
         int tamanio;
-        symbol simbolo = new symbol(); //Creamos un nuevo objeto
+        symbol simbolo = new symbol();
         simbolo = contenedor.get(id);
 
         tamanio = simbolo.tamanio;
 
 
 
-        return tamanio; //Retornamos el tamaño de la variable
+        return tamanio;
     }
 
 
-    static boolean existeVariable(String id){ //Revisara si una variable ya se encuentra en la tabla de simbolos
+    static boolean existeVariable(String id){
         
         if(contenedor.containsKey(id)){
             // System.out.println("Si existe el valor en la tabla: " + id);
@@ -138,7 +138,7 @@ public class cminusparser {
 
 
 
-    static void mostrar (){  //Imprimira todo lo guardado en la tabla de simbolos
+    static void mostrar (){
         System.out.println("\n\nACCEDIENDO A TABLA DE SIMBOLOS(HASH)");
     	for(String id : contenedor.keySet()){
             symbol simbolo = new symbol();
@@ -148,7 +148,7 @@ public class cminusparser {
 
     }
 
-    static void validarTiposArreglo(String tipo1, String tipo2){ //Comparara el tipo de la variable con en tipo del dato ingresado en el arreglo
+    static void validarTiposArreglo(String tipo1, String tipo2){
         if(!tipo1.equals("") && (tipo1.equals("int") || tipo1.equals("float") || tipo1.equals("char")) ){
         if(tipo1.equals(tipo2)){
             //System.out.println("Tipo de dato dentro de arreglo igual");
@@ -159,7 +159,7 @@ public class cminusparser {
         }
     }
 
-    static void comparacionAritmetica(String tipo1, String tipo2){ //Comparara los tipos de la variable y de los operandos de la operacion
+    static void comparacionAritmetica(String tipo1, String tipo2){        
         String tipo="";
         symbol simbolo = new symbol();
         if(contenedor.get(tipo1) != null){       
@@ -178,7 +178,7 @@ public class cminusparser {
         }
     }
 
-    static void validarTipos(String id, String tipo){ //Para validar que el tipo de la variable sea del mismo tipo que el del valor que guardaremos
+    static void validarTipos(String id, String tipo){
 
         if (existeVariable(id)){
 
